@@ -169,69 +169,6 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
-                        <div class="form-group">
-                            <?php
-                            $field_name = 'url_website';
-                            $field_lable = label_case($field_name);
-                            $field_placeholder = $field_lable;
-                            $required = "";
-                            ?>
-                            {{ html()->label($field_lable, $field_name) }} {!! fielf_required($required) !!}
-                            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group">
-                            <?php
-                            $field_name = 'url_facebook';
-                            $field_lable = label_case($field_name);
-                            $field_placeholder = $field_lable;
-                            $required = "";
-                            ?>
-                            {{ html()->label($field_lable, $field_name) }} {!! fielf_required($required) !!}
-                            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group">
-                            <?php
-                            $field_name = 'url_instagram';
-                            $field_lable = label_case($field_name);
-                            $field_placeholder = $field_lable;
-                            $required = "";
-                            ?>
-                            {{ html()->label($field_lable, $field_name) }} {!! fielf_required($required) !!}
-                            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group">
-                            <?php
-                            $field_name = 'url_twitter';
-                            $field_lable = label_case($field_name);
-                            $field_placeholder = $field_lable;
-                            $required = "";
-                            ?>
-                            {{ html()->label($field_lable, $field_name) }} {!! fielf_required($required) !!}
-                            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group">
-                            <?php
-                            $field_name = 'url_linkedin';
-                            $field_lable = label_case($field_name);
-                            $field_placeholder = $field_lable;
-                            $required = "";
-                            ?>
-                            {{ html()->label($field_lable, $field_name) }} {!! fielf_required($required) !!}
-                            {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
                     <div class="col">
                         <div class="form-group">
                             {{ html()->submit($text = icon('fas fa-save')." Save")->class('btn btn-success') }}
@@ -274,13 +211,13 @@
 <!-- Select2 Bootstrap 4 Core UI -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
-    $('.select2').select2({
-        theme: "bootstrap",
-        placeholder: "-- Select an option --",
-        allowClear: true,
+    $(document).ready(function() {
+        $('.select2').select2({
+            theme: "bootstrap",
+            placeholder: "-- Select an option --",
+            allowClear: true,
+        });
     });
-});
 </script>
 
 <!-- Date Time Picker & Moment Js-->
@@ -288,21 +225,21 @@ $(document).ready(function() {
 <script type="text/javascript" src="{{ asset('vendor/bootstrap-4-datetime-picker/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 
 <script type="text/javascript">
-$(function() {
-    $('.datetime').datetimepicker({
-        format: 'YYYY-MM-DD',
-        icons: {
-            time: 'far fa-clock',
-            date: 'far fa-calendar-alt',
-            up: 'fas fa-arrow-up',
-            down: 'fas fa-arrow-down',
-            previous: 'fas fa-chevron-left',
-            next: 'fas fa-chevron-right',
-            today: 'far fa-calendar-check',
-            clear: 'far fa-trash-alt',
-            close: 'fas fa-times'
-        }
+    $(function() {
+        $('.datetime').datetimepicker({
+            format: 'YYYY-MM-DD',
+            icons: {
+                time: 'far fa-clock',
+                date: 'far fa-calendar-alt',
+                up: 'fas fa-arrow-up',
+                down: 'fas fa-arrow-down',
+                previous: 'fas fa-chevron-left',
+                next: 'fas fa-chevron-right',
+                today: 'far fa-calendar-check',
+                clear: 'far fa-trash-alt',
+                close: 'fas fa-times'
+            }
+        });
     });
-});
 </script>
 @endpush

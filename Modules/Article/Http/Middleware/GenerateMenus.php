@@ -19,7 +19,7 @@ class GenerateMenus
         \Menu::make('admin_sidebar', function ($menu) {
 
             // Articles Dropdown
-            $articles_menu = $menu->add('<i class="c-sidebar-nav-icon fas fa-file-alt"></i> Article', [
+            /*$articles_menu = $menu->add('<i class="c-sidebar-nav-icon fas fa-file-alt"></i> Article', [
                 'class' => 'c-sidebar-nav-dropdown',
             ])
             ->data([
@@ -33,10 +33,10 @@ class GenerateMenus
             $articles_menu->link->attr([
                 'class' => 'c-sidebar-nav-dropdown-toggle',
                 'href'  => '#',
-            ]);
+            ]);*/
 
             // Submenu: Posts
-            $articles_menu->add('<i class="c-sidebar-nav-icon fas fa-file-alt"></i> Posts', [
+            /*$articles_menu->add('<i class="c-sidebar-nav-icon fas fa-file-alt"></i> Posts', [
                 'route' => 'backend.posts.index',
                 'class' => 'c-sidebar-nav-item',
             ])
@@ -47,9 +47,9 @@ class GenerateMenus
             ])
             ->link->attr([
                 'class' => 'c-sidebar-nav-link',
-            ]);
+            ]);*/
             // Submenu: Categories
-            $articles_menu->add('<i class="c-sidebar-nav-icon fas fa-sitemap"></i> Categories', [
+            /*$articles_menu->add('<i class="c-sidebar-nav-icon fas fa-sitemap"></i> Categories', [
                 'route' => 'backend.categories.index',
                 'class' => 'c-sidebar-nav-item',
             ])
@@ -60,7 +60,7 @@ class GenerateMenus
             ])
             ->link->attr([
                 'class' => 'c-sidebar-nav-link',
-            ]);
+            ]);*/
         })->sortBy('order');
 
         return $next($request);

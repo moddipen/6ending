@@ -25,7 +25,7 @@
                 <div class="float-right">
                     <x-buttons.create route='{{ route("backend.$module_name.create") }}' title="{{__('Create')}} {{ ucwords(Str::singular($module_name)) }}"/>
 
-                    <div class="btn-group" role="group" aria-label="Toolbar button groups">
+                    <!-- <div class="btn-group" role="group" aria-label="Toolbar button groups">
                         <div class="btn-group" role="group">
                             <button id="btnGroupToolbar" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-cog"></i>
@@ -36,7 +36,7 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <!--/.col-->
@@ -98,12 +98,12 @@
         responsive: true,
         ajax: '{{ route("backend.$module_name.index_data") }}',
         columns: [
-            {data: 'id', name: 'id'},
-            {data: 'name', name: 'name'},
-            {data: 'email', name: 'email'},
-            {data: 'status', name: 'status'},
-            {data: 'user_roles', name: 'user_roles'},
-            {data: 'action', name: 'action', orderable: false, searchable: false}
+        {data: 'id', name: 'id'},
+        {data: 'name', name: 'name'},
+        {data: 'email', name: 'email'},
+        {data: 'status', name: 'status'},
+        {data: 'user_roles', name: 'user_roles'},
+        {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 

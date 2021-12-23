@@ -34,8 +34,6 @@
             <div class="col-lg-6 col-md-8">
                 <div class="card bg-secondary border border-soft">
 
-                    @include('auth.social_login_buttons')
-
                     <div class="card-body px-lg-5 py-lg-5">
                         <div class="text-center text-muted mb-4">
                             <small> @lang("* All fields are required.") </small>

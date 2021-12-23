@@ -12,49 +12,6 @@
     </ul>
 
     <ul class="c-header-nav ml-auto mr-4">
-        <li class="c-header-nav-item dropdown d-md-down-none mx-2">
-            <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <i class="c-icon cil-language"></i>&nbsp; {{strtoupper(App::getLocale())}}
-            </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg pt-0">
-                <div class="dropdown-header bg-light">
-                    <strong>@lang('Change language')</strong>
-                </div>
-
-                <a class="dropdown-item" href="{{route("language.switch", "bn")}}">
-                    বাংলা (BN)
-                </a>
-                <a class="dropdown-item" href="{{route("language.switch", "en")}}">
-                    English (EN)
-                </a>
-            </div>
-        </li>
-        <li class="c-header-nav-item dropdown d-md-down-none mx-2">
-            <?php
-            $notifications = optional(auth()->user())->unreadNotifications;
-            $notifications_count = optional($notifications)->count();
-            $notifications_latest = optional($notifications)->take(5);
-            ?>
-            <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <i class="c-icon cil-bell"></i>&nbsp;
-                @if($notifications_count)<span class="badge badge-pill badge-danger">{{$notifications_count}}</span>@endif
-            </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg pt-0">
-                <div class="dropdown-header bg-light">
-                    <strong>@lang("You have :count notifications", ['count'=>$notifications_count])</strong>
-                </div>
-                @if($notifications_latest)
-                @foreach($notifications_latest as $notification)
-                @php
-                $notification_text = isset($notification->data['title'])? $notification->data['title'] : $notification->data['module'];
-                @endphp
-                <a class="dropdown-item" href="{{route("backend.notifications.show", $notification)}}">
-                    <i class="c-icon {{isset($notification->data['icon'])? $notification->data['icon'] : 'cil-bullhorn'}} "></i>&nbsp;{{$notification_text}}
-                </a>
-                @endforeach
-                @endif
-            </div>
-        </li>
 
         <li class="c-header-nav-item dropdown">
             <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -73,11 +30,6 @@
                     <i class="c-icon cil-at"></i>&nbsp;
                     {{ Auth::user()->email }}
                 </a>
-                <a class="dropdown-item" href="{{ route("backend.notifications.index") }}">
-                    <i class="c-icon cil-bell"></i>&nbsp;
-                    @lang('Notifications') <span class="badge badge-danger ml-auto">{{$notifications_count}}</span>
-                </a>
-
                 <div class="dropdown-header bg-light py-2"><strong>@lang('Settings')</strong></div>
 
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -92,42 +44,6 @@
         <ol class="breadcrumb border-0 m-0">
             @yield('breadcrumbs')
         </ol>
-        <div class="c-subheader-nav d-md-down-none mfe-2">
-            <span class="c-subheader-nav-link">
-                <div class="btn-group" role="group" aria-label="Button group">
-                    {{ date_today() }}&nbsp;<div id="liveClock" class="clock" onload="showTime()"></div>
-                </div>
-            </span>
-        </div>
+
     </div>
 </header>
-
-@push('after-scripts')
-<script type="text/javascript">
-
-$(function () {
-    // Show the time
-    showTime();
-})
-
-function showTime(){
-    var date = new Date();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var seconds = date.getSeconds();
-
-    var session = hours >= 12 ? 'pm' : 'am';
-
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-    minutes = minutes < 10 ? '0'+minutes : minutes;
-    seconds = seconds < 10 ? '0'+seconds : seconds;
-
-    var time = hours + ":" + minutes + ":" + seconds + " " + session;
-    document.getElementById("liveClock").innerText = time;
-    document.getElementById("liveClock").textContent = time;
-
-    setTimeout(showTime, 1000);
-}
-</script>
-@endpush

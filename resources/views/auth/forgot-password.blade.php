@@ -93,9 +93,9 @@
                 <div class="row mt-3">
                     @if (Route::has('register'))
                     <div class="col-6 text-left">
-                        <a href="{{ route('register') }}" class="text-gray">
+                        <!-- <a href="{{ route('register') }}" class="text-gray">
                             <small>Create new account</small>
-                        </a>
+                        </a> -->
                     </div>
                     @endif
 

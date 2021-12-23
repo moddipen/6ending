@@ -12,16 +12,16 @@
         <div class="row">
             <div class="col-sm-8">
                 <h4 class="card-title mb-0">@lang("Welcome to", ['name'=>config('app.name')])</h4>
-                <div class="small text-muted">{{ date_today() }}</div>
+                <!-- <div class="small text-muted">{{ date_today() }}</div> -->
             </div>
 
-            <div class="col-sm-4 hidden-sm-down">
+            <!-- <div class="col-sm-4 hidden-sm-down">
                 <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
                     <button type="button" class="btn btn-info float-right">
                         <i class="c-icon cil-bullhorn"></i>
                     </button>
                 </div>
-            </div>
+            </div> -->
         </div>
         <hr>
 

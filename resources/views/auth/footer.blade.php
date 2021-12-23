@@ -2,11 +2,11 @@
     <div class="container">
         <div class="row align-items-center justify-content-xl-between">
             <div class="col-xl-6">
-                <div class="copyright text-center text-xl-left text-muted">
+                <!-- <div class="copyright text-center text-xl-left text-muted">
                     &copy; {{ config('app.name') }}, {!! setting('footer_text') !!}
-                </div>
+                </div> -->
             </div>
-            <div class="col-xl-6">
+            <!-- <div class="col-xl-6">
                 <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                     <li class="nav-item">
                         <a href="https://nasirkhn.com" class="nav-link" target="_blank">Nasir Khan</a>
@@ -28,7 +28,7 @@
                         <a href="#" class="nav-link">License</a>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
 </footer>

@@ -24,7 +24,7 @@ class GenerateMenus
          */
         \Menu::make('admin_sidebar', function ($menu) {
 
-            // comments
+            /*// comments
             $menu->add('<i class="fas fa-comments c-sidebar-nav-icon"></i> Comments', [
                 'route' => 'backend.comments.index',
                 'class' => 'c-sidebar-nav-item',
@@ -36,7 +36,7 @@ class GenerateMenus
             ])
             ->link->attr([
                 'class' => 'c-sidebar-nav-link',
-            ]);
+            ]);*/
         })->sortBy('order');
 
         return $next($request);

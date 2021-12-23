@@ -47,10 +47,10 @@
                     {{ html()->label(__('labels.backend.users.fields.first_name'))->class('col-sm-2 form-control-label')->for('first_name') }}
                     <div class="col-sm-10">
                         {{ html()->text('first_name')
-                                ->class('form-control')
-                                ->placeholder(__('labels.backend.users.fields.first_name'))
-                                ->attribute('maxlength', 191)
-                                ->required() }}
+                        ->class('form-control')
+                        ->placeholder(__('labels.backend.users.fields.first_name'))
+                        ->attribute('maxlength', 191)
+                        ->required() }}
                     </div>
                 </div>
 
@@ -58,10 +58,10 @@
                     {{ html()->label(__('labels.backend.users.fields.last_name'))->class('col-sm-2 form-control-label')->for('last_name') }}
                     <div class="col-sm-10">
                         {{ html()->text('last_name')
-                                ->class('form-control')
-                                ->placeholder(__('labels.backend.users.fields.last_name'))
-                                ->attribute('maxlength', 191)
-                                ->required() }}
+                        ->class('form-control')
+                        ->placeholder(__('labels.backend.users.fields.last_name'))
+                        ->attribute('maxlength', 191)
+                        ->required() }}
                     </div>
                 </div>
 
@@ -70,10 +70,10 @@
 
                     <div class="col-sm-10">
                         {{ html()->email('email')
-                                ->class('form-control')
-                                ->placeholder(__('labels.backend.users.fields.email'))
-                                ->attribute('maxlength', 191)
-                                ->required() }}
+                        ->class('form-control')
+                        ->placeholder(__('labels.backend.users.fields.email'))
+                        ->attribute('maxlength', 191)
+                        ->required() }}
                     </div>
                 </div>
 
@@ -82,9 +82,9 @@
 
                     <div class="col-sm-10">
                         {{ html()->password('password')
-                                ->class('form-control')
-                                ->placeholder(__('labels.backend.users.fields.password'))
-                                ->required() }}
+                        ->class('form-control')
+                        ->placeholder(__('labels.backend.users.fields.password'))
+                        ->required() }}
                     </div>
                 </div>
 
@@ -93,9 +93,9 @@
 
                     <div class="col-sm-10">
                         {{ html()->password('password_confirmation')
-                                ->class('form-control')
-                                ->placeholder(__('labels.backend.users.fields.password_confirmation'))
-                                ->required() }}
+                        ->class('form-control')
+                        ->placeholder(__('labels.backend.users.fields.password_confirmation'))
+                        ->required() }}
                     </div>
                 </div>
 
@@ -135,34 +135,86 @@
                                     </div>
                                     <div class="card-body">
                                         @if ($roles->count())
+                                        @can('isSuperAdmins')
                                         @foreach($roles as $role)
+                                        @if($role->name == 'super admin' || $role->name == 'admin' )
                                         <div class="card">
                                             <div class="card-header">
                                                 <div class="checkbox">
                                                     {{ html()->label(html()->checkbox('roles[]', old('roles') && in_array($role->name, old('roles')) ? true : false, $role->name)->id('role-'.$role->id) . "&nbsp;" . ucwords($role->name). "&nbsp;(".$role->name.")")->for('role-'.$role->id) }}
                                                 </div>
                                             </div>
-                                            <div class="card-body">
-                                                @if ($role->id != 1)
-                                                @if ($role->permissions->count())
-                                                @foreach ($role->permissions as $permission)
-                                                <i class="far fa-check-circle mr-1"></i>{{ $permission->name }}&nbsp;
-                                                @endforeach
-                                                @else
-                                                None
-                                                @endif
-                                                @else
-                                                @lang('All Permissions')
-                                                @endif
+                                        </div>
+                                        @endif
+                                        @endforeach
+                                        @endcan
+                                        
+                                        @can('isAdmins')
+                                        @foreach($roles as $role)
+                                        @if($role->name == 'subadmin')
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <div class="checkbox">
+                                                    {{ html()->label(html()->checkbox('roles[]',1, old('roles') && in_array($role->name, old('roles')) ? true : false, $role->name)->id('role-'.$role->id) . "&nbsp;" . ucwords($role->name). "&nbsp;(".$role->name.")")->for('role-'.$role->id) }}
+                                                </div>
                                             </div>
                                         </div>
-                                        <!--card-->
+                                        @endif
                                         @endforeach
+                                        @endcan
+                                        
+
+                                        @can('isSubAdmins')
+                                        @foreach($roles as $role)
+                                        @if($role->name == 'supermaster')
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <div class="checkbox">
+                                                    {{ html()->label(html()->checkbox('roles[]',1, old('roles') && in_array($role->name, old('roles')) ? true : false, $role->name)->id('role-'.$role->id) . "&nbsp;" . ucwords($role->name). "&nbsp;(".$role->name.")")->for('role-'.$role->id) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @endforeach
+                                        @endcan
+                                        
+                                        @can('isSuperMasters')
+                                        @foreach($roles as $role)
+                                        @if($role->name == 'master')
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <div class="checkbox">
+                                                    {{ html()->label(html()->checkbox('roles[]',1, old('roles') && in_array($role->name, old('roles')) ? true : false, $role->name)->id('role-'.$role->id) . "&nbsp;" . ucwords($role->name). "&nbsp;(".$role->name.")")->for('role-'.$role->id) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @endforeach
+                                        @endcan
+
+
+                                        @can('isMasters')
+                                        @foreach($roles as $role)
+                                        
+                                        @if($role->name == 'user')
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <div class="checkbox">
+                                                    {{ html()->label(html()->checkbox('roles[]',1, old('roles') && in_array($role->name, old('roles')) ? true : false, $role->name)->id('role-'.$role->id) . "&nbsp;" . ucwords($role->name). "&nbsp;(".$role->name.")")->for('role-'.$role->id) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @endforeach
+                                        @endcan
+                                        
+                                        <!--card-->
+                                        
                                         @endif
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-5">
+                            <!-- <div class="col-12 col-sm-5">
                                 <div class="card card-accent-primary">
                                     <div class="card-header">
                                         @lang('Permissions')
@@ -177,7 +229,7 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -206,15 +258,7 @@
 
     </div>
 
-    <div class="card-footer">
-        <div class="row">
-            <div class="col">
-                <small class="float-right text-muted">
 
-                </small>
-            </div>
-        </div>
-    </div>
 </div>
 
 @endsection

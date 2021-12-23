@@ -58,23 +58,23 @@
 
                 @guest
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="{{ route('login') }}" class="nav-link">
                             <span class="nav-link-inner--text">Login</span>
                         </a>
-                    </li>
-                    @if (Route::has('register'))
+                    </li> -->
+                    <!-- @if (Route::has('register'))
                     <li class="nav-item">
                         <a href="{{ route('register') }}" class="nav-link">
                             <span class="nav-link-inner--text">Register</span>
                         </a>
                     </li>
-                    @endif
+                    @endif -->
                 </ul>
                 @endguest
 
                 <hr class="d-lg-none" />
-                <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+                <!-- <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                     <li class="nav-item">
                         <a class="nav-link nav-link-icon" href="#" target="_blank" data-toggle="tooltip" data-original-title="Like us on Facebook">
                             <i class="fab fa-facebook-square"></i>
@@ -107,7 +107,7 @@
                             <span class="nav-link-inner--text">Upgrade to Pro</span>
                         </a>
                     </li>
-                </ul>
+                </ul> -->
             </div>
         </div>
     </nav>

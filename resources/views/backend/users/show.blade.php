@@ -29,8 +29,7 @@
             <div class="col-4">
                 <div class="float-right">
                     <a href="{{ route("backend.users.index") }}" class="btn btn-primary mt-1 btn-sm" data-toggle="tooltip" title="List"><i class="fas fa-list"></i> List</a>
-                    <a href="{{ route("backend.users.profile", $user->id) }}" class="btn btn-primary mt-1 btn-sm" data-toggle="tooltip" title="Profile"><i class="fas fa-user"></i> Profile</a>
-                    <a href="{{ route("backend.users.edit", $user->id) }}" class="btn btn-primary mt-1 btn-sm" data-toggle="tooltip" title="Edit {{ Str::singular($module_name) }} "><i class="fas fa-wrench"></i> Edit</a>
+
                 </div>
             </div>
             <!--/.col-->
@@ -73,16 +72,6 @@
                         </tr>
 
                         <tr>
-                            <th>{{ __('labels.backend.users.fields.social') }}</th>
-                            <td>
-                                <ul class="list-unstyled">
-                                    @foreach ($user->providers as $provider)
-                                    <li>
-                                        <i class="fab fa-{{ $provider->provider }}"></i> {{ label_case($provider->provider) }}
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </td>
                         </tr>
 
                         <tr>
@@ -103,28 +92,15 @@
                             <th>{{ __('labels.backend.users.fields.roles') }}</th>
                             <td>
                                 @if($user->getRoleNames()->count() > 0)
-                                    <ul>
-                                        @foreach ($user->getRoleNames() as $role)
-                                        <li>{{ ucwords($role) }}</li>
-                                        @endforeach
-                                    </ul>
+                                <ul>
+                                    @foreach ($user->getRoleNames() as $role)
+                                    <li>{{ ucwords($role) }}</li>
+                                    @endforeach
+                                </ul>
                                 @endif
                             </td>
 
                         </tr>
-                        <tr>
-                            <th>{{ __('labels.backend.users.fields.permissions') }}</th>
-                            <td>
-                                @if($user->getAllPermissions()->count() > 0)
-                                    <ul>
-                                        @foreach ($user->getAllPermissions() as $permission)
-                                        <li>{{ $permission->name }}</li>
-                                        @endforeach
-                                    </ul>
-                                @endif
-                            </td>
-                        </tr>
-
                         <tr>
                             <th>{{ __('labels.backend.users.fields.created_at') }}</th>
                             <td>{{ $user->created_at }}<br><small>({{ $user->created_at->diffForHumans() }})</small></td>
@@ -139,71 +115,9 @@
                 </div><!--/table-responsive-->
 
                 <hr>
-
-                @if ($user->status != 2)
-                <a href="{{route('backend.users.block', $user)}}" class="btn btn-danger mt-1" data-method="PATCH" data-token="{{csrf_token()}}" data-toggle="tooltip" title="{{__('labels.backend.block')}}" data-confirm="Are you sure?"><i class="fas fa-ban"></i> Block</a>
-                @endif
-                @if ($user->status == 2)
-                <a href="{{route('backend.users.unblock', $user)}}" class="btn btn-info mt-1" data-method="PATCH" data-token="{{csrf_token()}}" data-toggle="tooltip" title="{{__('labels.backend.unblock')}}" data-confirm="Are you sure?"><i class="fas fa-check"></i> Unblock</a>
-                @endif
-                <a href="{{route('backend.users.destroy', $user)}}" class="btn btn-danger mt-1" data-method="DELETE" data-token="{{csrf_token()}}" data-toggle="tooltip" title="{{__('labels.backend.delete')}}" data-confirm="Are you sure?"><i class="fas fa-trash-alt"></i> Delete</a>
-                @if ($user->email_verified_at == null)
-                <a href="{{route('backend.users.emailConfirmationResend', $user->id)}}" class="btn btn-primary mt-1" data-toggle="tooltip" title="Send Confirmation Email"><i class="fas fa-envelope"></i> Email Confirmation</a>
-                @endif
             </div><!--/col-->
-
-            <div class="col">
-                <h4>
-                    User Profile
-                </h4>
-                <div class="table-responsive">
-                    <table class="table table-responsive-sm table-hover table-bordered">
-                        <?php
-                          $all_columns = $userprofile->getTableColumns();
-                        ?>
-                        <thead>
-                            <tr>
-                                <th scope="col">
-                                    <strong>
-                                        Name
-                                    </strong>
-                                </th>
-                                <th scope="col">
-                                    <strong>
-                                        Value
-                                    </strong>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($all_columns as $column)
-                            <tr>
-                                <td>
-                                    <strong>
-                                        {{ label_case($column->Field) }}
-                                    </strong>
-                                </td>
-                                <td>
-                                    {!! show_column_value($$module_name_singular, $column) !!}
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
         <!--/.row-->
-    </div>
-    <div class="card-footer">
-        <div class="row">
-            <div class="col">
-                <small class="float-right text-muted">
-                    Updated: {{$user->updated_at->diffForHumans()}},
-                    Created at: {{$user->created_at->isoFormat('LLLL')}}
-                </small>
-            </div>
-        </div>
     </div>
 </div>
 @endsection
