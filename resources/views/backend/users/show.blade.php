@@ -40,84 +40,76 @@
             <div class="col">
                 <div class="table-responsive">
                     <table class="table table-hover">
-                        <tr>
+                        <!-- <tr>
                             <th>{{ __('labels.backend.users.fields.avatar') }}</th>
                             <td><img src="{{asset($$module_name_singular->avatar)}}" class="user-profile-image img-fluid img-thumbnail" style="max-height:200px; max-width:200px;" /></td>
                         </tr>
+                    -->
+                    <tr>
+                        <th>{{ __('labels.backend.users.fields.first_name') }}</th>
+                        <td>{{ $user->first_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ __('labels.backend.users.fields.last_name') }}</th>
+                        <td>{{ $user->last_name }}</td>
+                    </tr>
 
-                        <tr>
-                            <th>{{ __('labels.backend.users.fields.first_name') }}</th>
-                            <td>{{ $user->first_name }}</td>
-                        </tr>
-                        <tr>
-                            <th>{{ __('labels.backend.users.fields.last_name') }}</th>
-                            <td>{{ $user->last_name }}</td>
-                        </tr>
+                    <tr>
+                        <th>{{ __('labels.backend.users.fields.email') }}</th>
+                        <td>{{ $user->email }}</td>
+                    </tr>
 
-                        <tr>
-                            <th>{{ __('labels.backend.users.fields.email') }}</th>
-                            <td>{{ $user->email }}</td>
-                        </tr>
+                    <tr>
+                        <th>{{ __('labels.backend.users.fields.mobile') }}</th>
+                        <td>{{ $user->mobile }}</td>
+                    </tr>
+                    <tr>
+                    </tr>
 
-                        <tr>
-                            <th>{{ __('labels.backend.users.fields.mobile') }}</th>
-                            <td>{{ $user->mobile }}</td>
-                        </tr>
+                    <tr>
+                        <th>{{ __('labels.backend.users.fields.status') }}</th>
+                        <td>{!! $user->status_label !!}</td>
+                    </tr>
 
-                        <tr>
-                            <th>{{ __('labels.backend.users.fields.password') }}</th>
-                            <td>
-                                <a href="{{ route('backend.users.changePassword', $user->id) }}" class="btn btn-outline-primary btn-sm">Change password</a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <th>{{ __('labels.backend.users.fields.confirmed') }}</th>
+                        <td>
+                            {!! $user->confirmed_label !!}
+                            @if ($user->email_verified_at == null)
+                            <a href="{{route('backend.users.emailConfirmationResend', $user->id)}}" class="btn btn-primary btn-sm mt-1" data-toggle="tooltip" title="Send Confirmation Email"><i class="fas fa-envelope"></i> Send Confirmation Reminder</a>
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>{{ __('labels.backend.users.fields.roles') }}</th>
+                        <td>
+                            @if($user->getRoleNames()->count() > 0)
+                            <ul>
+                                @foreach ($user->getRoleNames() as $role)
+                                <li>{{ ucwords($role) }}</li>
+                                @endforeach
+                            </ul>
+                            @endif
+                        </td>
 
-                        <tr>
-                        </tr>
+                    </tr>
+                    <tr>
+                        <th>{{ __('labels.backend.users.fields.created_at') }}</th>
+                        <td>{{ $user->created_at }}<br><small>({{ $user->created_at->diffForHumans() }})</small></td>
+                    </tr>
 
-                        <tr>
-                            <th>{{ __('labels.backend.users.fields.status') }}</th>
-                            <td>{!! $user->status_label !!}</td>
-                        </tr>
+                    <tr>
+                        <th>{{ __('labels.backend.users.fields.updated_at') }}</th>
+                        <td>{{ $user->updated_at }}<br/><small>({{ $user->updated_at->diffForHumans() }})</small></td>
+                    </tr>
 
-                        <tr>
-                            <th>{{ __('labels.backend.users.fields.confirmed') }}</th>
-                            <td>
-                                {!! $user->confirmed_label !!}
-                                @if ($user->email_verified_at == null)
-                                <a href="{{route('backend.users.emailConfirmationResend', $user->id)}}" class="btn btn-primary btn-sm mt-1" data-toggle="tooltip" title="Send Confirmation Email"><i class="fas fa-envelope"></i> Send Confirmation Reminder</a>
-                                @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>{{ __('labels.backend.users.fields.roles') }}</th>
-                            <td>
-                                @if($user->getRoleNames()->count() > 0)
-                                <ul>
-                                    @foreach ($user->getRoleNames() as $role)
-                                    <li>{{ ucwords($role) }}</li>
-                                    @endforeach
-                                </ul>
-                                @endif
-                            </td>
+                </table>
+            </div><!--/table-responsive-->
 
-                        </tr>
-                        <tr>
-                            <th>{{ __('labels.backend.users.fields.created_at') }}</th>
-                            <td>{{ $user->created_at }}<br><small>({{ $user->created_at->diffForHumans() }})</small></td>
-                        </tr>
-
-                        <tr>
-                            <th>{{ __('labels.backend.users.fields.updated_at') }}</th>
-                            <td>{{ $user->updated_at }}<br/><small>({{ $user->updated_at->diffForHumans() }})</small></td>
-                        </tr>
-
-                    </table>
-                </div><!--/table-responsive-->
-
-                <hr>
-            </div><!--/col-->
-        </div>
-        <!--/.row-->
+            <hr>
+        </div><!--/col-->
     </div>
+    <!--/.row-->
+</div>
 </div>
 @endsection
