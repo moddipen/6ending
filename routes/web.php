@@ -78,16 +78,18 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
 
     /*
     *
-    *  Notification Routes
+    *  Matchtypevent Routes
     *
     * ---------------------------------------------------------------------
     */
-    $module_name = 'notifications';
-    $controller_name = 'NotificationsController';
+    $module_name = 'eventmanagers';
+    $controller_name = 'MatchtypeeventController';
     Route::get("$module_name", ['as' => "$module_name.index", 'uses' => "$controller_name@index"]);
-    Route::get("$module_name/markAllAsRead", ['as' => "$module_name.markAllAsRead", 'uses' => "$controller_name@markAllAsRead"]);
+    Route::get("$module_name/create", ['as' => "$module_name.create", 'uses' => "$controller_name@create"]);
+    Route::post("$module_name", "$controller_name@store")->name("$module_name.store");
+    /*Route::get("$module_name/markAllAsRead", ['as' => "$module_name.markAllAsRead", 'uses' => "$controller_name@markAllAsRead"]);
     Route::delete("$module_name/deleteAll", ['as' => "$module_name.deleteAll", 'uses' => "$controller_name@deleteAll"]);
-    Route::get("$module_name/{id}", ['as' => "$module_name.show", 'uses' => "$controller_name@show"]);
+    Route::get("$module_name/{id}", ['as' => "$module_name.show", 'uses' => "$controller_name@show"]);*/
 
     /*
     *

@@ -45,13 +45,27 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-link',
             ]);
 
+            // Event Manager
+            $menu->add('<i class="c-sidebar-nav-icon cil-task"></i> Event Manager', [
+                'route' => 'backend.users.index',
+                'class' => 'c-sidebar-nav-item',
+            ])
+            ->data([
+                'order'         => 2,
+                'activematches' => 'admin/users*',
+                'permission'    => ['view_users'],
+            ])
+            ->link->attr([
+                'class' => 'c-sidebar-nav-link',
+            ]);
+
 
             // Access Control Dropdown
             $accessControl = $menu->add('<i class="c-sidebar-nav-icon cil-shield-alt"></i> Access Control', [
                 'class' => 'c-sidebar-nav-dropdown',
             ])
             ->data([
-                'order'         => 3,
+                'order'         => 13,
                 'activematches' => [
                     'admin/roles*',
                 ],
@@ -68,7 +82,7 @@ class GenerateMenus
                 'class' => 'nav-item',
             ])
             ->data([
-                'order'         => 4,
+                'order'         => 14,
                 'activematches' => 'admin/roles*',
                 'permission'    => ['view_roles'],
             ])
@@ -82,7 +96,7 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-item',
             ])
             ->data([
-                'order'         => 5,
+                'order'         => 15,
                 'activematches' => 'admin/settings*',
                 'permission'    => ['edit_settings'],
             ])
@@ -128,6 +142,6 @@ class GenerateMenus
             });
         })->sortBy('order');
 
-        return $next($request);
-    }
+return $next($request);
+}
 }
