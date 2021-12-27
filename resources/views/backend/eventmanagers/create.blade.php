@@ -48,6 +48,7 @@
                     <div class="col-sm-10">
                         <select class="form-control m-bot15" name="matchtype_id" id="matchtype_id">
                             @if($get_match_types->count() > 0)
+                                <option value="">Select Record</option>
                                 @foreach ($get_match_types as $key=>$value)
                                     <option value="{{ $key }}">{{ $value }}</option>
                                 @endforeach
