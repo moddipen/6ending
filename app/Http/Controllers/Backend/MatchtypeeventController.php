@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Role;
+use App\Models\Matchtype;
+use App\Models\Matchtypeevent;
+use App\Models\Eventtype;
 use App\Models\Permission;
 
 class MatchtypeeventController extends Controller
@@ -53,15 +56,30 @@ class MatchtypeeventController extends Controller
 
         $roles = Role::get();
         $permissions = Permission::select('name', 'id')->get();
+        $get_match_types = Matchtype::pluck('type','id');
+        $get_event_types = Eventtype::pluck('type','id');
         
         return view(
             "backend.$module_name.create",
-            compact('module_title', 'module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular', 'roles', 'permissions')
+            compact('module_title', 'module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular', 'roles', 'permissions','get_match_types','get_event_types')
         );
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        exit('asf');
+        $validatedData = $request->validate([
+            'matchtype_id' => 'required',
+            'eventtype_id' => 'required',
+            'bet_coin' => 'required',
+            'win_coin' => 'required'
+        ]);     
+        $request_object = $request->all();
+        $create_record = array(
+            "matchtype_id" => $request_object['matchtype_id'],
+            "eventtype_id" => $request_object['eventtype_id'],
+            "bet_coin" => $request_object['bet_coin'],
+            "win_coin" => $request_object['win_coin']
+        );
+        Matchtypeevent::create($create_record);
     }
 }

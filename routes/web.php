@@ -64,6 +64,12 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     Route::get('dashboard', 'BackendController@index')->name('dashboard');
 
     /*
+        Event Type Routes
+    */
+    Route::post('eventtypes/ajax-dropdown', ['as' => 'eventtypes.get_event_types_ajax', 'uses' => 'EventtypeController@ajax_dropdown_list']);
+
+
+    /*
      *
      *  Settings Routes
      *
@@ -90,6 +96,9 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     /*Route::get("$module_name/markAllAsRead", ['as' => "$module_name.markAllAsRead", 'uses' => "$controller_name@markAllAsRead"]);
     Route::delete("$module_name/deleteAll", ['as' => "$module_name.deleteAll", 'uses' => "$controller_name@deleteAll"]);
     Route::get("$module_name/{id}", ['as' => "$module_name.show", 'uses' => "$controller_name@show"]);*/
+
+    
+
 
     /*
     *

@@ -18,7 +18,7 @@ class EventtypeSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
 
-        // Add the master administrator, user id of 1
+        // Add the master admin, user id of 1
         $eventtypes = [
             [
                 'type'        => 'Toss',

@@ -18,7 +18,7 @@ class MatchtypeSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
 
-        // Add the master administrator, user id of 1
+        // Add the master admin, user id of 1
         $matchtypes = [
             [
                 'type'        => '50-50',

@@ -25,7 +25,7 @@ class UserTableSeeder extends Seeder
 
         $faker = \Faker\Factory::create();
 
-        // Add the master administrator, user id of 1
+        // Add the master admin, user id of 1
         $users = [
             [
                 'first_name'        => 'Super',

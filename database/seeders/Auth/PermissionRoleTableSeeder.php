@@ -23,9 +23,10 @@ class PermissionRoleTableSeeder extends Seeder
 
         // Create Roles
         $super_admin = Role::create(['name' => 'super admin']);
-        $admin = Role::create(['name' => 'administrator']);
-        $manager = Role::create(['name' => 'manager']);
-        $executive = Role::create(['name' => 'executive']);
+        $admin = Role::create(['name' => 'admin']);
+        $manager = Role::create(['name' => 'subadmin']);
+        $executive = Role::create(['name' => 'supermaster']);
+        $master = Role::create(['name' => 'master']);
         $user = Role::create(['name' => 'user']);
 
         // Create Permissions

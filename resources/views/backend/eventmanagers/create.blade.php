@@ -44,47 +44,41 @@
                 {{ csrf_field() }}
 
                 <div class="form-group row">
-                    {{ html()->label('Event')->class('col-sm-2 form-control-label')->for('event') }}
+                    {{ html()->label('Match Type')->class('col-sm-2 form-control-label')->for('match_type') }}
                     <div class="col-sm-10">
-                        {{ html()->text('event')
-                        ->class('form-control')
-                        ->placeholder('Event')
-                        ->attribute('maxlength', 191)
-                        ->required() }}
-                    </div>
+                        <select class="form-control m-bot15" name="matchtype_id" id="matchtype_id">
+                            @if($get_match_types->count() > 0)
+                                @foreach ($get_match_types as $key=>$value)
+                                    <option value="{{ $key }}">{{ $value }}</option>
+                                @endforeach
+                            @endif
+                        </select>                       
+                    </div>                    
                 </div>
 
                 <div class="form-group row">
-                    {{ html()->label('Match Type')->class('col-sm-2 form-control-label')->for('match_type') }}
+                    {{ html()->label('Event')->class('col-sm-2 form-control-label')->for('event') }}
                     <div class="col-sm-10">
-                        {{ html()->text('match_type')
-                        ->class('form-control')
-                        ->placeholder('Match Type')
-                        ->attribute('maxlength', 191)
-                        ->required() }}
-                    </div>
-                </div>
+                        <select class="form-control m-bot15" name="eventtype_id" id="eventtype_id">
+                           
+                        </select>                       
+                    </div>                    
+                </div>                
 
                 <div class="form-group row">
                     {{ html()->label('Bet Coin')->class('col-sm-2 form-control-label')->for('bet_coin') }}
                     <div class="col-sm-10">
-                        {{ html()->text('bet_coin')
-                        ->class('form-control')
-                        ->placeholder('Bet Coin')
-                        ->attribute('maxlength', 191)
-                        ->required() }}
-                    </div>
+                        <input type="text" name="bet_coin" id="input-bet-coin" class="form-control{{ $errors->has('bet_coin') ? ' is-invalid' : '' }}" placeholder="{{ __('Bet Coin') }}"
+                                     value="{{ old('bet_coin', 100) }}" autofocus readonly>
+                    </div>                   
                 </div>
 
                 <div class="form-group row">
                     {{ html()->label('Win Coin')->class('col-sm-2 form-control-label')->for('win_coin') }}
                     <div class="col-sm-10">
-                        {{ html()->text('win_coin')
-                        ->class('form-control')
-                        ->placeholder('Win Coin')
-                        ->attribute('maxlength', 191)
-                        ->required() }}
-                    </div>
+                        <input type="text" name="win_coin" id="input-win-coin" class="form-control{{ $errors->has('win_coin') ? ' is-invalid' : '' }}" placeholder="{{ __('Win Coin') }}"
+                        value="{{ old('win_coin') }}" autofocus>
+                    </div>                    
                 </div>
 
 
@@ -115,5 +109,10 @@
     </div>
 
 </div>
-
 @endsection
+@push('after-scripts')
+<script>
+    var get_event_type_ajax = '{{  route('backend.eventtypes.get_event_types_ajax') }}';  
+</script>
+<script src="{{ asset('/js/event-management.js') }}"></script>
+@endpush

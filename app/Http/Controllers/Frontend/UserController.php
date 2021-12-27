@@ -323,7 +323,7 @@ class UserController extends Controller
         $$module_name_singular->update($request->except(['roles', 'permissions']));
 
         if ($id == 1) {
-            $user->syncRoles(['administrator']);
+            $user->syncRoles(['admin']);
 
             return redirect("admin/$module_name")->with('flash_success', 'Update successful!');
         }
@@ -375,7 +375,7 @@ class UserController extends Controller
 
                 return redirect()->back();
             } else {
-                flash('<i class="fas fa-exclamation-triangle"></i> Request rejected. Please contact the Administrator!')->warning();
+                flash('<i class="fas fa-exclamation-triangle"></i> Request rejected. Please contact the admin!')->warning();
             }
         }
 
@@ -392,7 +392,7 @@ class UserController extends Controller
     public function emailConfirmationResend($id)
     {
         if ($id != auth()->user()->id) {
-            if (auth()->user()->hasAnyRole(['administrator', 'super admin'])) {
+            if (auth()->user()->hasAnyRole(['admin', 'super admin'])) {
                 Log::info(auth()->user()->name.' ('.auth()->user()->id.') - User Requested for Email Verification.');
             } else {
                 Log::warning(auth()->user()->name.' ('.auth()->user()->id.') - User trying to confirm another users email.');

@@ -41,17 +41,17 @@ abstract class TestCase extends BaseTestCase
      */
     protected function getAdminRole()
     {
-        if ($role = Role::whereName('administrator')->first()) {
+        if ($role = Role::whereName('admin')->first()) {
             return $role;
         }
-        $adminRole = Role::create(['name' => 'administrator']);
+        $adminRole = Role::create(['name' => 'admin']);
         $adminRole->givePermissionTo(Permission::firstOrCreate(['name' => 'view_backend']));
 
         return $adminRole;
     }
 
     /**
-     * Create an administrator.
+     * Create an admin.
      *
      * @param array $attributes
      *
@@ -68,7 +68,7 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
-     * Login the given administrator or create the first if none supplied.
+     * Login the given admin or create the first if none supplied.
      *
      * @param bool $admin
      *

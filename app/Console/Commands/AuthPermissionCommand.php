@@ -60,7 +60,7 @@ class AuthPermissionCommand extends Command
         }
 
         // sync role for admin
-        if ($role = Role::where('name', 'administrator')->first()) {
+        if ($role = Role::where('name', 'admin')->first()) {
             $role->syncPermissions(Permission::all());
             $this->info('Admin Permissions Updated.');
         }

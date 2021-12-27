@@ -243,7 +243,7 @@ class RolesController extends Controller
         $role_users = $$module_name_singular->users;
 
         if ($id == 1) {
-            Flash::warning("<i class='fas fa-exclamation-triangle'></i> You can not delete 'Administrator'!")->important();
+            Flash::warning("<i class='fas fa-exclamation-triangle'></i> You can not delete 'admin'!")->important();
 
             Log::notice(label_case($module_title.' '.$module_action).' Failed | User:'.auth()->user()->name.'(ID:'.auth()->user()->id.')');
 
