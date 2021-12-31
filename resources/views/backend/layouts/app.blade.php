@@ -73,7 +73,7 @@
         <!-- Scripts -->
         @stack('before-scripts')
 
-        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ mix('js/backend.js') }}"></script>
         @stack('after-scripts')
         @livewireScripts
 
