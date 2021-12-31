@@ -1,30 +1,24 @@
 $(document).ready(function() {
-    var dataTable = $('#user-list').DataTable({
+    $('#datatable').DataTable({
         processing: true,
         serverSide: true,
-        pageLength : 10,
-        language: {
-            paginate: {
-                previous: "<i class='fas fa-angle-left'>",
-                next: "<i class='fas fa-angle-right'>"
-            }
-        },     
+        autoWidth: true,
+        responsive: true,
         ajax : {
-            url : userList,
-            type: "POST",
-            dataType:'json',
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data: function (d) {                
-                
-            }        
-        },
-        columns : [
-            {data:"action"},
-            {data:"user_roles"},
-            {data:"name"},
-            {data:"updated_at"},
-            {data:"status"},    
-            {data:"data"},                                    
+                url :  userList,
+                type: "POST",                
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: function (d) {  
+                              
+                }        
+            },        
+        columns: [
+            {data: 'id', name: 'id'},
+            {data: 'name', name: 'name'},
+            {data: 'email', name: 'email'},
+            {data: 'status', name: 'status'},
+            {data: 'user_roles', name: 'user_roles'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 });

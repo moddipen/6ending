@@ -16,6 +16,6 @@
     @endif
 
     @if ($data->email_verified_at == null)
-    <a href="{{route('backend.users.emailConfirmationResend', $data->id)}}" class="btn btn-primary btn-sm mt-1" data-toggle="tooltip" title="@lang('Send confirmation email')"><i class="fas fa-envelope"></i></a>
+    {{-- <a href="{{route('backend.users.emailConfirmationResend', $data->id)}}" class="btn btn-primary btn-sm mt-1" data-toggle="tooltip" title="@lang('Send confirmation email')"><i class="fas fa-envelope"></i></a> --}}
     @endif
 </div>

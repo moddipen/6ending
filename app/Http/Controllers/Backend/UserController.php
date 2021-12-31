@@ -70,7 +70,7 @@ class UserController extends Controller
         Log::info("'$title' viewed by User:".auth()->user()->name.'(ID:'.auth()->user()->id.')');
 
         return view(
-            "backend.$module_path.index",
+            "backend.$module_path.index_datatable",
             compact('module_title', 'module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular', 'page_heading', 'title')
         );
     }
@@ -86,7 +86,7 @@ class UserController extends Controller
 
         $module_action = 'List';
 
-        $$module_name = $module_model::where('id',auth()->user()->id)->select('id', 'name', 'username', 'email', 'email_verified_at', 'updated_at', 'status');
+        $$module_name = $module_model::Where('id', '!=', auth()->user()->id)->select('id', 'name', 'username', 'email', 'email_verified_at', 'updated_at', 'status');
 
         $data = $$module_name;
 

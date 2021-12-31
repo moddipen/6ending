@@ -60,36 +60,6 @@ class GenerateMenus
             ]);
 
 
-            // Access Control Dropdown
-            $accessControl = $menu->add('<i class="c-sidebar-nav-icon cil-shield-alt"></i> Access Control', [
-                'class' => 'c-sidebar-nav-dropdown',
-            ])
-            ->data([
-                'order'         => 13,
-                'activematches' => [
-                    'admin/roles*',
-                ],
-                'permission'    => ['view_users', 'view_roles'],
-            ]);
-            $accessControl->link->attr([
-                'class' => 'c-sidebar-nav-dropdown-toggle',
-                'href'  => '#',
-            ]);
-
-            // Submenu: Roles
-            $accessControl->add('<i class="c-sidebar-nav-icon cil-people"></i> Roles', [
-                'route' => 'backend.roles.index',
-                'class' => 'nav-item',
-            ])
-            ->data([
-                'order'         => 14,
-                'activematches' => 'admin/roles*',
-                'permission'    => ['view_roles'],
-            ])
-            ->link->attr([
-                'class' => 'c-sidebar-nav-link',
-            ]);
-
             // Settings
             $menu->add('<i class="c-sidebar-nav-icon fas fa-cogs"></i> Settings', [
                 'route' => 'backend.settings',

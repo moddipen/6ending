@@ -86,26 +86,10 @@
 @endpush
 
 @push ('after-scripts')
+<script>
+    var userList = '{{ route("backend.$module_name.index_data") }}';
+</script>
 <!-- DataTables Core and Extensions -->
 <script type="text/javascript" src="{{ asset('vendor/datatable/datatables.min.js') }}"></script>
-
-<script type="text/javascript">
-
-    $('#datatable').DataTable({
-        processing: true,
-        serverSide: true,
-        autoWidth: true,
-        responsive: true,
-        ajax: '{{ route("backend.$module_name.index_data") }}',
-        columns: [
-        {data: 'id', name: 'id'},
-        {data: 'name', name: 'name'},
-        {data: 'email', name: 'email'},
-        {data: 'status', name: 'status'},
-        {data: 'user_roles', name: 'user_roles'},
-        {data: 'action', name: 'action', orderable: false, searchable: false}
-        ]
-    });
-
-</script>
+<script src="{{ asset('js/user-module.js') }}"></script>
 @endpush
