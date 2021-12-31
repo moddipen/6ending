@@ -15,7 +15,12 @@ class Matchtypeevent extends Model
         'bet_coin',
         'win_coin'
     ];
+
     public function event_types(){
-        return $this->belongsTo(Eventtype::class);
+        return $this->belongsTo(Eventtype::class,'eventtype_id');
+    }
+
+    public function match_types(){
+        return $this->belongsTo(Matchtype::class,'matchtype_id');
     }
 }

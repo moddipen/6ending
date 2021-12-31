@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Matchtype extends Model
 {
     use HasFactory;
+    public function matchtypeevents(){
+        return $this->hasMany(Matchtypeevent::class);
+    }
 }

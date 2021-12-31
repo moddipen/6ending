@@ -10,13 +10,21 @@ $(document).ready(function() {
             }
         },     
         ajax : {
-            url : route,
+            url : userList,
             type: "POST",
             dataType:'json',
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data: function (d) {   
-                             
+            data: function (d) {                
+                
             }        
-        }
+        },
+        columns : [
+            {data:"action"},
+            {data:"user_roles"},
+            {data:"name"},
+            {data:"updated_at"},
+            {data:"status"},    
+            {data:"data"},                                    
+        ]
     });
 });

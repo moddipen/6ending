@@ -47,7 +47,7 @@ class GenerateMenus
 
             // Event Manager
             $menu->add('<i class="c-sidebar-nav-icon cil-task"></i> Event Manager', [
-                'route' => 'backend.users.index',
+                'route' => 'backend.eventmanagers.index',
                 'class' => 'c-sidebar-nav-item',
             ])
             ->data([

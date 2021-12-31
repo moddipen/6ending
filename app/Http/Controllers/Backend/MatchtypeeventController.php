@@ -36,7 +36,19 @@ class MatchtypeeventController extends Controller
 
     public function index()
     {
+        $module_title = $this->module_title;
+        $module_name = $this->module_name;
+        $module_path = $this->module_path;
+        $module_icon = $this->module_icon;
+        $module_model = $this->module_model;
+        $module_name_singular = Str::singular($module_name);
 
+        $module_action = 'List';
+
+        return view(
+            "backend.$module_name.index",
+            compact('module_title', 'module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular')
+        );
     }
     /**
      * Show the form for creating a new resource.
