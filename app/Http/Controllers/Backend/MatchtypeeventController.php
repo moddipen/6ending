@@ -89,7 +89,7 @@ class MatchtypeeventController extends Controller
         })
         ->editColumn('win_coin', function ($data) {
             return '<div class="row">
-                            <div class="input-group col-lg-3 input-group-sm mb-3">
+                            <div class="input-group col-lg-6 input-group-sm mb-3">
                                 <input type="text" value="'.$data->win_coin.'" data-val-required="Required" name="amount" class="form-control amount-customization" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
                                 <div class="invalid-feedback order-last">This field is required.</div>
                                 <div style="display:none; cursor:pointer;" class="input-group-append" data-id="'.$data->id.'">

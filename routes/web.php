@@ -57,6 +57,12 @@ Route::group(['namespace' => 'Frontend', 'as' => 'frontend.'], function () {
 Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.', 'middleware' => ['auth', 'can:view_backend']], function () {
 
     /**
+     * Match Routes
+     * 
+     */
+    Route::resource('matches', 'MatchController');
+
+    /**
      * Backend Dashboard
      * Namespaces indicate folder structure.
      */
