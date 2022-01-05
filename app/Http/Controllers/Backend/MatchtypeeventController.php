@@ -63,7 +63,10 @@ class MatchtypeeventController extends Controller
 
         $module_action = 'List';
 
-        $$module_name =  DB::table('matchtypeevents')->join('eventtypes','eventtypes.id', '=','matchtypeevents.eventtype_id')->join('matchtypes','matchtypes.id', '=','matchtypeevents.matchtype_id')->select(['matchtypeevents.id', 'matchtypes.type as matchType', 'eventtypes.type as eventType', 'matchtypeevents.bet_coin', 'matchtypeevents.win_coin','matchtypeevents.status']);
+        $$module_name =  DB::table('matchtypeevents')
+        ->join('eventtypes','eventtypes.id', '=','matchtypeevents.eventtype_id')
+        ->join('matchtypes','matchtypes.id', '=','matchtypeevents.matchtype_id')
+        ->select(['matchtypeevents.id', 'matchtypes.type as matchType', 'eventtypes.type as eventType', 'matchtypeevents.bet_coin', 'matchtypeevents.win_coin','matchtypeevents.status']);
         
         $data = $$module_name;
         
