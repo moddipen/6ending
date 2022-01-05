@@ -145,6 +145,7 @@ class MatchtypeeventController extends Controller
             "win_coin" => $request_object['win_coin']
         );
         Matchtypeevent::create($create_record);
+        return redirect()->route('backend.eventmanagers.index')->withStatus(__('Record successfully created.'));   
     }
 
     public function update(Request $request){
