@@ -5,20 +5,20 @@ $(document).ready(function() {
         autoWidth: true,
         responsive: true,
         ajax : {
-                url :  userList,
-                type: "POST",                
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                data: function (d) {  
-                              
-                }        
-            },        
+            url :  userList,
+            type: "POST",                
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: function (d) {  
+              
+            }        
+        },        
         columns: [
-            {data: 'id', name: 'id'},
-            {data: 'name', name: 'name'},
-            {data: 'email', name: 'email'},
-            {data: 'status', name: 'status'},
-            {data: 'user_roles', name: 'user_roles'},
-            {data: 'action', name: 'action', orderable: false, searchable: false}
+        {data: 'id', name: 'id'},
+        {data: 'name', name: 'name'},
+        {data: 'email', name: 'email'},
+        {data: 'status', name: 'status'},
+        {data: 'user_roles', name: 'user_roles'},
+        {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 });

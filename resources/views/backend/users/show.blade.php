@@ -72,15 +72,6 @@
                     </tr>
 
                     <tr>
-                        <th>{{ __('labels.backend.users.fields.confirmed') }}</th>
-                        <td>
-                            {!! $user->confirmed_label !!}
-                            @if ($user->email_verified_at == null)
-                            <a href="{{route('backend.users.emailConfirmationResend', $user->id)}}" class="btn btn-primary btn-sm mt-1" data-toggle="tooltip" title="Send Confirmation Email"><i class="fas fa-envelope"></i> Send Confirmation Reminder</a>
-                            @endif
-                        </td>
-                    </tr>
-                    <tr>
                         <th>{{ __('labels.backend.users.fields.roles') }}</th>
                         <td>
                             @if($user->getRoleNames()->count() > 0)

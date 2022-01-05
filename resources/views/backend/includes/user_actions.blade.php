@@ -11,11 +11,8 @@
     <a href="{{route('backend.users.unblock', $data)}}" class="btn btn-info btn-sm mt-1" data-method="PATCH" data-token="{{csrf_token()}}" data-toggle="tooltip" title="{{__('labels.backend.unblock')}}" data-confirm="@lang('Are you sure?')"><i class="fas fa-check"></i></a>
     @endif
 
-    @if ($data->id != 1)
+    <!-- @if ($data->id != 1)
     <a href="{{route('backend.users.destroy', $data)}}" class="btn btn-danger btn-sm mt-1" data-method="DELETE" data-token="{{csrf_token()}}" data-toggle="tooltip" title="{{__('labels.backend.delete')}}" data-confirm="@lang('Are you sure?')"><i class="fas fa-trash-alt"></i></a>
-    @endif
+    @endif -->
 
-    @if ($data->email_verified_at == null)
-    {{-- <a href="{{route('backend.users.emailConfirmationResend', $data->id)}}" class="btn btn-primary btn-sm mt-1" data-toggle="tooltip" title="@lang('Send confirmation email')"><i class="fas fa-envelope"></i></a> --}}
-    @endif
 </div>

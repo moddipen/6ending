@@ -52,7 +52,21 @@ class GenerateMenus
             ])
             ->data([
                 'order'         => 2,
-                'activematches' => 'admin/users*',
+                'activematches' => 'admin/eventmanagers*',
+                'permission'    => ['view_users'],
+            ])
+            ->link->attr([
+                'class' => 'c-sidebar-nav-link',
+            ]);
+
+            // Event Manager
+            $menu->add('<i class="c-sidebar-nav-icon cil-task"></i> Matches', [
+                'route' => 'backend.matches.index',
+                'class' => 'c-sidebar-nav-item',
+            ])
+            ->data([
+                'order'         => 2,
+                'activematches' => 'admin/matches*',
                 'permission'    => ['view_users'],
             ])
             ->link->attr([
@@ -112,6 +126,6 @@ class GenerateMenus
             });
         })->sortBy('order');
 
-return $next($request);
-}
+        return $next($request);
+    }
 }

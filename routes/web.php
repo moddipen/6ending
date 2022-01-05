@@ -66,7 +66,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     /*
         Event Type Routes
     */
-    Route::post('eventtypes/ajax-dropdown', ['as' => 'eventtypes.get_event_types_ajax', 'uses' => 'EventtypeController@ajax_dropdown_list']);
+        Route::post('eventtypes/ajax-dropdown', ['as' => 'eventtypes.get_event_types_ajax', 'uses' => 'EventtypeController@ajax_dropdown_list']);
 
 
     /*
@@ -96,11 +96,25 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     Route::post("$module_name", "$controller_name@store")->name("$module_name.store");
     Route::post("$module_name/update", "$controller_name@update")->name("$module_name.update");
     Route::post("$module_name/updateStatus", "$controller_name@update_status")->name("$module_name.update-status");
-    /*Route::get("$module_name/markAllAsRead", ['as' => "$module_name.markAllAsRead", 'uses' => "$controller_name@markAllAsRead"]);
-    Route::delete("$module_name/deleteAll", ['as' => "$module_name.deleteAll", 'uses' => "$controller_name@deleteAll"]);
-    Route::get("$module_name/{id}", ['as' => "$module_name.show", 'uses' => "$controller_name@show"]);*/
-
     
+    
+
+
+    /*
+    *
+    *  Matches Routes
+    *
+    * ---------------------------------------------------------------------
+    */
+    $module_name = 'matches';
+    $controller_name = 'MatchController';
+    Route::get("$module_name", ['as' => "$module_name.index", 'uses' => "$controller_name@index"]);
+    Route::post("$module_name/datatable", ['as' => "$module_name.datatable", 'uses' => "$controller_name@datatable"]);
+    Route::get("$module_name/create", ['as' => "$module_name.create", 'uses' => "$controller_name@create"]);
+    Route::post("$module_name", "$controller_name@store")->name("$module_name.store");
+    Route::post("$module_name/update", "$controller_name@update")->name("$module_name.update");
+    Route::post("$module_name/updateStatus", "$controller_name@update_status")->name("$module_name.update-status");
+
 
 
     /*

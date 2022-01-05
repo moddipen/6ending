@@ -98,54 +98,11 @@
                         </td>
                     </tr>
 
-                        <!-- <tr>
-                            <th>{{ __('labels.backend.users.fields.social') }}</th>
-                            <td>
-                                <ul class="list-unstyled">
-                                    @foreach ($user->providers as $provider)
-                                    <li>
-                                        <i class="fab fa-{{ $provider->provider }}"></i> {{ label_case($provider->provider) }}
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </td>
-                        </tr>
-                    -->
                     <tr>
                         <th>{{ __('labels.backend.users.fields.status') }}</th>
                         <td>{!! $user->status_label !!}</td>
                     </tr>
 
-                    <tr>
-                        <th>{{ __('labels.backend.users.fields.confirmed') }}</th>
-                        <td>{!! $user->confirmed_label !!}</td>
-                    </tr>
-                        <!-- <tr>
-                            <th>{{ __('labels.backend.users.fields.roles') }}</th>
-                            <td>
-                                @if($user->roles()->count() > 0)
-                                <ul>
-                                    @foreach ($user->roles() as $role)
-                                    <li>{{ ucwords($role) }}</li>
-                                    @endforeach
-                                </ul>
-                                @endif
-                            </td>
-
-                        </tr>
-                    --><!-- <tr>
-                            <th>{{ __('labels.backend.users.fields.permissions') }}</th>
-                            <td>
-                                @if($user->permissions()->count() > 0)
-                                <ul>
-                                    @foreach ($user->permissions() as $permission)
-                                    <li>{{ $permission['name'] }}</li>
-                                    @endforeach
-                                </ul>
-                                @endif
-                            </td>
-                        </tr>
-                    -->
                     <tr>
                         <th>{{ __('labels.backend.users.fields.created_at') }}</th>
                         <td>{{ $user->created_at->isoFormat('llll') }}<br><small>({{ $user->created_at->diffForHumans() }})</small></td>
