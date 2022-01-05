@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Matchtype;
 use App\Models\Match;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\DataTables;
 
 class MatchController extends Controller
 {
@@ -34,7 +36,18 @@ class MatchController extends Controller
      */
     public function index()
     {
-        //
+        $module_title = $this->module_title;
+        $module_name = $this->module_name;
+        $module_path = $this->module_path;
+        $module_icon = $this->module_icon;
+        $module_model = $this->module_model;
+        $module_name_singular = Str::singular($module_name);
+
+        $module_action = 'List';
+        return view(
+            "backend.$module_name.index",
+            compact('module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular','module_title')
+        );
     }
 
     /**
@@ -58,6 +71,44 @@ class MatchController extends Controller
             "backend.$module_name.create",
             compact('match_types', 'module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular','module_title')
         );
+    }
+
+
+    public function datatable(){
+        $module_title = $this->module_title;
+        $module_name = $this->module_name;
+        $module_path = $this->module_path;
+        $module_icon = $this->module_icon;
+        $module_model = $this->module_model;
+        $module_name_singular = Str::singular($module_name);
+
+        $module_action = 'List';
+
+        $$module_name =  DB::table('matches')
+        ->join('matchtypes','matchtypes.id', '=','matches.matchtype_id')
+        ->select(['matches.id','matches.team_1', 'matchtypes.type as matchType', 'matches.team_2', 'matches.status']);
+        
+        $data = $$module_name;
+        
+        return Datatables::of($data)
+        ->addColumn('status', function ($data) {
+            if($data->status == 0){
+                return '<div class="checkbox"><input data-class="btn-block" id="kv-toggle-demo" data-id="'.$data->id.'" value="0" type="checkbox" checked data-toggle="toggle" data-on="Active" data-off="Inactive" data-onstyle="success" data-offstyle="warning"></div>';
+            }else{
+                return '<div class="checkbox"><input data-class="btn-block" id="kv-toggle-demo" data-id="'.$data->id.'" value="1" type="checkbox" data-toggle="toggle" data-on="Active" data-off="Inactive" data-onstyle="success" data-offstyle="warning"></div>';
+            }            
+        })
+        ->editColumn('matchType',  function ($data) {
+            return $data->matchType;
+        })
+        ->editColumn('team_1', function ($data) {
+            return $data->team_1;
+        })
+        ->editColumn('team_2', function ($data) {
+            return $data->team_2;
+        })
+        ->rawColumns(['status'])
+        ->make(true);
     }
 
     /**
