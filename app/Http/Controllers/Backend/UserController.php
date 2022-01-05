@@ -86,7 +86,10 @@ class UserController extends Controller
 
         $module_action = 'List';
 
-        $$module_name = $module_model::Where('id', '!=', auth()->user()->id)->select('id', 'name', 'username', 'email', 'email_verified_at', 'updated_at', 'status');
+        $$module_name = $module_model::whereHas('userprofile',function($q) {
+            // Query the name field in status table
+            $q->where('created_by',  auth()->user()->id); 
+        })->Where('id', '!=', auth()->user()->id)->select('id', 'name', 'username', 'email', 'email_verified_at', 'updated_at', 'status');
 
         $data = $$module_name;
 
