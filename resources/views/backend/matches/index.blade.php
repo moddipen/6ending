@@ -64,6 +64,7 @@
 @push ('after-scripts')
 <script>
     var matchList = '{{ route("backend.$module_name.datatable") }}';    
+    var routeStatusUpdate = '{{ route("backend.$module_name.update-status") }}';
 </script>
 <!-- DataTables Core and Extensions -->
 <script type="text/javascript" src="{{ asset('vendor/datatable/datatables.min.js') }}"></script>

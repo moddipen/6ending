@@ -93,9 +93,9 @@ class MatchController extends Controller
         return Datatables::of($data)
         ->addColumn('status', function ($data) {
             if($data->status == 0){
-                return '<div class="checkbox"><input data-class="btn-block" id="kv-toggle-demo" data-id="'.$data->id.'" value="0" type="checkbox" checked data-toggle="toggle" data-on="Active" data-off="Inactive" data-onstyle="success" data-offstyle="warning"></div>';
+                return '<div class="checkbox row col-lg-6"><input data-class="btn-block" id="kv-toggle-demo" data-id="'.$data->id.'" value="0" type="checkbox" checked data-toggle="toggle" data-on="Active" data-off="Inactive" data-onstyle="success" data-offstyle="warning"></div>';
             }else{
-                return '<div class="checkbox"><input data-class="btn-block" id="kv-toggle-demo" data-id="'.$data->id.'" value="1" type="checkbox" data-toggle="toggle" data-on="Active" data-off="Inactive" data-onstyle="success" data-offstyle="warning"></div>';
+                return '<div class="checkbox row col-lg-6"><input data-class="btn-block" id="kv-toggle-demo" data-id="'.$data->id.'" value="1" type="checkbox" data-toggle="toggle" data-on="Active" data-off="Inactive" data-onstyle="success" data-offstyle="warning"></div>';
             }            
         })
         ->editColumn('matchType',  function ($data) {
@@ -183,5 +183,10 @@ class MatchController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function update_status(Request $request){
+        $request_object = $request->all();
+        Match::where("id",$request_object['id'])->update(['status'=>$request_object['status']]);
     }
 }

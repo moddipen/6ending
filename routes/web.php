@@ -62,6 +62,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
      */
     Route::resource('matches', 'MatchController');
     Route::post("matches/datatable", ['as' => "matches.datatable", 'uses' => "MatchController@datatable"]);
+    Route::post("matches/updateStatus", "MatchController@update_status")->name("matches.update-status");
     /**
      * Backend Dashboard
      * Namespaces indicate folder structure.

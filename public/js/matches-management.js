@@ -20,7 +20,7 @@ $(document).ready(function() {
                 },
             },
             fnDrawCallback : function() {
-                $('#event-list #kv-toggle-demo').bootstrapToggle({
+                $('#match-list #kv-toggle-demo').bootstrapToggle({
                     width : '100%'
                 });
             },
@@ -51,34 +51,34 @@ $(document).ready(function() {
         //     }      
         // });
     
-        // $(document).on("change", "input[type='checkbox']", function (e) { 
-        //     if($(this).val() == 0){
-        //         $.ajax({
-        //             type:'POST',
-        //             url: routeStatusUpdate,
-        //             data : {
-        //                 "_token": $('meta[name="csrf-token"]').attr('content'),
-        //                 "id": $(this).attr("data-id"),
-        //                 "status" : 1
-        //             },
-        //             success:function() {
-        //                 dataTable.draw();          
-        //             }
-        //         }); 
-        //     }else{
-        //         $.ajax({
-        //             type:'POST',
-        //             url: routeStatusUpdate,
-        //             data : {
-        //                 "_token": $('meta[name="csrf-token"]').attr('content'),
-        //                 "id": $(this).attr("data-id"),
-        //                 "status" : 0
-        //             },
-        //             success:function() {
-        //                 dataTable.draw();          
-        //             }
-        //         }); 
-        //     } 
-        // });
+        $(document).on("change", "input[type='checkbox']", function (e) { 
+            if($(this).val() == 0){
+                $.ajax({
+                    type:'POST',
+                    url: routeStatusUpdate,
+                    data : {
+                        "_token": $('meta[name="csrf-token"]').attr('content'),
+                        "id": $(this).attr("data-id"),
+                        "status" : 1
+                    },
+                    success:function() {
+                        dataTable.draw();          
+                    }
+                }); 
+            }else{
+                $.ajax({
+                    type:'POST',
+                    url: routeStatusUpdate,
+                    data : {
+                        "_token": $('meta[name="csrf-token"]').attr('content'),
+                        "id": $(this).attr("data-id"),
+                        "status" : 0
+                    },
+                    success:function() {
+                        dataTable.draw();          
+                    }
+                }); 
+            } 
+        });
     }
 });
