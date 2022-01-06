@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
         $request->authenticate();
-
+        Auth::logoutOtherDevices($request['password']);
         $request->session()->regenerate();
 
         $redirectTo = request()->redirectTo;
