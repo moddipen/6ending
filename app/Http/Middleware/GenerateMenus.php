@@ -59,7 +59,7 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-link',
             ]);
 
-            // Event Manager
+            /*// Event Manager
             $menu->add('<i class="c-sidebar-nav-icon cil-task"></i> Matches', [
                 'route' => 'backend.matches.index',
                 'class' => 'c-sidebar-nav-item',
@@ -72,7 +72,7 @@ class GenerateMenus
             ->link->attr([
                 'class' => 'c-sidebar-nav-link',
             ]);
-
+*/
 
             // Settings
             $menu->add('<i class="c-sidebar-nav-icon fas fa-cogs"></i> Settings', [
