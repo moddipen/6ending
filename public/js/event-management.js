@@ -57,8 +57,8 @@ $(document).ready(function() {
                 });
             },
             columns: [
-                {data: 'matchType', name: 'matchType'},
-                {data: 'eventType', name: 'eventType'},
+                {data: 'matchType', name: 'matchType',searchable: false},
+                {data: 'eventType', name: 'eventType',searchable: false},
                 {data: 'bet_coin', name: 'bet_coin'},
                 {data: 'win_coin', name: 'win_coin'},            
                 {data: 'action', name: 'action', orderable: false, searchable: false}
