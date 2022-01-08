@@ -490,3 +490,16 @@ if (!function_exists('date_today')) {
         return $str;
     }
 }
+
+/**
+ * Check remaining time between dates in string format
+ */
+if (!function_exists('time_string_format')) {
+    function time_string_format($end_date)
+    {
+        $datetime1 = new DateTime();
+        $datetime2 = new DateTime($end_date);
+        $interval = $datetime2->diff($datetime1);
+        return $interval->format('%h')."h ".$interval->format('%i')."m";
+    }    
+}

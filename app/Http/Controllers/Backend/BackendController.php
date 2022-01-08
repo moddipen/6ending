@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Match;
 
 class BackendController extends Controller
 {
@@ -14,5 +15,11 @@ class BackendController extends Controller
     public function index()
     {
         return view('backend.index');
+    }
+
+    public function user_dashboard()
+    {
+        $matches = Match::with("matchtype")->get();
+        return view('backend.dashboard',["matches"=>$matches]);
     }
 }
