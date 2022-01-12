@@ -85,14 +85,15 @@ class UserController extends Controller
         $module_name_singular = Str::singular($module_name);
 
         $module_action = 'List';
-
+        // $test = User::with('points')->get();
         $$module_name = $module_model::whereHas('userprofile',function($q) {
             // Query the name field in status table
             $q->where('created_by',  auth()->user()->id); 
         })->Where('id', '!=', auth()->user()->id)->select('id', 'name', 'username', 'email', 'email_verified_at', 'updated_at', 'status');
 
         $data = $$module_name;
-
+        // echo "<pre>";
+        // print_r($test->toArray());exit;
         return Datatables::of($$module_name)
         ->addColumn('action', function ($data) {
             $module_name = $this->module_name;

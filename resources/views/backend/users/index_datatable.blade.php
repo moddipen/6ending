@@ -77,6 +77,74 @@
         </div>
     </div>
 </div>
+<div class="modal fade credit-point" id="credit-point" role="dialog" tabindex="-1" aria-labelledby="credit-point">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('backend.credits.update') }}" id="credit-points-update" method="post">
+                @csrf
+                <input type="hidden" name="type" value="credit" />
+                <input type="hidden" name="user_id" id="user_id" />
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Credit Points</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>                
+                <div class="modal-body"> 
+                    <ul class="list-group list-group-flush one-time-charge-row list my--3">                                        
+                        <li class="list-group-item px-0">
+                            <div class="row align-items-center">
+                                <div class="col-12">
+                                    <small>Points</small>
+                                    <input type="text" id="points" name="points" class="form-control-sm m-bot15 form-control" value="">                                        
+                                    <div class="invalid-feedback"></div>
+                                </div>                                                                                      
+                            </div>
+                        </li>
+                    </ul>                  
+                </div>   
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary credit-points-button">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div> 
+            </form>                   
+        </div>    
+    </div>
+</div> 
+<div class="modal fade debit-point" id="debit-point" role="dialog" tabindex="-1" aria-labelledby="debit-point">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('backend.credits.update') }}" id="debit-points-update" method="post">
+                @csrf
+                <input type="hidden" name="type" value="debit" />
+                <input type="hidden" name="user_id" id="user_id" />
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Debit Points</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>                
+                <div class="modal-body"> 
+                    <ul class="list-group list-group-flush one-time-charge-row list my--3">                                        
+                        <li class="list-group-item px-0">
+                            <div class="row align-items-center">
+                                <div class="col-12">
+                                    <small>Points</small>
+                                    <input type="text" id="points" name="points" class="form-control-sm m-bot15 form-control" value="">                                        
+                                    <div class="invalid-feedback"></div>
+                                </div>                                                                                      
+                            </div>
+                        </li>
+                    </ul>                  
+                </div>   
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary debit-points-button">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div> 
+            </form>                   
+        </div>    
+    </div>
+</div> 
 @endsection
 
 @push ('after-styles')
