@@ -12,6 +12,11 @@ class Match extends Model
         'matchtype_id',
         'team_1',
         'team_2',
-        'status'
+        'status',
+        'schedule'
     ];
+
+    public function matchtype(){
+        return $this->belongsTo(Matchtype::class,'matchtype_id');
+    }
 }

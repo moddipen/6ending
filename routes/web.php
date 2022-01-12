@@ -63,12 +63,14 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     Route::resource('matches', 'MatchController');
     Route::post("matches/datatable", ['as' => "matches.datatable", 'uses' => "MatchController@datatable"]);
     Route::post("matches/updateStatus", "MatchController@update_status")->name("matches.update-status");
+    Route::get("matches/events/{id}", "MatchController@events")->name("matches.events");
     /**
      * Backend Dashboard
      * Namespaces indicate folder structure.
      */
     Route::get('/', 'BackendController@index')->name('home');
     Route::get('dashboard', 'BackendController@index')->name('dashboard');
+    Route::get('users/dashboard', 'BackendController@user_dashboard')->name('users.dashboard');
 
     /*
         Event Type Routes

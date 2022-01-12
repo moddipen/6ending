@@ -73,6 +73,18 @@
                     </div>                    
                 </div>
 
+                
+                <div class="form-group row">
+                    {{ html()->label('Date & Time')->class('col-sm-2 form-control-label')->for('schedule') }}
+                    <div class="input-group col-sm-10 date datetime" id="schedule" data-target-input="nearest">
+                        {{ html()->text('schedule')->placeholder('Date & Time')->class('form-control datetimepicker-input') }}
+                        <div class="input-group-append" data-target="#schedule" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+                        </div>
+                    </div>
+                </div>
+                
+
                 <div class="form-group row">
                     {{ html()->label('Status')->class('col-sm-2 form-control-label')->for('status') }}
                     <div class="col-sm-10">
@@ -110,9 +122,29 @@
 
 </div>
 @endsection
+@push('after-styles')
+<link rel="stylesheet" href="{{ asset('vendor/bootstrap-4-datetime-picker/css/tempusdominus-bootstrap-4.min.css') }}" />
+@endpush
+
 @push('after-scripts')
-{{-- <script>
-    var get_event_type_ajax = '{{  route('backend.eventtypes.get_event_types_ajax') }}';  
+<script type="text/javascript" src="{{ asset('vendor/moment/moment.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/bootstrap-4-datetime-picker/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
+<script type="text/javascript">
+    $(function() {
+        $('.datetime').datetimepicker({
+            icons: {
+                time: 'far fa-clock',
+                date: 'far fa-calendar-alt',
+                up: 'fas fa-arrow-up',
+                down: 'fas fa-arrow-down',
+                previous: 'fas fa-chevron-left',
+                next: 'fas fa-chevron-right',
+                today: 'far fa-calendar-check',
+                clear: 'far fa-trash-alt',
+                close: 'fas fa-times'
+            }
+        });
+    });
 </script>
-<script src="{{ asset('/js/event-management.js') }}"></script> --}}
 @endpush

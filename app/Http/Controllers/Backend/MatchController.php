@@ -8,6 +8,7 @@ use App\Models\Match;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use App\Models\Matchtypeevent;
 
 class MatchController extends Controller
 {
@@ -123,6 +124,7 @@ class MatchController extends Controller
             'matchtype_id' => 'required',
             'team_1' => 'required|regex:/^[\pL\s]+$/u|max:255',
             'team_2' => 'required|regex:/^[\pL\s]+$/u|max:255',
+            'schedule' => 'required',
             'status' => 'required'
         ],
         [
@@ -134,7 +136,8 @@ class MatchController extends Controller
             "matchtype_id" => $request_object['matchtype_id'],
             "team_1" => $request_object['team_1'],
             "team_2" => $request_object['team_2'],
-            "status" => $request_object['status']
+            "status" => $request_object['status'],
+            "schedule" => \Carbon\Carbon::parse($request_object['schedule'])->toDateTimeString()
         );
         Match::create($create_record);
         return redirect()->route('backend.matches.index')->withStatus(__('Record successfully created.'));          
@@ -188,5 +191,11 @@ class MatchController extends Controller
     public function update_status(Request $request){
         $request_object = $request->all();
         Match::where("id",$request_object['id'])->update(['status'=>$request_object['status']]);
+    }
+
+    public function events($id){
+        $id = \Crypt::decrypt($id);
+        $get_match_events = Matchtypeevent::with("match_types","event_types")->where("matchtype_id",$id)->get();
+        return view('backend.matches.events',["get_match_events"=>$get_match_events]);        
     }
 }
