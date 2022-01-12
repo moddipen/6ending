@@ -36,6 +36,8 @@ $(document).ready(function() {
             processing: true,
             serverSide: true,
             pageLength : 10,
+            autoWidth: true,
+            responsive: true,
             language: {
                 paginate: {
                     previous: "<i class='fas fa-angle-left'>",

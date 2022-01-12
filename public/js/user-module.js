@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#datatable').DataTable({
+    var datatable = $('#datatable').DataTable({
         processing: true,
         serverSide: true,
         autoWidth: true,
@@ -13,12 +13,16 @@ $(document).ready(function() {
             }        
         },        
         columns: [
-        {data: 'id', name: 'id'},
-        {data: 'name', name: 'name'},
-        {data: 'email', name: 'email'},
-        {data: 'status', name: 'status'},
-        {data: 'user_roles', name: 'user_roles'},
-        {data: 'action', name: 'action', orderable: false, searchable: false}
+            {data: 'id', name: 'id'},
+            {data: 'name', name: 'name'},
+            {data: 'email', name: 'email'},
+            {data: 'status', name: 'status'},
+            {data: 'user_roles', name: 'user_roles'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
+    });
+    
+    $(document).on('click', '.debit-points', function(e){
+        $(".applyPause #children_id").val($(this).attr('data-id'));
     });
 });
