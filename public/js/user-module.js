@@ -18,6 +18,7 @@ $(document).ready(function() {
             {data: 'email', name: 'email'},
             {data: 'status', name: 'status'},
             {data: 'user_roles', name: 'user_roles'},
+            {data: 'points', name: 'points'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
