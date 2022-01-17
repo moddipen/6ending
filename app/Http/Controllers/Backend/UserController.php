@@ -106,7 +106,11 @@ class UserController extends Controller
         })
         ->editColumn('name', '<strong>{{$name}}</strong>')
         ->editColumn('points', function ($data) {
-            return $data->points->net_points;
+            if(!empty($data->points)){
+                return $data->points->net_points;
+            }else{
+                return 0;
+            }            
         })
         ->editColumn('status', function ($data) {
             $return_data = $data->status_label;
