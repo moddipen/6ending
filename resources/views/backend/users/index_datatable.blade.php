@@ -54,7 +54,7 @@
                                 <th>{{ __('labels.backend.users.fields.email') }}</th>
                                 <th>{{ __('labels.backend.users.fields.status') }}</th>
                                 <th>{{ __('labels.backend.users.fields.roles') }}</th>
-                                <th>Points</th>
+                                <th>Coins</th>
                                 <th class="text-right">{{ __('labels.backend.action') }}</th>
                             </tr>
                         </thead>
