@@ -57,6 +57,45 @@
             
         </div>
     </div>
+    <div class="modal fade credit-points" id="credit-points" tabindex="-1" aria-labelledby="credit-points" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Credit Points</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>                
+                <div class="modal-body"> 
+                                      
+                </div>   
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary credit-points-button">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>                      
+            </div>    
+        </div>
+    </div> 
+
+    <div class="modal fade debit-points" id="debit-points" tabindex="-1" aria-labelledby="debit-points" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Debit Points</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>                
+                <div class="modal-body"> 
+                                      
+                </div>   
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary debit-points-button">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>                      
+            </div>    
+        </div>
+    </div> 
     @endsection
     @push('after-styles')
     <link rel="stylesheet" href="{{ asset('vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
