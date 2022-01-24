@@ -173,5 +173,11 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     Route::resource("$module_name", "$controller_name");
     Route::get("$module_name/{id}/block", ['as' => "$module_name.block", 'uses' => "$controller_name@block", 'middleware' => ['permission:block_users']]);
     Route::get("$module_name/{id}/unblock", ['as' => "$module_name.unblock", 'uses' => "$controller_name@unblock", 'middleware' => ['permission:block_users']]);
-    Route::post("$module_name/credit/update", ['as' => "$module_name.credits.update", 'uses' => "$controller_name@credit_update"]);
+    
+    /**
+     * Credit Module
+     */
+    $module_name = 'credits';
+    $controller_name = 'CreditController';
+    Route::post("$module_name/credit/update", ['as' => "$module_name.update", 'uses' => "$controller_name@credit_update"]);
 });

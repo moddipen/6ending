@@ -67,7 +67,10 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     {
         return $this->hasOne('App\Models\Userprofile');
     }
-
+    
+    public function points(){
+        return $this->hasOne(Credit::class)->latest();
+    }
     /**
      * Get the list of users related to the current User.
      *

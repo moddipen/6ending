@@ -21,7 +21,7 @@ class CreateCreditsTable extends Migration
             $table->foreign('parent_id')->references('id')->on('users')->onDelete('cascade');
             $table->float('points')->default(0); 
             $table->string('type');
-            $table->float('new_points')->default(0);
+            $table->float('net_points')->default(0);
             $table->timestamps();
         });
     }

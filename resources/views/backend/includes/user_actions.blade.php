@@ -1,6 +1,6 @@
 <div class="text-right">
-    <a href="#" data-bs-toggle="modal" data-bs-target="#debit-points" class="btn btn-danger btn-sm mt-1 debit-points" data-id="{{ $data->id }}" data-type="debit" data-toggle="tooltip" title="{{__('labels.backend.show')}}"><i class="fas fa-arrow-down"></i></a>
-    <a href="#" data-bs-toggle="modal" data-bs-target="#credit-points" class="btn btn-success btn-sm mt-1 credit-points" data-id="{{ $data->id }}" data-type="credit" data-toggle="tooltip" title="{{__('labels.backend.show')}}"><i class="fas fa-arrow-up"></i></a>
+    <a href="#" data-toggle="modal" data-backdrop="false" data-target="#debit-point" class="btn btn-danger btn-sm mt-1 debit-points" data-id="{{ $data->id }}" data-type="debit" title="Debit"><i class="fas fa-arrow-down"></i></a>
+    <a href="#" data-toggle="modal" data-backdrop="false" data-target="#credit-point" class="btn btn-success btn-sm mt-1 credit-points" data-id="{{ $data->id }}" data-type="credit" title="Credit"><i class="fas fa-arrow-up"></i></a>
     <a href="{{route('backend.users.show', $data)}}" class="btn btn-success btn-sm mt-1" data-toggle="tooltip" title="{{__('labels.backend.show')}}"><i class="fas fa-desktop"></i></a>
     <a href="{{route('backend.users.edit', $data)}}" class="btn btn-primary btn-sm mt-1" data-toggle="tooltip" title="{{__('labels.backend.edit')}}"><i class="fas fa-wrench"></i></a>
     <a href="{{route('backend.users.changePassword', $data)}}" class="btn btn-info btn-sm mt-1" data-toggle="tooltip" title="{{__('labels.backend.changePassword')}}"><i class="fas fa-key"></i></a>

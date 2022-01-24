@@ -85,18 +85,15 @@ class UserController extends Controller
         $module_name_singular = Str::singular($module_name);
 
         $module_action = 'List';
-
-        $$module_name = $module_model::whereHas('userprofile',function($q) {
+        $$module_name = $module_model::with('points')->whereHas('userprofile',function($q) {
             // Query the name field in status table
             $q->where('created_by',  auth()->user()->id); 
         })->Where('id', '!=', auth()->user()->id)->select('id', 'name', 'username', 'email', 'email_verified_at', 'updated_at', 'status');
 
         $data = $$module_name;
-
         return Datatables::of($$module_name)
         ->addColumn('action', function ($data) {
             $module_name = $this->module_name;
-
             return view('backend.includes.user_actions', compact('module_name', 'data'));
         })
         ->addColumn('user_roles', function ($data) {
@@ -105,6 +102,13 @@ class UserController extends Controller
             return view('backend.includes.user_roles', compact('module_name', 'data'));
         })
         ->editColumn('name', '<strong>{{$name}}</strong>')
+        ->editColumn('points', function ($data) {
+            if(!empty($data->points)){
+                return $data->points->net_points;
+            }else{
+                return 0;
+            }            
+        })
         ->editColumn('status', function ($data) {
             $return_data = $data->status_label;
             return $return_data;
@@ -120,7 +124,7 @@ class UserController extends Controller
                 return $data->updated_at->isoFormat('LLLL');
             }
         })
-        ->rawColumns(['name', 'action', 'status', 'user_roles'])
+        ->rawColumns(['name', 'action', 'status', 'user_roles','points'])
         ->orderColumns(['id'], '-:column $1')
         ->make(true);
     }
