@@ -56,7 +56,7 @@ class CreditController extends Controller
                 $parent_transaction_type = "credit";
             }
         }else{
-            $check_parent_net_points_parentscredit = Credit::where('user_id',auth()->user()->id)->latest()->first();
+            $check_parent_credit = Credit::where('user_id',auth()->user()->id)->latest()->first();
             $net_points = $request_object['points'];   
             if($request_object['type'] == "credit"){
                 if(!empty($check_parent_credit) && $check_parent_credit->net_points >= $request_object['points']){

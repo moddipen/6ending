@@ -75,7 +75,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     /*
         Event Type Routes
     */
-        Route::post('eventtypes/ajax-dropdown', ['as' => 'eventtypes.get_event_types_ajax', 'uses' => 'EventtypeController@ajax_dropdown_list']);
+    Route::post('eventtypes/ajax-dropdown', ['as' => 'eventtypes.get_event_types_ajax', 'uses' => 'EventtypeController@ajax_dropdown_list']);
 
 
     /*
@@ -180,4 +180,11 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     $module_name = 'credits';
     $controller_name = 'CreditController';
     Route::post("$module_name/credit/update", ['as' => "$module_name.update", 'uses' => "$controller_name@credit_update"]);
+
+    /**
+     * Bet Module
+     */
+    $module_name = 'bets';
+    $controller_name = 'BetController';
+    Route::post("$module_name/store", ['as' => "$module_name.store", 'uses' => "$controller_name@store"]);
 });

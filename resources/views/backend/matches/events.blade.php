@@ -37,5 +37,8 @@
 @endsection
 
 @push ('after-scripts')
+    <script>
+        var bet_url = '{{  route('backend.bets.store') }}';
+    </script>
     <script src="{{ asset('js/match-events-front.js') }}"></script>
 @endpush

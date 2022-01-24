@@ -1,12 +1,12 @@
 $(document).ready(function() {
     $(document).on('click', '.place-bet', function(e){
-        alert("dadsd");
+        var bet_amount = $(this).closest("div").find('input').val();        
         $.ajax({
             type:'POST',
-            url: url,
+            url: bet_url,
             data: {
                 "_token"     : $('meta[name="csrf-token"]').attr('content'),
-                "type" : $(".credit-point input[name='type']").val(),
+                "bet_amount" : bet_amount,
                 "user_id" : $(".credit-point input[name='user_id']").val(),
                 "points"   : $(".credit-point input[name='points']").val()
             },            
