@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Authorizable;
 use Illuminate\Http\Request;
+use Exception;
 use App\Http\Controllers\Controller;
 use App\Rules\CheckCoins;
-use App\Authorizable;
 use App\Models\Bet;
 use App\Models\Credit;
 
@@ -28,10 +29,6 @@ class BetController extends Controller
 
         // module model name, path
         $this->module_model = "App\Models\Bet";
-    }
-
-    public function index(){
-        exit("dasdasd");
     }
 
     public function store(Request $request){

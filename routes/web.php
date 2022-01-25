@@ -48,6 +48,18 @@ Route::group(['namespace' => 'Frontend', 'as' => 'frontend.'], function () {
     });
 });
 
+Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.', 'middleware' => ['auth', 'can:users_dashboard']], function () {
+    Route::get('users/dashboard', 'BackendController@user_dashboard')->name('users.dashboard');
+    Route::get("matches/events/{id}/{match_id}", "MatchController@events")->name("matches.events");
+    /**
+     * Bet Module
+     */
+    $module_name = 'bets';
+    $controller_name = 'BetController';
+    Route::post("$module_name/store", ['as' => "$module_name.store", 'uses' => "$controller_name@store"]);
+    // Route::get("$module_name/index", ['as' => "$module_name.index", 'uses' => "$controller_name@index"]);
+});
+
 /*
 *
 * Backend Routes
@@ -63,14 +75,14 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     Route::resource('matches', 'MatchController');
     Route::post("matches/datatable", ['as' => "matches.datatable", 'uses' => "MatchController@datatable"]);
     Route::post("matches/updateStatus", "MatchController@update_status")->name("matches.update-status");
-    Route::get("matches/events/{id}/{match_id}", "MatchController@events")->name("matches.events");
+    
     /**
      * Backend Dashboard
      * Namespaces indicate folder structure.
      */
     Route::get('/', 'BackendController@index')->name('home');
     Route::get('dashboard', 'BackendController@index')->name('dashboard');
-    Route::get('users/dashboard', 'BackendController@user_dashboard')->name('users.dashboard');
+    
 
     /*
         Event Type Routes
@@ -179,13 +191,5 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
      */
     $module_name = 'credits';
     $controller_name = 'CreditController';
-    Route::post("$module_name/credit/update", ['as' => "$module_name.update", 'uses' => "$controller_name@credit_update"]);
-
-    /**
-     * Bet Module
-     */
-    $module_name = 'bets';
-    $controller_name = 'BetController';
-    Route::post("$module_name/store", ['as' => "$module_name.store", 'uses' => "$controller_name@store"]);
-    Route::get("$module_name/index", ['as' => "$module_name.index", 'uses' => "$controller_name@index"]);
+    Route::post("$module_name/credit/update", ['as' => "$module_name.update", 'uses' => "$controller_name@credit_update"]);    
 });
