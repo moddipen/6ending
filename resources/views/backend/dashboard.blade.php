@@ -83,7 +83,7 @@
                     </div> 
                 </div>
                 <div class="card-footer text-muted text-right">
-                    <a href="{{ route("backend.matches.events",\Crypt::encrypt($match->matchtype_id)) }}" class="text-decoration-none"><i class="fa fa-arrow-right"></i></a>
+                    <a href="{{ route("backend.matches.events",['id'=>\Crypt::encrypt($match->matchtype_id),'match_id'=>$match->id]) }}" class="text-decoration-none"><i class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>  

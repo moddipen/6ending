@@ -193,9 +193,9 @@ class MatchController extends Controller
         Match::where("id",$request_object['id'])->update(['status'=>$request_object['status']]);
     }
 
-    public function events($id){
+    public function events($id,$match_id){
         $id = \Crypt::decrypt($id);
         $get_match_events = Matchtypeevent::with("match_types","event_types")->where("matchtype_id",$id)->get();
-        return view('backend.matches.events',["get_match_events"=>$get_match_events]);        
+        return view('backend.matches.events',["get_match_events"=>$get_match_events,"match_id"=>$match_id]);        
     }
 }

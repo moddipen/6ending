@@ -23,4 +23,8 @@ class Matchtypeevent extends Model
     public function match_types(){
         return $this->belongsTo(Matchtype::class,'matchtype_id');
     }
+
+    public function match(){
+        return $this->hasMany(Match::class,'matchtype_id','matchtype_id');
+    }
 }

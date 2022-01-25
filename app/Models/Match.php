@@ -19,4 +19,8 @@ class Match extends Model
     public function matchtype(){
         return $this->belongsTo(Matchtype::class,'matchtype_id');
     }
+
+    public function bets(){
+        return $this->hasMany(Bet::class,'match_id');
+    }
 }

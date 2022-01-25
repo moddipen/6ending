@@ -1,30 +1,35 @@
 $(document).ready(function() {
     $(document).on('click', '.place-bet', function(e){
-        var bet_amount = $(this).closest("div").find('input').val();        
-        $.ajax({
-            type:'POST',
-            url: bet_url,
-            data: {
-                "_token"     : $('meta[name="csrf-token"]').attr('content'),
-                "bet_amount" : bet_amount,
-                "user_id" : $(".credit-point input[name='user_id']").val(),
-                "points"   : $(".credit-point input[name='points']").val()
-            },            
-            success:function(data) {
-                $('.credit-point input[name="points"]').next('div .invalid-feedback').css("display","none");
-                $('#credit-point').modal('hide');
-                $('.modal-backdrop').remove();
-                $('.credit-point input[name="points"]').val("");
-                dataTable.draw();
-            },
-            error:function (data) {
-                if(data.responseJSON.errors.points){
-                    $('.credit-point input[name="points"]').next('div .invalid-feedback').text(data.responseJSON.errors.points);
-                    $('.credit-point input[name="points"]').next('div .invalid-feedback').css("display","block");
-                }else{
-                    $('.credit-point input[name="points"]').next('div .invalid-feedback').css("display","none");
-                }              
-            } 
-        });
+        if (confirm("Do you want to place this bet?") == true) {
+            var current_div = $(this);
+            var bet_amount = $(this).closest("div").find('input[name=bet_coin]').val();  
+            var eventtype_id = $(this).closest("div").find('input[name=eventtype_id]').val();        
+            var match_id = $(this).closest("div").find('input[name=match_id]').val();        
+            $.ajax({
+                type:'POST',
+                url: bet_url,
+                data: {
+                    "_token"     : $('meta[name="csrf-token"]').attr('content'),
+                    "bet_coin" : bet_amount,
+                    "eventtype_id" : eventtype_id,
+                    "match_id"   : match_id
+                },            
+                success:function(data) {
+                    current_div.closest("div").next().find('.spot-count').text(parseInt(current_div.closest("div").next().find('.spot-count').text()) + parseInt(1));
+                    current_div.closest("div").find('.mx-sm-3').html('<h5 class="success text-success">Bet Placed!</h5>');   
+                    current_div.closest("div").find('.mx-sm-3').next('a').remove();
+                    current_div.closest("div").find('input[name=bet_coin]').val("");   
+                    current_div.closest("div").find('input[name=bet_coin]').next('div .invalid-feedback').css("display","none");                   
+                },
+                error:function (data) {
+                    if(data.responseJSON.errors.bet_coin){
+                        current_div.closest("div").find('input[name=bet_coin]').next('div .invalid-feedback').text(data.responseJSON.errors.bet_coin);
+                        current_div.closest("div").find('input[name=bet_coin]').next('div .invalid-feedback').css("display","block");
+                    }else{
+                        current_div.closest("div").find('input[name=bet_coin]').next('div .invalid-feedback').css("display","none");
+                    }              
+                } 
+            });
+        }      
     });
 });

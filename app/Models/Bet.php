@@ -16,4 +16,8 @@ class Bet extends Model
         'status',
         'type'
     ];
+
+    public function match(){
+        return $this->belongsTo(Match::class);
+    }
 }

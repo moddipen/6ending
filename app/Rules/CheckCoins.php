@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Rules;
-use App\Model\Credit;
+use App\Models\Credit;
 
 use Illuminate\Contracts\Validation\Rule;
 
@@ -28,7 +28,7 @@ class CheckCoins implements Rule
     {
         //Check if user has available credits or not
         $find_total_coints_available = Credit::where('user_id',auth()->user()->id)->latest()->first();
-        if(!empty($find_total_coints_available) && $find_total_coints_available->net_points > $value){
+        if(!empty($find_total_coints_available) && $find_total_coints_available->net_points >= $value){
             return true;
         }else{
             return false;
