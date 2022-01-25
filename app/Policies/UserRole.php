@@ -38,4 +38,8 @@ class UserRole
     public function master(User $user){
         return $user->hasRole('master');
     }
+
+    public function user(User $user){
+        return $user->hasRole('user');
+    }
 }

@@ -26,6 +26,7 @@ class GenerateMenus
             ->data([
                 'order'         => 1,
                 'activematches' => 'admin/dashboard*',
+                'permission'    => ['view_users'],
             ])
             ->link->attr([
                 'class' => 'c-sidebar-nav-link',
@@ -54,6 +55,20 @@ class GenerateMenus
                 'order'         => 2,
                 'activematches' => 'admin/eventmanagers*',
                 'permission'    => ['view_users'],
+            ])
+            ->link->attr([
+                'class' => 'c-sidebar-nav-link',
+            ]);
+
+            // User Dashboard
+            $menu->add('<i class="cil-speedometer c-sidebar-nav-icon"></i> User Dashboard', [
+                'route' => 'backend.users.dashboard',
+                'class' => 'c-sidebar-nav-item',
+            ])
+            ->data([
+                'order'         => 5,
+                'activematches' => 'admin/users/dashboard*',
+                'permission'    => ['users_dashboard'],
             ])
             ->link->attr([
                 'class' => 'c-sidebar-nav-link',

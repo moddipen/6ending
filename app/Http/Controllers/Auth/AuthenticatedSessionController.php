@@ -35,11 +35,15 @@ class AuthenticatedSessionController extends Controller
 
         $redirectTo = request()->redirectTo;
 
-        if ($redirectTo) {
-            return redirect($redirectTo);
-        } else {
-            return redirect(RouteServiceProvider::HOME);
-        }
+        if (auth()->user()->hasRole('user')) {
+            return redirect('admin/users/dashboard');
+        }else{
+            if ($redirectTo) {
+                return redirect($redirectTo);
+            } else {
+                return redirect(RouteServiceProvider::HOME);
+            }
+        }        
     }
 
     /**

@@ -30,6 +30,10 @@ class BetController extends Controller
         $this->module_model = "App\Models\Bet";
     }
 
+    public function index(){
+        exit("dasdasd");
+    }
+
     public function store(Request $request){
         $request->validate([
                 'bet_coin' => ['required', 'numeric', 'gt:0', new CheckCoins()] 

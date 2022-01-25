@@ -187,4 +187,5 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     $module_name = 'bets';
     $controller_name = 'BetController';
     Route::post("$module_name/store", ['as' => "$module_name.store", 'uses' => "$controller_name@store"]);
+    Route::get("$module_name/index", ['as' => "$module_name.index", 'uses' => "$controller_name@index"]);
 });

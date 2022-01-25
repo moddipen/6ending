@@ -29,7 +29,9 @@ class Permission extends \Spatie\Permission\Models\Permission
             'download_backups',
             'delete_backups',
 
-            'view_user_dashboard'
+            'view_user_dashboard',
+            'users_dashboard',
+            'bet_module'
         ];
     }
 
