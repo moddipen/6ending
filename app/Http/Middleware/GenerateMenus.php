@@ -74,6 +74,20 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-link',
             ]);
 
+            // Matches 
+            $menu->add('<i class="c-sidebar-nav-icon cil-task"></i> Matches', [
+                'route' => 'backend.matches.index',
+                'class' => 'c-sidebar-nav-item',
+            ])
+            ->data([
+                'order'         => 5,
+                'activematches' => 'admin/matches*',
+                'permission'    => ['users_dashboard'],
+            ])
+            ->link->attr([
+                'class' => 'c-sidebar-nav-link',
+            ]);
+
             /*// Event Manager
             $menu->add('<i class="c-sidebar-nav-icon cil-task"></i> Matches', [
                 'route' => 'backend.matches.index',

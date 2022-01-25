@@ -195,7 +195,12 @@ class MatchController extends Controller
 
     public function events($id,$match_id){
         $id = \Crypt::decrypt($id);
-        $get_match_events = Matchtypeevent::with("match_types","event_types")->where("matchtype_id",$id)->get();
+        $get_match_events = Matchtypeevent::with(["match_types","event_types","match_to_list"=> function($q) use($match_id) {
+            // Query the name field in status table
+            $q->where('id', $match_id); // '=' is optional
+        }])->where("matchtype_id",$id)->get();
+        // echo "<pre>";
+        // print_r($get_match_events->toArray());exit;
         return view('backend.matches.events',["get_match_events"=>$get_match_events,"match_id"=>$match_id]);        
     }
 }

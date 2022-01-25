@@ -33,8 +33,11 @@ class BetController extends Controller
 
     public function store(Request $request){
         $request->validate([
-                'bet_coin' => ['required', 'numeric', 'gt:0', new CheckCoins()] 
-            ]
+                'bet_coin' => ['required', 'numeric', 'gt:0', new CheckCoins()],
+                'result' => 'required'
+        ],[
+            'result.required' => 'Please enter your prediction!'
+        ]
         ); 
         $request_object = $request->all();
         $create_bet_object = array(
@@ -42,6 +45,7 @@ class BetController extends Controller
             'match_id' => $request_object['match_id'],
             'eventtype_id' => $request_object['eventtype_id'],
             'bet_coins' => $request_object['bet_coin'],
+            'result' => $request_object['result'],
             'status' => 'NA',
             'type' => 'placed'
         );

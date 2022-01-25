@@ -14,6 +14,7 @@ class Bet extends Model
         'eventtype_id',
         'bet_coins',
         'status',
+        'result',
         'type'
     ];
 

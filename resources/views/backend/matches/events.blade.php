@@ -29,8 +29,20 @@
                         </div>                        
                     @else 
                         <div class="form-group mx-sm-3 mb-2">
-                            <input type="text" class="form-control form-control-sm bet-coins" name="bet_coin">
-                            <div class="invalid-feedback"></div>
+                            <div class="input-group">
+                                @if($event->event_types->type == "Toss")
+                                    <select class="form-control form-control-sm result" name="result">
+                                        <option value="">Choose team</option>
+                                        <option value="{{ $event->match_to_list->team_1 }}">{{ $event->match_to_list->team_1 }}</option>
+                                        <option value="{{ $event->match_to_list->team_2 }}">{{ $event->match_to_list->team_2 }}</option>
+                                    </select>  
+                                @else
+                                    <input type="text" class="form-control form-control-sm result" placeholder="Enter value" name="result"> 
+                                @endif                                
+                                {{-- <input type="text" class="form-control form-control-sm bet-coins" name="bet_coin">  --}}
+                                <input type="text" class="form-control form-control-sm bet-coins" placeholder="Enter Coins" name="bet_coin">
+                                <div class="invalid-feedback"></div>
+                            </div>                         
                             <input type="hidden" name="match_id" value="{{ $match_id }}">
                             <input type="hidden" name="eventtype_id" value="{{ $event->eventtype_id }}">
                         </div>
