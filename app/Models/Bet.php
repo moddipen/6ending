@@ -10,8 +10,7 @@ class Bet extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'match_id',
-        'eventtype_id',
+        'match_event_id',
         'bet_coins',
         'status',
         'result',

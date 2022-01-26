@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Matchtype;
 use App\Models\Match;
+use App\Models\MatchEvent;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -142,7 +143,17 @@ class MatchController extends Controller
             "status" => $request_object['status'],
             "schedule" => \Carbon\Carbon::parse($request_object['schedule'])->toDateTimeString()
         );
-        Match::create($create_record);
+        $match = Match::create($create_record);
+        $match_id = $match->id;
+        $get_events = Matchtypeevent::where("matchtype_id",$request_object['matchtype_id'])->get();
+        
+        foreach ($get_events as $event){
+            $create_match_event_array = array(
+                "match_id" => $match_id,
+                "matchtypeevent_id" => $event->id
+            );
+            MatchEvent::create($create_match_event_array);
+        }
         return redirect()->route('backend.matches.index')->withStatus(__('Record successfully created.'));          
     }
 
@@ -198,7 +209,7 @@ class MatchController extends Controller
 
     public function update_type(Request $request){
         $request_object = $request->all();
-        Matchtypeevent::where("id",$request_object['id'])->update(['type'=>$request_object['type']]);
+        MatchEvent::where("matchtypeevent_id",$request_object['id'])->update(['status'=>$request_object['status']]);
     }
 
     public function event_backend($id,$match_id){
@@ -212,23 +223,23 @@ class MatchController extends Controller
         $module_action = 'Event List';
 
         $id = \Crypt::decrypt($id);
-        $get_match_events = Matchtypeevent::with(["match_types","event_types","match_result","match_to_list"=> function($q) use($match_id) {
-            // Query the name field in status table
-            $q->where('id', $match_id); // '=' is optional
-        }])->where("matchtype_id",$id)->get();
+        $get_match_events = MatchEvent::with("matchtypeevent.event_types","matchtypeevent.match_types","match_result","match")->where("match_id",$match_id)->get();
         // echo "<pre>";
         // print_R($get_match_events->toArray());exit;
-        return view('backend.matches.events_backend',compact('module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular','module_title','get_match_events','match_id'));        
+        return view('backend.matches.events_backend',compact('module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular','module_title','get_match_events','match_id','id'));        
     }
 
     public function events($id,$match_id){
         $id = \Crypt::decrypt($id);
-        $get_match_events = Matchtypeevent::with(["match_types","event_types","match_to_list"=> function($q) use($match_id) {
-            // Query the name field in status table
-            $q->where('id', $match_id); // '=' is optional
-        }])->where("matchtype_id",$id)->get();
+        $get_match_events = MatchEvent::with("matchtypeevent.event_types","matchtypeevent.match_types","match")->where("match_id",$match_id)->get();
         // echo "<pre>";
         // print_R($get_match_events->toArray());exit;
         return view('backend.matches.events',["get_match_events"=>$get_match_events,"match_id"=>$match_id]);        
+    }
+
+    public function settlement(Request $request){
+        $match_events = Match::whereHas()->first();
+        echo "<pre>";
+        print_r($match_events->toArray());exit;
     }
 }

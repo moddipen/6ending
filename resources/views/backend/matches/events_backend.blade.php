@@ -38,15 +38,15 @@
                         <tbody>
                             @foreach($get_match_events as $event)
                                 <tr>
-                                    <td>{{ $event->event_types->type }}</td>
+                                    <td>{{ $event->matchtypeevent->event_types->type }}</td>
                                     <td>
                                         <div class="row">
                                             <div class="input-group col-lg-6 input-group-sm mb-3">
-                                                @if($event->event_types->type == "Toss")
+                                                @if($event->matchtypeevent->event_types->type == "Toss")
                                                     <select class="form-control select-winner amount-customization" name="result">
                                                         <option value="">choose winner</option>
-                                                        <option {{ (!empty($event->match_result) && $event->match_result->result == $event->match_to_list->team_1 ) ? ' selected'  : ''}} value="{{ $event->match_to_list->team_1 }}">{{ $event->match_to_list->team_1 }}</option>
-                                                        <option {{ (!empty($event->match_result) && $event->match_result->result == $event->match_to_list->team_2 ) ? ' selected'  : ''}} value="{{ $event->match_to_list->team_2 }}">{{ $event->match_to_list->team_2 }}</option>
+                                                        <option {{ (!empty($event->match_result) && $event->match_result->result == $event->match->team_1 ) ? ' selected'  : ''}} value="{{ $event->match->team_1 }}">{{ $event->match->team_1 }}</option>
+                                                        <option {{ (!empty($event->match_result) && $event->match_result->result == $event->match->team_2 ) ? ' selected'  : ''}} value="{{ $event->match->team_2 }}">{{ $event->match->team_2 }}</option>
                                                     </select>
                                                     <div class="invalid-feedback order-last">This field is required.</div>
                                                     <div style="display:none; cursor:pointer;" class="input-group-append" data-id="{{ $event->id }}">
@@ -68,10 +68,10 @@
                                     </td>
                                     <td>
                                         <div class="checkbox row col-lg-6">
-                                            @if($event->type == 0)
-                                                <input data-class="btn-block" data-id="{{ $event->id }}" data-width="100%" id="kv-toggle-demo" value="0" type="checkbox" checked data-toggle="toggle" data-on="Enable" data-off="Disable" data-onstyle="success" data-offstyle="warning">
+                                            @if($event->status == 0)
+                                                <input data-class="btn-block" data-id="{{ $event->matchtypeevent->id }}" data-width="100%" id="kv-toggle-demo" value="1" type="checkbox" checked data-toggle="toggle" data-on="Enable" data-off="Disable" data-onstyle="success" data-offstyle="warning">
                                             @else
-                                                <input data-class="btn-block" data-id="{{ $event->id }}" data-width="100%" id="kv-toggle-demo" value="1" type="checkbox" data-toggle="toggle" data-on="Enable" data-off="Disable" data-onstyle="success" data-offstyle="warning">
+                                                <input data-class="btn-block" data-id="{{ $event->matchtypeevent->id }}" data-width="100%" id="kv-toggle-demo" value="0" type="checkbox" data-toggle="toggle" data-on="Enable" data-off="Disable" data-onstyle="success" data-offstyle="warning">
                                             @endif
                                         </div>
                                     </td>                                           
@@ -80,7 +80,18 @@
                         </tbody>
                     </table>
                 </div>
-            </div>            
+            </div>   
+            <div class="d-flex justify-content-center">
+                {{ html()->form('POST', route('backend.matches.settlement'))->class('form-horizontal')->open() }}
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <input type="hidden" value="{{ $match_id }}" name="matchtype_id">
+                    <button type="submit" class="btn btn-success  " data-toggle="tooltip" title="" data-original-title="Make settlement">
+                    <i class="fas fa-balance-scale" data-original-title="" title=""></i>
+                    &nbsp; Settlement
+                    </button>
+                </div>                
+            </div>         
         </div>
     </div>   
 </div>

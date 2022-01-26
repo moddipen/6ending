@@ -127,7 +127,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     * ---------------------------------------------------------------------
     */
     $module_name = 'matchevents';
-    $controller_name = 'MatchtypeeventResultController';
+    $controller_name = 'MatchEventResultController';
     Route::post("$module_name/updateresult", "$controller_name@update_result")->name("$module_name.update-result");
     
     
@@ -147,6 +147,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     Route::post("$module_name", "$controller_name@store")->name("$module_name.store");
     Route::post("$module_name/update", "$controller_name@update")->name("$module_name.update");
     Route::post("$module_name/updateStatus", "$controller_name@update_status")->name("$module_name.update-status");
+    Route::post("$module_name/settlement", "$controller_name@settlement")->name("$module_name.settlement");
 
 
 

@@ -28,6 +28,7 @@ $(document).ready(function() {
     });
    
     $(document).on("change", "input[type='checkbox']", function (e) { 
+        var current = $(this);
         if($(this).val() == 0){
             $.ajax({
                 type:'POST',
@@ -35,10 +36,10 @@ $(document).ready(function() {
                 data : {
                     "_token": $('meta[name="csrf-token"]').attr('content'),
                     "id": $(this).attr("data-id"),
-                    "type" : 1
+                    "status" : 0
                 },
                 success:function() {
-                              
+                    current.val('1');    
                 }
             }); 
         }else{
@@ -48,10 +49,10 @@ $(document).ready(function() {
                 data : {
                     "_token": $('meta[name="csrf-token"]').attr('content'),
                     "id": $(this).attr("data-id"),
-                    "type" : 0
+                    "status" : 1
                 },
                 success:function() {
-                           
+                    current.val('0');   
                 }
             }); 
         } 

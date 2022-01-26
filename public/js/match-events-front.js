@@ -3,8 +3,7 @@ $(document).ready(function() {
         if (confirm("Do you want to place this bet?") == true) {
             var current_div = $(this);
             var bet_amount = $(this).closest("div").find('input[name=bet_coin]').val();  
-            var eventtype_id = $(this).closest("div").find('input[name=eventtype_id]').val();        
-            var match_id = $(this).closest("div").find('input[name=match_id]').val();   
+            var match_event_id = $(this).closest("div").find('input[name=match_event_id]').val();        
             var result = $(this).closest("div").find('.result').val();        
             $.ajax({
                 type:'POST',
@@ -12,8 +11,7 @@ $(document).ready(function() {
                 data: {
                     "_token"     : $('meta[name="csrf-token"]').attr('content'),
                     "bet_coin" : bet_amount,
-                    "eventtype_id" : eventtype_id,
-                    "match_id"   : match_id,
+                    "match_event_id" : match_event_id,
                     'result' : result
                 },            
                 success:function(data) {

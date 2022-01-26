@@ -8,6 +8,7 @@ use Exception;
 use App\Http\Controllers\Controller;
 use App\Rules\CheckCoins;
 use App\Models\Bet;
+use App\Models\MatchEvent;
 use App\Models\Credit;
 
 class BetController extends Controller
@@ -40,27 +41,34 @@ class BetController extends Controller
         ]
         ); 
         $request_object = $request->all();
-        $create_bet_object = array(
-            'user_id' => auth()->user()->id,
-            'match_id' => $request_object['match_id'],
-            'eventtype_id' => $request_object['eventtype_id'],
-            'bet_coins' => $request_object['bet_coin'],
-            'result' => $request_object['result'],
-            'status' => 'NA',
-            'type' => 'placed'
-        );
-        Bet::create($create_bet_object);
-
-        //Update coins & debit from user
-        $check_user_credit = Credit::where('user_id',auth()->user()->id)->latest()->first();
-        $creat_credit_object = array(
-            "user_id" => auth()->user()->id,
-            "parent_id" => $check_user_credit->parent_id,
-            "points" => $request_object['bet_coin'],
-            "net_points" => $check_user_credit->net_points - $request_object['bet_coin'],
-            "type" => 'debit'
-        );
-        Credit::create($creat_credit_object);   
-        return response()->json(['success'=>'Points updated']);   
+        
+        $check_for_enabled_match_event = MatchEvent::where('id',$request_object['match_event_id'])->first();
+        if($check_for_enabled_match_event->status == 0){
+            $create_bet_object = array(
+                'user_id' => auth()->user()->id,
+                'match_event_id' => $request_object['match_event_id'],
+                'bet_coins' => $request_object['bet_coin'],
+                'result' => $request_object['result'],
+                'status' => 'NA',
+                'type' => 'placed'
+            );
+            Bet::create($create_bet_object);
+    
+            //Update coins & debit from user
+            $check_user_credit = Credit::where('user_id',auth()->user()->id)->latest()->first();
+            $creat_credit_object = array(
+                "user_id" => auth()->user()->id,
+                "parent_id" => $check_user_credit->parent_id,
+                "points" => $request_object['bet_coin'],
+                "net_points" => $check_user_credit->net_points - $request_object['bet_coin'],
+                "type" => 'debit'
+            );
+            Credit::create($creat_credit_object);   
+            return response()->json(['success'=>'Points updated']);
+        }else{
+            return response()->json([
+                'errors'=>array("bet_coin"=>array('Betting is disabled!'))                     
+            ],422);
+        }                
     }
 }

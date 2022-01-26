@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMatchtypeeventResultsTable extends Migration
+class DropFieldsUpdateBetTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,17 @@ class CreateMatchtypeeventResultsTable extends Migration
      */
     public function up()
     {
-        Schema::create('match_event_results', function (Blueprint $table) {
-            $table->id();
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0'); 
+        Schema::table('bets', function (Blueprint $table) {
+            $table->dropForeign('bets_match_id_foreign');
+            $table->dropColumn('match_id');
+
+            $table->dropForeign('bets_eventtype_id_foreign');
+            $table->dropColumn('eventtype_id');
             $table->unsignedBigInteger('match_event_id');
             $table->foreign('match_event_id')->references('id')->on('match_events')->onDelete('cascade');
-            $table->string('result', 155)->default(0);
-            $table->timestamps();
         });
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
     }
 
     /**
@@ -29,6 +33,6 @@ class CreateMatchtypeeventResultsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('match_event_results');
+        //
     }
 }

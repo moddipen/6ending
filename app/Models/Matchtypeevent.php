@@ -31,7 +31,7 @@ class Matchtypeevent extends Model
         return $this->belongsTo(Match::class,'matchtype_id','matchtype_id');
     }
 
-    public function match_result(){
-        return $this->hasOne(MatchtypeeventResult::class);
-    }
+    // public function match_result(){
+    //     return $this->hasOne(MatchEventResult::class);
+    // }
 }
