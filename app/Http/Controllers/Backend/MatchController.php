@@ -87,7 +87,7 @@ class MatchController extends Controller
 
         $$module_name =  DB::table('matches')
         ->join('matchtypes','matchtypes.id', '=','matches.matchtype_id')
-        ->select(['matches.id','matches.team_1', 'matchtypes.type as matchType', 'matches.team_2', 'matches.status']);
+        ->select(['matches.id','matches.team_1', 'matchtypes.type as matchType', 'matches.team_2', 'matches.status','matches.matchtype_id']);
         
         $data = $$module_name;
         
@@ -99,6 +99,9 @@ class MatchController extends Controller
                 return '<div class="checkbox row col-lg-6"><input data-class="btn-block" id="kv-toggle-demo" data-id="'.$data->id.'" value="1" type="checkbox" data-toggle="toggle" data-on="Active" data-off="Inactive" data-onstyle="success" data-offstyle="warning"></div>';
             }            
         })
+        ->addColumn('action', function ($data) {
+            return '<a href="'.route("backend.matches.events.list",['id'=>\Crypt::encrypt($data->matchtype_id),'match_id'=>$data->id]).'" class="btn btn-info btn-sm mt-1" data-toggle="tooltip" title="Match events"><i class="fas fa-universal-access"></i></a>';         
+        })
         ->editColumn('matchType',  function ($data) {
             return $data->matchType;
         })
@@ -108,7 +111,7 @@ class MatchController extends Controller
         ->editColumn('team_2', function ($data) {
             return $data->team_2;
         })
-        ->rawColumns(['status'])
+        ->rawColumns(['status','action'])
         ->make(true);
     }
 
@@ -193,6 +196,31 @@ class MatchController extends Controller
         Match::where("id",$request_object['id'])->update(['status'=>$request_object['status']]);
     }
 
+    public function update_type(Request $request){
+        $request_object = $request->all();
+        Matchtypeevent::where("id",$request_object['id'])->update(['type'=>$request_object['type']]);
+    }
+
+    public function event_backend($id,$match_id){
+        $module_title = $this->module_title;
+        $module_name = $this->module_name;
+        $module_path = $this->module_path;
+        $module_icon = $this->module_icon;
+        $module_model = $this->module_model;
+        $module_name_singular = Str::singular($module_name);
+
+        $module_action = 'Event List';
+
+        $id = \Crypt::decrypt($id);
+        $get_match_events = Matchtypeevent::with(["match_types","event_types","match_result","match_to_list"=> function($q) use($match_id) {
+            // Query the name field in status table
+            $q->where('id', $match_id); // '=' is optional
+        }])->where("matchtype_id",$id)->get();
+        // echo "<pre>";
+        // print_R($get_match_events->toArray());exit;
+        return view('backend.matches.events_backend',compact('module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular','module_title','get_match_events','match_id'));        
+    }
+
     public function events($id,$match_id){
         $id = \Crypt::decrypt($id);
         $get_match_events = Matchtypeevent::with(["match_types","event_types","match_to_list"=> function($q) use($match_id) {
@@ -200,7 +228,7 @@ class MatchController extends Controller
             $q->where('id', $match_id); // '=' is optional
         }])->where("matchtype_id",$id)->get();
         // echo "<pre>";
-        // print_r($get_match_events->toArray());exit;
+        // print_R($get_match_events->toArray());exit;
         return view('backend.matches.events',["get_match_events"=>$get_match_events,"match_id"=>$match_id]);        
     }
 }

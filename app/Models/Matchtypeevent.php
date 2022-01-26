@@ -13,7 +13,10 @@ class Matchtypeevent extends Model
         'matchtype_id',
         'eventtype_id',
         'bet_coin',
-        'win_coin'
+        'win_coin',
+        'status',
+        'type',
+        'is_settled'
     ];
 
     public function event_types(){
@@ -26,5 +29,9 @@ class Matchtypeevent extends Model
 
     public function match_to_list(){
         return $this->belongsTo(Match::class,'matchtype_id','matchtype_id');
+    }
+
+    public function match_result(){
+        return $this->hasOne(MatchtypeeventResult::class);
     }
 }

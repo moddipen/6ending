@@ -26,7 +26,12 @@
                         <div class="form-group mx-sm-3 mb-3">
                             <h5 class="success text-success">Bet Placed!</h5>
                             <a href="#">&nbsp</a>
-                        </div>                        
+                        </div>    
+                    @elseif($event->type == 1)
+                        <div class="form-group mx-sm-3 mb-3">
+                            <h5 class="success text-danger">Betting is disabled!</h5>
+                            <a href="#">&nbsp</a>
+                        </div>                  
                     @else 
                         <div class="form-group mx-sm-3 mb-2">
                             <div class="input-group">

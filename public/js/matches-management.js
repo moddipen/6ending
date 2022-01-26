@@ -25,31 +25,13 @@ $(document).ready(function() {
                 });
             },
             columns: [
-                {data: 'matchType'},
+                {data: 'matchType', searchable: false},
                 {data: 'team_1'},
                 {data: 'team_2'},
-                {data: 'status'}
+                {data: 'status'},
+                {data: 'action'},
             ]           
         });
-    
-        // $(document).on("click", ".input-group-append", function () { 
-        //     if($(this).prev().prev('.amount-customization').val() == ""){
-        //         $(this).prev('.invalid-feedback').css("display","block");
-        //     }else{
-        //         $.ajax({
-        //             type:'POST',
-        //             url: routeWinCoinUpdate,
-        //             data : {
-        //                 "_token": $('meta[name="csrf-token"]').attr('content'),
-        //                 "id": $(this).attr("data-id"),
-        //                 "win_coin" : $(this).prev().prev('.amount-customization').val()
-        //             },
-        //             success:function() {
-        //                 dataTable.draw();          
-        //             }
-        //         }); 
-        //     }      
-        // });
     
         $(document).on("change", "input[type='checkbox']", function (e) { 
             if($(this).val() == 0){

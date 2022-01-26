@@ -75,7 +75,8 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     Route::resource('matches', 'MatchController');
     Route::post("matches/datatable", ['as' => "matches.datatable", 'uses' => "MatchController@datatable"]);
     Route::post("matches/updateStatus", "MatchController@update_status")->name("matches.update-status");
-    
+    Route::post("matches/updateType", "MatchController@update_type")->name("matches.update-type");
+    Route::get("matches/events/list/{id}/{match_id}", "MatchController@event_backend")->name("matches.events.list");
     /**
      * Backend Dashboard
      * Namespaces indicate folder structure.
@@ -117,6 +118,17 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     Route::post("$module_name", "$controller_name@store")->name("$module_name.store");
     Route::post("$module_name/update", "$controller_name@update")->name("$module_name.update");
     Route::post("$module_name/updateStatus", "$controller_name@update_status")->name("$module_name.update-status");
+    
+    
+    /*
+    *
+    *  Matchtypevent Result Routes
+    *
+    * ---------------------------------------------------------------------
+    */
+    $module_name = 'matchevents';
+    $controller_name = 'MatchtypeeventResultController';
+    Route::post("$module_name/updateresult", "$controller_name@update_result")->name("$module_name.update-result");
     
     
 

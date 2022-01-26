@@ -39,6 +39,7 @@
                                 <th>Team 1</th>
                                 <th>Team 2</th>
                                 <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>                            
                     </table>
