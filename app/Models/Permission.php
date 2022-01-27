@@ -23,11 +23,25 @@ class Permission extends \Spatie\Permission\Models\Permission
             'delete_roles',
             'restore_roles',
 
-            'view_backups',
-            'add_backups',
-            'create_backups',
-            'download_backups',
-            'delete_backups',
+            'view_matches',
+            'add_matches',
+            'edit_matches',
+            'delete_matches',
+
+            'view_eventmanagers',
+            'add_eventmanagers',
+            'edit_eventmanagers',
+            'delete_eventmanagers',
+
+            'view_matchevents',
+            'add_matchevents',
+            'edit_matchevents',
+            'delete_matchevents',
+
+            'view_bets',
+            'add_bets',
+            'edit_bets',
+            'delete_bets',
 
             'view_user_dashboard',
             'users_dashboard'

@@ -54,7 +54,7 @@ class GenerateMenus
             ->data([
                 'order'         => 2,
                 'activematches' => 'admin/eventmanagers*',
-                'permission'    => ['view_users'],
+                'permission'    => ['view_eventmanagers'],
             ])
             ->link->attr([
                 'class' => 'c-sidebar-nav-link',
@@ -80,9 +80,9 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-item',
             ])
             ->data([
-                'order'         => 5,
+                'order'         => 6,
                 'activematches' => 'admin/matches*',
-                'permission'    => ['users_dashboard'],
+                'permission'    => ['view_matches'],
             ])
             ->link->attr([
                 'class' => 'c-sidebar-nav-link',
@@ -155,6 +155,6 @@ class GenerateMenus
             });
         })->sortBy('order');
 
-        return $next($request);
-    }
+return $next($request);
+}
 }

@@ -21,11 +21,6 @@ class UserRoleTableSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
 
         User::findOrFail(1)->assignRole('super admin');
-        User::findOrFail(2)->assignRole('admin');
-        User::findOrFail(3)->assignRole('subadmin');
-        User::findOrFail(4)->assignRole('supermaster');
-        User::findOrFail(5)->assignRole('master');
-
         Schema::enableForeignKeyConstraints();
     }
 }

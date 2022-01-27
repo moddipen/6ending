@@ -31,8 +31,9 @@ class PermissionRoleTableSeeder extends Seeder
 
         // Create Permissions
         Permission::firstOrCreate(['name' => 'view_backend']);
+        Permission::firstOrCreate(['name' => 'view_settings']);
         Permission::firstOrCreate(['name' => 'edit_settings']);
-        Permission::firstOrCreate(['name' => 'view_logs']);
+        
 
         $permissions = Permission::defaultPermissions();
 
@@ -40,32 +41,14 @@ class PermissionRoleTableSeeder extends Seeder
             Permission::firstOrCreate(['name' => $perms]);
         }
 
-        \Artisan::call('auth:permission', [
-            'name' => 'posts',
-        ]);
-        echo "\n _Posts_ Permissions Created.";
-
-        \Artisan::call('auth:permission', [
-            'name' => 'categories',
-        ]);
-        echo "\n _Categories_ Permissions Created.";
-
-        \Artisan::call('auth:permission', [
-            'name' => 'tags',
-        ]);
-        echo "\n _Tags_ Permissions Created.";
-
-        \Artisan::call('auth:permission', [
-            'name' => 'comments',
-        ]);
-        echo "\n _Comments_ Permissions Created.";
-
+        
         echo "\n\n";
 
         // Assign Permissions to Roles
-        $admin->givePermissionTo(Permission::all());
-        $manager->givePermissionTo('view_backend');
-        $executive->givePermissionTo('view_backend');
+        $super_admin->givePermissionTo(Permission::all());
+        /*$manager->givePermissionTo('view_backend');
+
+        $executive->givePermissionTo('view_backend');*/
 
         Schema::enableForeignKeyConstraints();
     }
