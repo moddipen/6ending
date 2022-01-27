@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use Exception;
 use App\Http\Controllers\Controller;
 use App\Rules\CheckCoins;
+use App\Rules\CheckLimit;
 use App\Models\Bet;
 use App\Models\MatchEvent;
 use App\Models\Credit;
 
 class BetController extends Controller
 {
-    use Authorizable;
+    // use Authorizable;
     public function __construct()
     {
         // Page Title
@@ -35,7 +36,7 @@ class BetController extends Controller
     public function store(Request $request){
         $request->validate([
                 'bet_coin' => ['required', 'numeric', 'gt:0', new CheckCoins()],
-                'result' => 'required'
+                'result' => ['required',new CheckLimit($request->type)]
         ],[
             'result.required' => 'Please enter your prediction!'
         ]

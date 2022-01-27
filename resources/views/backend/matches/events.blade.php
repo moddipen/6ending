@@ -44,6 +44,7 @@
                                 @elseif ($event->matchtypeevent->event_types->type == "One day Khada – 61 runs" || $event->matchtypeevent->event_types->type == "T20 Khada – 31 runs")
                                     <input type="text" class="form-control form-control-sm result_low" placeholder="Low Score" name="result_low"> 
                                     <input type="text" class="form-control form-control-sm result_high" placeholder="High Score" name="result_high"> 
+                                    <input type="hidden" class="form-control form-control-sm type" name="type" value="{{ $event->matchtypeevent->event_types->type }}"> 
                                 @else
                                     <input type="text" class="form-control form-control-sm result" placeholder="Enter value" name="result"> 
                                 @endif                                
