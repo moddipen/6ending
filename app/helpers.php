@@ -500,6 +500,6 @@ if (!function_exists('time_string_format')) {
         $datetime1 = new DateTime();
         $datetime2 = new DateTime($end_date);
         $interval = $datetime2->diff($datetime1);
-        return $interval->format('%h')."h ".$interval->format('%i')."m";
+        return $interval->format('%d')."d ".$interval->format('%h')."h ".$interval->format('%i')."m";
     }    
 }
