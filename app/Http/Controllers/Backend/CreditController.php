@@ -51,9 +51,16 @@ class CreditController extends Controller
                     ],422);   
                 }                
             }else{
-                $net_points = abs($request_object['points'] - $latest_record->net_points);
-                $net_points_parents = $check_parent_credit->net_points + $request_object['points'];
-                $parent_transaction_type = "credit";
+                if(!empty($latest_record) && $latest_record->net_points >= $request_object['points']){
+                    $net_points = abs($request_object['points'] - $latest_record->net_points);
+                    $net_points_parents = $check_parent_credit->net_points + $request_object['points'];
+                    $parent_transaction_type = "credit";
+                }else{
+                    return response()->json([
+                        'errors'=>array("points"=>array('You do not have enough coins to debit.'))                     
+                    ],422); 
+                }
+                
             }
         }else{
             $check_parent_credit = Credit::where('user_id',auth()->user()->id)->latest()->first();
@@ -68,8 +75,14 @@ class CreditController extends Controller
                     ],422);  
                 }
             }else{
-                $net_points_parents = $check_parent_credit->net_points + $request_object['points'];
-                $parent_transaction_type = "credit";
+                if(!empty($check_parent_credit) && $check_parent_credit->net_points >= $request_object['points']){
+                    $net_points_parents = $check_parent_credit->net_points + $request_object['points'];
+                    $parent_transaction_type = "credit";
+                }else{
+                    return response()->json([
+                        'errors'=>array("points"=>array('You do not have enough coins to debit.'))                     
+                    ],422); 
+                }                
             }    
         }
 

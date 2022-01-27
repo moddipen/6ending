@@ -43,7 +43,7 @@
                                         <div class="row">
                                             <div class="input-group col-lg-6 input-group-sm mb-3">
                                                 @if($event->matchtypeevent->event_types->type == "Toss")
-                                                    <select class="form-control select-winner amount-customization" name="result">
+                                                    <select class="form-control select-winner amount-customization" {{ $event->is_settled == 1 ? 'disabled' : '' }} disabled name="result">
                                                         <option value="">choose winner</option>
                                                         <option {{ (!empty($event->match_result) && $event->match_result->result == $event->match->team_1 ) ? ' selected'  : ''}} value="{{ $event->match->team_1 }}">{{ $event->match->team_1 }}</option>
                                                         <option {{ (!empty($event->match_result) && $event->match_result->result == $event->match->team_2 ) ? ' selected'  : ''}} value="{{ $event->match->team_2 }}">{{ $event->match->team_2 }}</option>
@@ -55,7 +55,7 @@
                                                         </span>
                                                     </div>
                                                 @else
-                                                    <input type="text" value="{{ !empty($event->match_result) ? $event->match_result->result : "" }}" data-val-required="Required" name="result" class="form-control amount-customization" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                    <input type="text" value="{{ !empty($event->match_result) ? $event->match_result->result : "" }}" {{ $event->is_settled == 1 ? 'disabled' : '' }} data-val-required="Required" name="result" class="form-control amount-customization" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
                                                     <div class="invalid-feedback order-last">This field is required.</div>
                                                     <div style="display:none; cursor:pointer;" class="input-group-append" data-id="{{ $event->id }}">
                                                         <span class="input-group-text" id="inputGroup-sizing-sm">

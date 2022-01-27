@@ -61,6 +61,6 @@ class MatchEventSettlement extends Model
     }
 
     public function net_point_calculation_winner( $actual_bet_coin, $actual_win_coin, $bet_placed_by_user){
-        return round($bet_placed_by_user*$actual_win_coin/$actual_bet_coin) + $bet_placed_by_user;
+        return round($bet_placed_by_user*$actual_win_coin/$actual_bet_coin);
     }
 }
