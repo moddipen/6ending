@@ -9,23 +9,23 @@ use App\Models\User;
 
 class BackendController extends Controller
 {
-    use Authorizable;
+    // use Authorizable;
     public function __construct()
     {
         // Page Title
-        $this->module_title = 'Dashboard';
+        // $this->module_title = 'Dashboard';
 
-        // module name
-        $this->module_name = 'dashboard';
+        // // module name
+        // $this->module_name = 'dashboard';
 
-        // directory path of the module
-        $this->module_path = 'users';
+        // // directory path of the module
+        // $this->module_path = 'users';
 
-        // module icon
-        $this->module_icon = 'c-icon cil-people';
+        // // module icon
+        // $this->module_icon = 'c-icon cil-people';
 
-        // module model name, path
-        $this->module_model = "App\Models\User";
+        // // module model name, path
+        // $this->module_model = "App\Models\User";        
     }
     /**
      * Show the application dashboard.

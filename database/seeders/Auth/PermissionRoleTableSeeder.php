@@ -46,6 +46,7 @@ class PermissionRoleTableSeeder extends Seeder
 
         // Assign Permissions to Roles
         $super_admin->givePermissionTo(Permission::all());
+        $admin->givePermissionTo('view_backend');
         /*$manager->givePermissionTo('view_backend');
 
         $executive->givePermissionTo('view_backend');*/

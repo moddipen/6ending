@@ -60,6 +60,11 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     // Route::get("$module_name/index", ['as' => "$module_name.index", 'uses' => "$controller_name@index"]);
 });
 
+Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.', 'middleware' => ['auth', 'can:view_user_dashboard']], function () {
+    Route::get('/', 'BackendController@index')->name('home');
+    Route::get('dashboard', 'BackendController@index')->name('dashboard');
+});
+
 /*
 *
 * Backend Routes
@@ -81,8 +86,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
      * Backend Dashboard
      * Namespaces indicate folder structure.
      */
-    Route::get('/', 'BackendController@index')->name('home');
-    Route::get('dashboard', 'BackendController@index')->name('dashboard');
+    
     
 
     /*

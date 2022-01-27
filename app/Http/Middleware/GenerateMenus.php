@@ -26,7 +26,7 @@ class GenerateMenus
             ->data([
                 'order'         => 1,
                 'activematches' => 'admin/dashboard*',
-                'permission'    => ['view_users'],
+                'permission'    => ['view_user_dashboard'],
             ])
             ->link->attr([
                 'class' => 'c-sidebar-nav-link',
@@ -68,7 +68,7 @@ class GenerateMenus
             ->data([
                 'order'         => 5,
                 'activematches' => 'admin/users/dashboard*',
-                'permission'    => ['users_dashboards'],
+                'permission'    => ['users_dashboard'],
             ])
             ->link->attr([
                 'class' => 'c-sidebar-nav-link',
