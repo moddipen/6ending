@@ -87,7 +87,7 @@
                     <div class="p-2 bd-highlight text-info">Match has been setteled down!</div>
                 </div>
             @else
-                <div class="d-flex justify-content-center border">
+                <div class="d-flex justify-content-center">
                     {{ html()->form('POST', route('backend.settlements.store'))->class('form-horizontal')->id('validate-form')->open() }}
                     {{ csrf_field() }}
                     <div class="form-group">

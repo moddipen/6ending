@@ -4,7 +4,13 @@ $(document).ready(function() {
             var current_div = $(this);
             var bet_amount = $(this).closest("div").find('input[name=bet_coin]').val();  
             var match_event_id = $(this).closest("div").find('input[name=match_event_id]').val();        
-            var result = $(this).closest("div").find('.result').val();        
+            var result = $(this).closest("div").find('.result').val();    
+            if($(this).closest("div").find('.result_low').length > 0 && $(this).closest("div").find('.result_high').length > 0){
+                var result_low = $(this).closest("div").find('.result_low').val();
+                var result_high = $(this).closest("div").find('.result_high').val();
+                result = result_low+"|"+result_high;
+            }  
+            
             $.ajax({
                 type:'POST',
                 url: bet_url,
