@@ -34,18 +34,18 @@
 <!-- / card -->
 <div class="row">
     <div class="col-sm-6 col-lg-3">
-        <div class="card">
+        <div class="card bg-gradient-primary text-white">
             <div class="card-body">
-                <div class="text-value-lg">89.9%</div>
-                <div>Widget title</div>
-                <div class="progress progress-xs my-2">
+                <div class="text-value-lg">{{ $total_coins; }}</div>
+                <div>Total Coins</div>
+                {{-- <div class="progress progress-xs my-2">
                     <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><small class="text-muted">Widget helper text</small>
+                </div><small class="text-muted">Widget helper text</small> --}}
             </div>
         </div>
     </div>
 
-    <div class="col-sm-6 col-lg-3">
+    {{-- <div class="col-sm-6 col-lg-3">
         <div class="card">
             <div class="card-body">
                 <div class="text-value-lg">12.124</div>
@@ -79,11 +79,11 @@
                 </div><small class="text-muted">Widget helper text</small>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 </div>
 
-<div class="row">
+{{-- <div class="row">
     <div class="col-sm-6 col-lg-3">
         <div class="card text-white bg-gradient-primary">
             <div class="card-body">
@@ -132,5 +132,5 @@
         </div>
     </div>
 
-</div>
+</div> --}}
 @endsection

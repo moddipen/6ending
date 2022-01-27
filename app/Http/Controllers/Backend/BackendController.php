@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Authorizable;
 use App\Models\Match;
+use App\Models\User;
 
 class BackendController extends Controller
 {
@@ -33,7 +34,14 @@ class BackendController extends Controller
      */
     public function index()
     {
-        return view('backend.index');
+        $total_coins = 0;
+        $user_coins = User::with("points")->where("id",auth()->user()->id)->first();
+        if(!empty($user_coins)){
+            if(!empty($user_coins->points)){
+                $total_coins = $user_coins->points->net_points;
+            }
+        }
+        return view('backend.index',["total_coins"=>$total_coins]);
     }
 
     public function user_dashboard()
