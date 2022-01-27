@@ -41,10 +41,12 @@
                                         <option value="{{ $event->match->team_1 }}">{{ $event->match->team_1 }}</option>
                                         <option value="{{ $event->match->team_2 }}">{{ $event->match->team_2 }}</option>
                                     </select>  
+                                @elseif ($event->matchtypeevent->event_types->type == "One day Khada – 61 runs" || $event->matchtypeevent->event_types->type == "T20 Khada – 31 runs")
+                                    <input type="text" class="form-control form-control-sm result_low" placeholder="Low Score" name="result_low"> 
+                                    <input type="text" class="form-control form-control-sm result_high" placeholder="High Score" name="result_high"> 
                                 @else
                                     <input type="text" class="form-control form-control-sm result" placeholder="Enter value" name="result"> 
                                 @endif                                
-                                {{-- <input type="text" class="form-control form-control-sm bet-coins" name="bet_coin">  --}}
                                 <input type="text" class="form-control form-control-sm bet-coins" placeholder="Enter Coins" name="bet_coin">
                                 <div class="invalid-feedback"></div>
                             </div>                         
