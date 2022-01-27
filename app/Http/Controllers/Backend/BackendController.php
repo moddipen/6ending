@@ -38,7 +38,7 @@ class BackendController extends Controller
 
     public function user_dashboard()
     {
-        $matches = Match::with("matchtype")->get();
+        $matches = Match::with("matchtype")->where("status",0)->where('is_settled',0)->get();
         return view('backend.dashboard',["matches"=>$matches]);
     }
 }
