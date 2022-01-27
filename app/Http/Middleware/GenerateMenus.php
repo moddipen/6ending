@@ -68,7 +68,7 @@ class GenerateMenus
             ->data([
                 'order'         => 5,
                 'activematches' => 'admin/users/dashboard*',
-                'permission'    => ['users_dashboard'],
+                'permission'    => ['users_dashboards'],
             ])
             ->link->attr([
                 'class' => 'c-sidebar-nav-link',
@@ -120,9 +120,10 @@ class GenerateMenus
             $menu->filter(function ($item) {
                 if ($item->data('permission')) {
                     if (auth()->check()) {
-                        if (auth()->user()->hasRole('super admin')) {
-                            return true;
-                        } elseif (auth()->user()->hasAnyPermission($item->data('permission'))) {
+                        // if (auth()->user()->hasRole('super admin')) {
+                        //     return true;
+                        // } else
+                        if (auth()->user()->hasAnyPermission($item->data('permission'))) {
                             return true;
                         }
                     }
