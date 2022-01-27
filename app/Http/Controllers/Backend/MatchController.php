@@ -88,7 +88,7 @@ class MatchController extends Controller
 
         $$module_name =  DB::table('matches')
         ->join('matchtypes','matchtypes.id', '=','matches.matchtype_id')
-        ->select(['matches.id','matches.team_1', 'matchtypes.type as matchType', 'matches.team_2', 'matches.status','matches.matchtype_id']);
+        ->select(['matches.id','matches.team_1', 'matchtypes.type as matchType', 'matches.team_2', 'matches.status','matches.matchtype_id','matches.is_settled']);
         
         $data = $$module_name;
         
@@ -108,6 +108,13 @@ class MatchController extends Controller
         })
         ->editColumn('team_1', function ($data) {
             return $data->team_1;
+        })
+        ->editColumn('is_settled', function ($data) {
+            if($data->is_settled == 0){
+                return "No";
+            }else{
+                return "Yes";
+            }            
         })
         ->editColumn('team_2', function ($data) {
             return $data->team_2;
@@ -224,9 +231,8 @@ class MatchController extends Controller
 
         $id = \Crypt::decrypt($id);
         $get_match_events = MatchEvent::with("matchtypeevent.event_types","matchtypeevent.match_types","match_result","match")->where("match_id",$match_id)->get();
-        // echo "<pre>";
-        // print_R($get_match_events->toArray());exit;
-        return view('backend.matches.events_backend',compact('module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular','module_title','get_match_events','match_id','id'));        
+        $check_id_match_settled = Match::find($match_id);
+        return view('backend.matches.events_backend',compact('check_id_match_settled','module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular','module_title','get_match_events','match_id','id'));        
     }
 
     public function events($id,$match_id){

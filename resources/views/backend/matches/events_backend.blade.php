@@ -81,17 +81,25 @@
                     </table>
                 </div>
             </div>   
-            <div class="d-flex justify-content-center">
-                {{ html()->form('POST', route('backend.matches.settlement'))->class('form-horizontal')->open() }}
-                {{ csrf_field() }}
-                <div class="form-group">
-                    <input type="hidden" value="{{ $match_id }}" name="matchtype_id">
-                    <button type="submit" class="btn btn-success  " data-toggle="tooltip" title="" data-original-title="Make settlement">
-                    <i class="fas fa-balance-scale" data-original-title="" title=""></i>
-                    &nbsp; Settlement
-                    </button>
-                </div>                
-            </div>         
+            
+            @if($check_id_match_settled->is_settled == 1)
+                <div class="d-flex justify-content-center border">
+                    <div class="p-2 bd-highlight text-info">Match has been setteled down!</div>
+                </div>
+            @else
+                <div class="d-flex justify-content-center border">
+                    {{ html()->form('POST', route('backend.settlements.store'))->class('form-horizontal')->id('validate-form')->open() }}
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <input type="hidden" value="{{ $match_id }}" name="match_id">
+                        <button type="button" class="btn btn-success" onClick="validate_form()" data-toggle="tooltip" title="" data-original-title="Make settlement">
+                        <i class="fas fa-balance-scale" data-original-title="" title=""></i>
+                        &nbsp; Settlement
+                        </button>
+                    </div>
+                </div> 
+            @endif                               
+                    
         </div>
     </div>   
 </div>

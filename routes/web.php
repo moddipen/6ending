@@ -147,7 +147,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     Route::post("$module_name", "$controller_name@store")->name("$module_name.store");
     Route::post("$module_name/update", "$controller_name@update")->name("$module_name.update");
     Route::post("$module_name/updateStatus", "$controller_name@update_status")->name("$module_name.update-status");
-    Route::post("$module_name/settlement", "$controller_name@settlement")->name("$module_name.settlement");
+    // Route::post("$module_name/settlement", "$controller_name@settlement")->name("$module_name.settlement");
 
 
 
@@ -205,4 +205,11 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     $module_name = 'credits';
     $controller_name = 'CreditController';
     Route::post("$module_name/credit/update", ['as' => "$module_name.update", 'uses' => "$controller_name@credit_update"]);    
+
+    /**
+     * Match event settlement
+     */
+    $module_name = 'settlements';
+    $controller_name = 'MatchEventSettlementController';
+    Route::post("$module_name/store", ['as' => "$module_name.store", 'uses' => "$controller_name@store"]);    
 });

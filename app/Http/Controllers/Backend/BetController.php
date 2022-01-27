@@ -61,7 +61,7 @@ class BetController extends Controller
                 "parent_id" => $check_user_credit->parent_id,
                 "points" => $request_object['bet_coin'],
                 "net_points" => $check_user_credit->net_points - $request_object['bet_coin'],
-                "type" => 'debit'
+                "type" => 'bet-debit'
             );
             Credit::create($creat_credit_object);   
             return response()->json(['success'=>'Points updated']);

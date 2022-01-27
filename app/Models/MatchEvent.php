@@ -25,5 +25,9 @@ class MatchEvent extends Model
 
     public function match_result(){
         return $this->hasOne(MatchEventResult::class);
-    }    
+    }  
+    
+    public function bet(){
+        return $this->hasMany(Bet::class);
+    }
 }

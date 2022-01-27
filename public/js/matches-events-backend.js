@@ -56,5 +56,11 @@ $(document).ready(function() {
                 }
             }); 
         } 
-    });    
+    });       
 });
+
+function validate_form(){
+    if (confirm("Do you want to make settlements?") == true) {
+        $("#validate-form").submit();    
+    }    
+}

@@ -13,7 +13,8 @@ class Match extends Model
         'team_1',
         'team_2',
         'status',
-        'schedule'
+        'schedule',
+        'is_settled'
     ];
 
     public function matchtype(){

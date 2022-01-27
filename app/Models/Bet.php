@@ -20,4 +20,8 @@ class Bet extends Model
     public function match(){
         return $this->belongsTo(Match::class);
     }
+
+    public function credit(){
+        return $this->hasOne(Credit::class,'user_id','user_id')->latest();
+    }
 }

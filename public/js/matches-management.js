@@ -28,6 +28,7 @@ $(document).ready(function() {
                 {data: 'matchType', searchable: false},
                 {data: 'team_1'},
                 {data: 'team_2'},
+                {data: 'is_settled'},
                 {data: 'status'},
                 {data: 'action'},
             ]           
