@@ -61,7 +61,7 @@ class GenerateMenus
             ]);
 
             // User Dashboard
-            $menu->add('<i class="cil-speedometer c-sidebar-nav-icon"></i> User Dashboard', [
+            $menu->add('<i class="cil-speedometer c-sidebar-nav-icon"></i> Dashboard', [
                 'route' => 'backend.users.dashboard',
                 'class' => 'c-sidebar-nav-item',
             ])

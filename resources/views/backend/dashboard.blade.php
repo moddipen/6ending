@@ -62,7 +62,7 @@
 <div class="row">
     @foreach($matches as $match)
         <div class="col-lg-4 col-sm-6">
-            <div class="card" role="button">
+            <div class="card" role="button"  onClick="redirect('{{ route("backend.matches.events",['id'=>\Crypt::encrypt($match->matchtype_id),'match_id'=>$match->id]) }}')">
                 <div class="card-header">
                     {{ $match->matchtype->type }}               
                 </div>
@@ -92,3 +92,10 @@
 @endif
 <!-- / card -->
 @endsection
+@push ('after-scripts')
+    <script>
+        function redirect(url){
+            window.location.href = url;
+        } 
+    </script>    
+@endpush
