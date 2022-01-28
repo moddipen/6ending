@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Authorizable;
 use Exception;
 use App\Models\Credit;
+use Flash;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -30,6 +31,10 @@ class CreditController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'points' => 'required|numeric|gt:0' 
+        ]
+    );
         $oldcredit = Credit::where('user_id',auth()->user()->id)->latest()->first();
         $credit = new Credit;
         $credit->user_id = auth()->user()->id;
@@ -38,7 +43,8 @@ class CreditController extends Controller
         $credit->net_points = $oldcredit->net_points+$request->points;
         $credit->type = 'credit';
         $credit->save();
-        return back();  
+        Flash::success('Points Added Successfully')->important();
+        return redirect()->back(); 
         
     }
 
@@ -121,3 +127,4 @@ class CreditController extends Controller
         return response()->json(['success'=>'Points updated']);   
     }
 }
+
