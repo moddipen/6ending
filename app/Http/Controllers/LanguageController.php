@@ -18,6 +18,6 @@ class LanguageController extends Controller
 
         flash()->success(__('Language changed to').' '.strtoupper($language))->important();
 
-        return redirect()->back();
+        return redirect()->back(); 
     }
 }
