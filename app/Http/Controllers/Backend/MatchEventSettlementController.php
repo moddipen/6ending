@@ -46,16 +46,20 @@ class MatchEventSettlementController extends Controller
             foreach($get_match_events as $event){                
                 if(!empty($event['bet'])){
                     foreach($event['bet'] as $bet){
-                        if($event['matchtypeevent']['event_types']['type'] == "One day Khada – 61 runs" || $event['matchtypeevent']['event_types']['type'] == "T20 Khada - 31 runs"){
-                            $bet_limits = explode("|",$bet['result']);
-                            if($event['match_result']['result'] >= $bet_limits[0] && $event['match_result']['result'] <= $bet_limits[1]){
-                                $this->match_event_settlement->event_settlement('credit',$bet,$event['matchtypeevent'],$event['id']);
+                        if($event['matchtypeevent']['event_types']['type'] == "One day Khada – 61 runs" || $event['matchtypeevent']['event_types']['type'] == "T20 Khada – 31 runs"){
+                            if(empty($event['match_result'])){
+                                $this->match_event_settlement->event_settlement('refund',$bet,$event['matchtypeevent'],$event['id']);
                             }else{
-                                $this->match_event_settlement->event_settlement('debit',$bet,$event['matchtypeevent'],$event['id']);
-                            }
+                                $bet_limits = explode("|",$bet['result']);
+                                if($event['match_result']['result'] >= $bet_limits[0] && $event['match_result']['result'] <= $bet_limits[1]){
+                                    $this->match_event_settlement->event_settlement('credit',$bet,$event['matchtypeevent'],$event['id']);
+                                }else{
+                                    $this->match_event_settlement->event_settlement('debit',$bet,$event['matchtypeevent'],$event['id']);
+                                }
+                            }                            
                         }else{
-                            if($event['match_result']['result'] == 0){
-                                $this->match_event_settlement->toss_event_settlement('refund',$bet,$event['matchtypeevent'],$event['id']);
+                            if(empty($event['match_result'])){
+                                $this->match_event_settlement->event_settlement('refund',$bet,$event['matchtypeevent'],$event['id']);
                             }else{
                                 if(in_array($event['match_result']['result'],$bet)){
                                     $this->match_event_settlement->event_settlement('credit',$bet,$event['matchtypeevent'],$event['id']);
