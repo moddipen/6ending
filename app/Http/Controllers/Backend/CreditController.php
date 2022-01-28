@@ -29,6 +29,19 @@ class CreditController extends Controller
         $this->module_model = "App\Models\Credit";
     }
 
+    public function store(Request $request){
+        $oldcredit = Credit::where('user_id',auth()->user()->id)->latest()->first();
+        $credit = new Credit;
+        $credit->user_id = auth()->user()->id;
+        $credit->parent_id  = $oldcredit->parent_id;
+        $credit->points = $request->points;
+        $credit->net_points = $oldcredit->net_points+$request->points;
+        $credit->type = 'credit';
+        $credit->save();
+        return back();  
+        
+    }
+
     public function credit_update(Request $request)
     {
         $request->validate([

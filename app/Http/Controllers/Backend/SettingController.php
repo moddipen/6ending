@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Models\Credit;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -69,5 +70,5 @@ class SettingController extends Controller
         }
 
         return redirect()->back()->with('status', 'Settings has been saved.');
-    }
-}
+    }   
+        }

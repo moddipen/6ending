@@ -57,9 +57,46 @@
                                 </div>
                             </div>
                         </div>
+                        
                         @endforeach
 
                     @endif
+
+                    <div class="row m-b-md">
+                        <div class="col-md-12">
+                            <button class="btn-primary btn">
+                                <i class='fas fa-save'></i> @lang('Save')
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <form method="post" action="{{ route('backend.credits.store') }}" class="form-horizontal" role="form">
+                    {!! csrf_field() !!}
+
+                   
+                    <div class="card card-accent-primary">
+                            <div class="card-header">
+                                <i class="fas fa-envelope"></i>
+                                Credit Coins
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group ">
+                                            <label for="points"> <strong>Coins</strong></label> <span class="text-danger"> <strong>*</strong> </span>
+                                            <input type="text" name="points" value="" class="form-control" id="points" placeholder="Coins" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
 
                     <div class="row m-b-md">
                         <div class="col-md-12">

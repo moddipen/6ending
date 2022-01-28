@@ -106,7 +106,10 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
         $controller_name = 'SettingController';
         Route::get("$module_name", "$controller_name@index")->name("$module_name");
         Route::post("$module_name", "$controller_name@store")->name("$module_name.store");
+       
+        
     });
+ 
 
     /*
     *
@@ -209,6 +212,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     $module_name = 'credits';
     $controller_name = 'CreditController';
     Route::post("$module_name/credit/update", ['as' => "$module_name.update", 'uses' => "$controller_name@credit_update"]);    
+    Route::post("$module_name/credit/store", ['as' => "$module_name.store", 'uses' => "$controller_name@store"]);    
 
     /**
      * Match event settlement
