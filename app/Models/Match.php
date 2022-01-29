@@ -12,6 +12,8 @@ class Match extends Model
         'matchtype_id',
         'team_1',
         'team_2',
+        'shortcode_1',
+        'shortcode_2',
         'status',
         'schedule',
         'is_settled'
