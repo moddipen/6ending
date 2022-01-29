@@ -19,6 +19,8 @@ class CreateMatchesTable extends Migration
             $table->foreign('matchtype_id')->references('id')->on('matchtypes')->onDelete('cascade');
             $table->string('team_1');
             $table->string('team_2');
+            $table->string('shortcode_team_1');
+            $table->string('shortcode_team_2');
             $table->integer('status')->comment("0=Active, 1=Inactive")->nullable()->default(0);   
             $table->timestamps();
         });
