@@ -31,8 +31,11 @@ $(document).ready(function() {
                 },            
                 success:function(data) {
                     current_div.closest("div").next().find('.spot-count').text(parseInt(current_div.closest("div").next().find('.spot-count').text()) + parseInt(1));
-                    current_div.closest("div").find('.mx-sm-3').html('<h5 class="success text-success">Bet Placed!</h5>');   
-                    current_div.closest("div").find('.mx-sm-3').next('a').remove();
+                    if(current_div.closest("div").find('.success').length > 0){
+                        current_div.closest("div").find('.success').remove();
+                    }
+                    current_div.closest("div").find('.mx-sm-3').append('<h5 class="success text-success">Bet Placed!</h5>');   
+                    // current_div.closest("div").find('.mx-sm-3').next('a').remove();
                     current_div.closest("div").find('input[name=bet_coin]').val("");   
                     current_div.closest("div").find('input[name=bet_coin]').next('div .invalid-feedback').css("display","none");                   
                 },
@@ -40,14 +43,33 @@ $(document).ready(function() {
                     if(data.responseJSON.errors.bet_coin){
                         current_div.closest("div").find('input[name=bet_coin]').next('div .invalid-feedback').text(data.responseJSON.errors.bet_coin);
                         current_div.closest("div").find('input[name=bet_coin]').next('div .invalid-feedback').css("display","block");
+                        current_div.closest("div").find('.success').remove();
                     }else if(data.responseJSON.errors.result){
                         current_div.closest("div").find('input[name=bet_coin]').next('div .invalid-feedback').text(data.responseJSON.errors.result);
                         current_div.closest("div").find('input[name=bet_coin]').next('div .invalid-feedback').css("display","block");
+                        current_div.closest("div").find('.success').remove();
                     }else{
                         current_div.closest("div").find('input[name=bet_coin]').next('div .invalid-feedback').css("display","none");
+                        current_div.closest("div").find('.success').remove();
                     }              
                 } 
             });
         }      
+    });
+
+    $(document).on('click', '.bet-placed', function(e){
+        $.ajax({
+            type:'GET',
+            url: placed_bet,
+            data: {
+                "_token"     : $('meta[name="csrf-token"]').attr('content')               
+            },            
+            success:function(data) {
+               $(".bet-placed-list").html(data);                   
+            },
+            error:function (data) {
+                          
+            } 
+        });
     });
 });

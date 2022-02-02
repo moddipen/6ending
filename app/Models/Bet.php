@@ -22,6 +22,10 @@ class Bet extends Model
     }
 
     public function credit(){
-        return $this->hasOne(Credit::class,'user_id','user_id')->latest();
+        return $this->hasOne(Credit::class,'user_id','user_id')->latest('id');
+    }
+
+    public function match_event(){
+        return $this->belongsTo(MatchEvent::class);
     }
 }

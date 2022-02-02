@@ -58,11 +58,12 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     $controller_name = 'BetController';
     Route::post("$module_name/store", ['as' => "$module_name.store", 'uses' => "$controller_name@store"]);
     // Route::get("$module_name/index", ['as' => "$module_name.index", 'uses' => "$controller_name@index"]);
+    Route::get("bets/{match_id}", "BetController@list")->name("bets.placed");
 });
 
 Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.', 'middleware' => ['auth', 'can:view_user_dashboard']], function () {
     Route::get('/', 'BackendController@index')->name('home');
-    Route::get('dashboard', 'BackendController@index')->name('dashboard');
+    Route::get('dashboard', 'BackendController@index')->name('dashboard');   
 });
 
 /*
@@ -81,7 +82,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     Route::post("matches/datatable", ['as' => "matches.datatable", 'uses' => "MatchController@datatable"]);
     Route::post("matches/updateStatus", "MatchController@update_status")->name("matches.update-status");
     Route::post("matches/updateType", "MatchController@update_type")->name("matches.update-type");
-    Route::get("matches/events/list/{id}/{match_id}", "MatchController@event_backend")->name("matches.events.list");
+    Route::get("matches/events/list/{id}/{match_id}", "MatchController@event_backend")->name("matches.events.list");    
     /**
      * Backend Dashboard
      * Namespaces indicate folder structure.

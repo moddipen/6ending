@@ -135,8 +135,8 @@ class MatchController extends Controller
             'matchtype_id' => 'required',
             'team_1' => 'required|regex:/^[\pL\s]+$/u|max:255',
             'team_2' => 'required|regex:/^[\pL\s]+$/u|max:255',
-            'shortcode_1' => 'required|regex:/^[\pL\s]+$/u|max:3',
-            'shortcode_2' => 'required|regex:/^[\pL\s]+$/u|max:3',
+            // 'shortcode_1' => 'required|regex:/^[\pL\s]+$/u|max:3',
+            // 'shortcode_2' => 'required|regex:/^[\pL\s]+$/u|max:3',
             'schedule' => 'required',
             'status' => 'required'
         ],
@@ -149,8 +149,8 @@ class MatchController extends Controller
             "matchtype_id" => $request_object['matchtype_id'],
             "team_1" => $request_object['team_1'],
             "team_2" => $request_object['team_2'],
-            "shortcode_1" => $request_object['shortcode_1'],
-            "shortcode_2" => $request_object['shortcode_2'],
+            // "shortcode_1" => $request_object['shortcode_1'],
+            // "shortcode_2" => $request_object['shortcode_2'],
             "status" => $request_object['status'],
             "schedule" => \Carbon\Carbon::parse($request_object['schedule'])->toDateTimeString()
         );
@@ -240,11 +240,17 @@ class MatchController extends Controller
     }
 
     public function events($id,$match_id){
+        $module_title = $this->module_title;
+        $module_name = $this->module_name;
+        $module_path = $this->module_path;
+        $module_icon = $this->module_icon;
+        $module_model = $this->module_model;
+        $module_name_singular = Str::singular($module_name);
+        $module_action = 'Event List';
+
         $id = \Crypt::decrypt($id);
         $get_match_events = MatchEvent::with("matchtypeevent.event_types","matchtypeevent.match_types","match")->where("match_id",$match_id)->get();
-        // echo "<pre>";
-        // print_R($get_match_events->toArray());exit;
-        return view('backend.matches.events',["get_match_events"=>$get_match_events,"match_id"=>$match_id]);        
+        return view('backend.matches.events',compact('module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular','module_title','get_match_events','match_id'));//["get_match_events"=>$get_match_events,"match_id"=>$match_id]);        
     }
 
     public function settlement(Request $request){

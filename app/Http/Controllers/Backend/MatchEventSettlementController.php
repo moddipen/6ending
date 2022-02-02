@@ -73,6 +73,7 @@ class MatchEventSettlementController extends Controller
                 MatchEvent::where('id',$event['id'])->update(["is_settled" => 1]);
                 Match::where('id',$event['match_id'])->update(["is_settled" => 1]);
             }   
+            //exit;
                    
         }   
         flash('<i class="fas fa-check"></i> Match events are settled!')->success();

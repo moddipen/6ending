@@ -3,11 +3,42 @@
 @section('title') @lang("Dashboard") @endsection
 
 @section('breadcrumbs')
-<x-backend-breadcrumbs/>
+<x-backend-breadcrumbs>
+    <x-backend-breadcrumb-item type="active" icon='{{ $module_icon }}'>{{ $module_title }}</x-backend-breadcrumb-item>
+</x-backend-breadcrumbs>
 @endsection
+
 
 @section('content')
 
+<div class="row">
+    <div class="col"></div>
+    <div class="col-6">
+        <div class="float-right">
+            <a data-toggle="modal" data-backdrop="false" data-target="#placed-bet" href="#" class="btn btn-success bet-placed" data-toggle="tooltip" title="" data-original-title="Placed Bets">
+                Bets
+            </a>
+        </div>
+    </div>    
+</div>
+<div class="modal fade placed-bet" id="placed-bet" role="dialog" tabindex="-1" aria-labelledby="placed-bet">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Betting Placed</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>                
+            <div class="modal-body bet-placed-list overflow-scroll"> 
+                                                    
+            </div>   
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>                               
+        </div>    
+    </div>
+</div> 
 @if($get_match_events->count() > 0)
 <div class="row">
     @foreach($get_match_events as $event)
@@ -17,9 +48,9 @@
                     {{ $event->matchtypeevent->match_types->type }}               
                 </div>
                 <div class="card-body text-center">
-                    <h5 class="success">{{ $event->matchtypeevent->event_types->type }}</h5>
+                    <h5 class="">{{ $event->matchtypeevent->event_types->type }}</h5>
                     <h6 class="card-text small">* Every {{ $event->matchtypeevent->bet_coin }} coin can get you {{ $event->matchtypeevent->win_coin }} coin on winning </h6>  
-                    @php
+                    {{-- @php
                         $check = \App\Models\Bet::where(['match_event_id' => $event->id,'user_id'=>auth()->user()->id])->first();                        
                     @endphp   
                     @if(!empty($check)) 
@@ -27,7 +58,8 @@
                             <h5 class="success text-success">Bet Placed!</h5>
                             <a href="#">&nbsp</a>
                         </div>    
-                    @elseif($event->status == 1)
+                    @else --}}
+                    @if($event->status == 1)
                         <div class="form-group mx-sm-3 mb-3">
                             <h5 class="success text-danger">Betting is disabled!</h5>
                             <a href="#">&nbsp</a>
@@ -75,7 +107,9 @@
 @push ('after-scripts')
     <script>
         var bet_url = '{{  route('backend.bets.store') }}';
-        var match_id = '<?php echo $match_id; ?>';        
+        var match_id = '<?php echo $match_id; ?>'; 
+        var placed_bet = '{{  route('backend.bets.placed',["match_id"=>$match_id]) }}';  
+        alert             
     </script>
     <script src="{{ asset('js/match-events-front.js') }}"></script>
 @endpush

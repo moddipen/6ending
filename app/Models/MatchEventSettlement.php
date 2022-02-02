@@ -19,6 +19,7 @@ class MatchEventSettlement extends Model
     ];
 
     public function event_settlement($type, $bet, $matchevent, $match_event_id){
+        $latest_bet_credit = Credit::where('user_id',$bet['credit']['user_id'])->latest()->first();
         if($type == 'credit'){
             //Make user bet as win
             Bet::where("id",$bet['id'])->update(["status"=>"win","type"=>"completed"]);
@@ -33,7 +34,7 @@ class MatchEventSettlement extends Model
                 "parent_id"=>$bet['credit']['parent_id'], 
                 "points"=> $net_points, 
                 "type"=>"bet-credit", 
-                "net_points"=>$bet['credit']['net_points'] + $net_points
+                "net_points"=>$latest_bet_credit->net_points + $net_points
             ]);
         }else if($type == 'debit'){
             //Make user bet as win
@@ -55,7 +56,7 @@ class MatchEventSettlement extends Model
                 "parent_id"=>$bet['credit']['parent_id'], 
                 "points"=> $net_points, 
                 "type"=>"bet-refund", 
-                "net_points"=>$bet['credit']['net_points'] + $net_points
+                "net_points"=>$latest_bet_credit->net_points + $net_points
             ]);
         }
     }
