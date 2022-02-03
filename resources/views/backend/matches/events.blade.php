@@ -10,7 +10,16 @@
 
 
 @section('content')
-
+@if($get_match_events->count() == 0)
+<div class="row">
+    <div class="col">
+        <div class="alert text-center alert-danger" role="alert">
+            There are no events available.
+        </div>
+    </div>
+</div>
+@endif
+@if($get_match_events->count() > 0)
 <div class="row">
     <div class="col"></div>
     <div class="col-6">
@@ -39,7 +48,6 @@
         </div>    
     </div>
 </div> 
-@if($get_match_events->count() > 0)
 <div class="row">
     @foreach($get_match_events as $event)
         <div class="col-lg-4 col-sm-6">
@@ -108,8 +116,7 @@
     <script>
         var bet_url = '{{  route('backend.bets.store') }}';
         var match_id = '<?php echo $match_id; ?>'; 
-        var placed_bet = '{{  route('backend.bets.placed',["match_id"=>$match_id]) }}';  
-        alert             
+        var placed_bet = '{{  route('backend.bets.placed',["match_id"=>$match_id]) }}';                    
     </script>
     <script src="{{ asset('js/match-events-front.js') }}"></script>
 @endpush
