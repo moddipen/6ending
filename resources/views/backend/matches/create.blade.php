@@ -66,6 +66,14 @@
                 </div>
 
                 <div class="form-group row">
+                    {{ html()->label('Short Code Team 1')->class('col-sm-2 form-control-label')->for('shortcode_1') }}
+                    <div class="col-sm-10">
+                        <input type="text" name="shortcode_1" id="input-win-coin" class="form-control{{ $errors->has('shortcode_1') ? ' is-invalid' : '' }}" placeholder="{{ __('ShortCode 2') }}"
+                        value="{{ old('shortcode_1') }}" autofocus>
+                    </div>                    
+                </div>
+
+                <div class="form-group row">
                     {{ html()->label('Team 2')->class('col-sm-2 form-control-label')->for('team_2') }}
                     <div class="col-sm-10">
                         <input type="text" name="team_2" id="input-win-coin" class="form-control{{ $errors->has('team_2') ? ' is-invalid' : '' }}" placeholder="{{ __('Team 2') }}"
@@ -74,14 +82,7 @@
                 </div>
 
                 <div class="form-group row">
-                    {{ html()->label('ShortCode 1')->class('col-sm-2 form-control-label')->for('shortcode_1') }}
-                    <div class="col-sm-10">
-                        <input type="text" name="shortcode_1" id="input-win-coin" class="form-control{{ $errors->has('shortcode_1') ? ' is-invalid' : '' }}" placeholder="{{ __('ShortCode 2') }}"
-                        value="{{ old('shortcode_1') }}" autofocus>
-                    </div>                    
-                </div>
-                <div class="form-group row">
-                    {{ html()->label('ShortCode 2')->class('col-sm-2 form-control-label')->for('shortcode_2') }}
+                    {{ html()->label('Short Code Team 2')->class('col-sm-2 form-control-label')->for('shortcode_2') }}
                     <div class="col-sm-10">
                         <input type="text" name="shortcode_2" id="input-win-coin" class="form-control{{ $errors->has('shortcode_2') ? ' is-invalid' : '' }}" placeholder="{{ __('ShortCode 2') }}"
                         value="{{ old('shortcode_2') }}" autofocus>
