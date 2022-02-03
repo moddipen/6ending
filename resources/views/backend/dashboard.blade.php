@@ -69,7 +69,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-4">
-                            <h3 class="success">{{ strtoupper(substr($match->team_1, 0, 3)); }}</h3>
+                            <h3 class="success">{{ $match->shortcode_1  }}</h3>
                             <span>{{ $match->team_1 }}</span>
                         </div>
                         <div class="col-4 text-center">
@@ -77,7 +77,7 @@
                             <span class="text-danger font-weight-bold">{{ time_string_format($match->schedule) }}</span>
                         </div>
                         <div class="col-4 text-right">
-                            <h3 class="success">{{ strtoupper(substr($match->team_2, 0, 3)); }}</h3>
+                            <h3 class="success">{{ $match->shortcode_2  }}</h3>
                             <span>{{ $match->team_2 }}</span>
                         </div>
                     </div> 

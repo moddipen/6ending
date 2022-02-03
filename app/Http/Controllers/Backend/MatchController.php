@@ -135,8 +135,8 @@ class MatchController extends Controller
             'matchtype_id' => 'required',
             'team_1' => 'required|regex:/^[\pL\s]+$/u|max:255',
             'team_2' => 'required|regex:/^[\pL\s]+$/u|max:255',
-            // 'shortcode_1' => 'required|regex:/^[\pL\s]+$/u|max:3',
-            // 'shortcode_2' => 'required|regex:/^[\pL\s]+$/u|max:3',
+            'shortcode_1' => 'required|regex:/^[\pL\s]+$/u|max:3',
+            'shortcode_2' => 'required|regex:/^[\pL\s]+$/u|max:3',
             'schedule' => 'required',
             'status' => 'required'
         ],
@@ -149,8 +149,8 @@ class MatchController extends Controller
             "matchtype_id" => $request_object['matchtype_id'],
             "team_1" => $request_object['team_1'],
             "team_2" => $request_object['team_2'],
-            // "shortcode_1" => $request_object['shortcode_1'],
-            // "shortcode_2" => $request_object['shortcode_2'],
+            "shortcode_1" => $request_object['shortcode_1'],
+            "shortcode_2" => $request_object['shortcode_2'],
             "status" => $request_object['status'],
             "schedule" => \Carbon\Carbon::parse($request_object['schedule'])->toDateTimeString()
         );
