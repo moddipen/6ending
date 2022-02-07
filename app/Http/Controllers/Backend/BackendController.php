@@ -43,7 +43,7 @@ class BackendController extends Controller
             }
         }
         $bet_coins = Credit::where("user_id",auth()->user()->id)->where("type","debit")->sum("points");
-        $total_coins = Credit::where("user_id",auth()->user()->id)->where("type","credit")->sum("points");exit;
+        $total_coins = Credit::where("user_id",auth()->user()->id)->where("type","credit")->sum("points");
         return view('backend.index',["remaining_coins"=>$remaining_coins,"bet_coins"=>$bet_coins,"total_coins"=>$total_coins]);
     }
 
