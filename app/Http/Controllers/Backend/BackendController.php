@@ -39,10 +39,12 @@ class BackendController extends Controller
         $user_coins = User::with("points")->where("id",auth()->user()->id)->first();
         if(!empty($user_coins)){
             if(!empty($user_coins->points)){
-                $total_coins = $user_coins->points->net_points;
+                $remaining_coins = $user_coins->points->net_points;
             }
         }
-        return view('backend.index',["total_coins"=>$total_coins]);
+        $bet_coins = Credit::where("user_id",auth()->user()->id)->where("type","debit")->sum("points");
+        $total_coins = Credit::where("user_id",auth()->user()->id)->where("type","credit")->sum("points");
+        return view('backend.index',["remaining_coins"=>$remaining_coins,"bet_coins"=>$bet_coins,"total_coins"=>$total_coins]);
     }
 
     public function user_dashboard()
