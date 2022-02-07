@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Authorizable;
 use App\Models\Match;
 use App\Models\User;
+use App\Models\Credit;
 
 class BackendController extends Controller
 {
@@ -53,7 +54,10 @@ class BackendController extends Controller
                 $remaining_coins = $user_coins->points->net_points;
             }
         }
+
+        $bet_coins = Credit::where("user_id",auth()->user()->id)->where("type","bet-debit")->sum("points");
+        $total_coins = Credit::where("user_id",auth()->user()->id)->where("type","credit")->sum("points");
         $matches = Match::with("matchtype")->where("status",0)->where('is_settled',0)->get();
-        return view('backend.dashboard',["matches"=>$matches,"remaining_coins"=>$remaining_coins]);
+        return view('backend.dashboard',["matches"=>$matches,"remaining_coins"=>$remaining_coins,"bet_coins"=>$bet_coins,"total_coins"=>$total_coins]);
     }
 }
