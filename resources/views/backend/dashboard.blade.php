@@ -12,8 +12,8 @@
     <div class="col-sm-6 col-lg-3">
         <div class="card bg-gradient-primary text-white">
             <div class="card-body">
-                <div class="text-value-lg">{{ $total_coins; }}</div>
-                <div>Total Coins</div>
+                <div class="text-value-lg">{{ $remaining_coins; }}</div>
+                <div>Coins</div>
                 {{-- <div class="progress progress-xs my-2">
                     <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div><small class="text-muted">Widget helper text</small> --}}

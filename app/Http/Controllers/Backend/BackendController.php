@@ -50,10 +50,10 @@ class BackendController extends Controller
         $user_coins = User::with("points")->where("id",auth()->user()->id)->first();
         if(!empty($user_coins)){
             if(!empty($user_coins->points)){
-                $total_coins = $user_coins->points->net_points;
+                $remaining_coins = $user_coins->points->net_points;
             }
         }
         $matches = Match::with("matchtype")->where("status",0)->where('is_settled',0)->get();
-        return view('backend.dashboard',["matches"=>$matches,"total_coins"=>$total_coins]);
+        return view('backend.dashboard',["matches"=>$matches,"remaining_coins"=>$remaining_coins]);
     }
 }
