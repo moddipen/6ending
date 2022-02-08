@@ -74,6 +74,13 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
 */
 Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.', 'middleware' => ['auth', 'can:view_backend']], function () {
 
+
+    /**
+     * Reports
+     */
+    Route::get("credit-debit/reports", "ReportController@credit_debit_report")->name("credit.debit.report");    
+    Route::get("credit-debit/reports/datatable", ['as' => "credit.debit.report.datatable", 'uses' => "ReportController@credit_debit_report_datatable"]);
+
     /**
      * Match Routes
      * 
