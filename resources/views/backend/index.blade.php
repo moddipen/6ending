@@ -34,103 +34,37 @@
 <!-- / card -->
 <div class="row">
     <div class="col-sm-6 col-lg-3">
-        <div class="card bg-gradient-primary text-white">
+        <div class="card bg-gradient-info text-white">
+            <div class="card-body">
+                <div class="text-value-lg">{{ $remaining_coins; }}</div>
+                <div>Remainig Coins</div>               
+            </div>
+        </div>
+    </div>
+
+    <!-- betcoins card start -->
+    
+    <div class="col-sm-6 col-lg-3">
+        <div class="card bg-gradient-danger text-white">
+            <div class="card-body">
+                <div class="text-value-lg">{{ $bet_coins; }}</div>
+                <div>Bet Coins</div>                
+            </div>
+        </div>
+    </div>
+    <!-- betcoins card end -->
+
+    <!-- totalcoins card start -->
+    
+    <div class="col-sm-6 col-lg-3">
+        <div class="card bg-gradient-success text-white">
             <div class="card-body">
                 <div class="text-value-lg">{{ $total_coins; }}</div>
-                <div>Total Coins</div>
-                {{-- <div class="progress progress-xs my-2">
-                    <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><small class="text-muted">Widget helper text</small> --}}
+                <div>Total Coins</div>                
             </div>
         </div>
-    </div>
+    </div>    <!-- totalcoins card end -->
 
-    {{-- <div class="col-sm-6 col-lg-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="text-value-lg">12.124</div>
-                <div>Widget title</div>
-                <div class="progress progress-xs my-2">
-                    <div class="progress-bar bg-gradient-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><small class="text-muted">Widget helper text</small>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="text-value-lg">$98.111,00</div>
-                <div>Widget title</div>
-                <div class="progress progress-xs my-2">
-                    <div class="progress-bar bg-gradient-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><small class="text-muted">Widget helper text</small>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="text-value-lg">2 TB</div>
-                <div>Widget title</div>
-                <div class="progress progress-xs my-2">
-                    <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><small class="text-muted">Widget helper text</small>
-            </div>
-        </div>
-    </div> --}}
 
 </div>
-
-{{-- <div class="row">
-    <div class="col-sm-6 col-lg-3">
-        <div class="card text-white bg-gradient-primary">
-            <div class="card-body">
-                <div class="text-value-lg">89.9%</div>
-                <div>Widget title</div>
-                <div class="progress progress-white progress-xs my-2">
-                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><small class="text-muted">Widget helper text</small>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-3">
-        <div class="card text-white bg-gradient-warning">
-            <div class="card-body">
-                <div class="text-value-lg">12.124</div>
-                <div>Widget title</div>
-                <div class="progress progress-white progress-xs my-2">
-                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><small class="text-muted">Widget helper text</small>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-3">
-        <div class="card text-white bg-gradient-danger">
-            <div class="card-body">
-                <div class="text-value-lg">$98.111,00</div>
-                <div>Widget title</div>
-                <div class="progress progress-white progress-xs my-2">
-                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><small class="text-muted">Widget helper text</small>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-3">
-        <div class="card text-white bg-gradient-info">
-            <div class="card-body">
-                <div class="text-value-lg">2 TB</div>
-                <div>Widget title</div>
-                <div class="progress progress-white progress-xs my-2">
-                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><small class="text-muted">Widget helper text</small>
-            </div>
-        </div>
-    </div>
-
-</div> --}}
 @endsection
