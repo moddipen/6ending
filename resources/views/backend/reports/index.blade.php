@@ -27,15 +27,14 @@
         <div>
             <div class="row mt-4">
                 <div class="col">                  
-                    <table class="table table-hover table-responsive-sm" id="match-list">
+                    <table class="table table-hover table-responsive-sm" id="credit-debit-list">
                         <thead>
                             <tr>
-                                <th>Match</th>
-                                <th>Team 1</th>
-                                <th>Team 2</th>
-                                <th>Is Settled?</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>Date & Time</th>
+                                <th>Debit Coin</th>
+                                <th>Credit Coin</th>
+                                <th>Balance</th>
+                                <th>From / To</th>                                
                             </tr>
                         </thead>                            
                     </table>
@@ -59,12 +58,11 @@
 @endpush
 
 @push ('after-scripts')
-{{-- <script>
-    var matchList = '{{ route("backend.$module_name.datatable") }}';    
-    var routeStatusUpdate = '{{ route("backend.$module_name.update-status") }}';
+<script>
+    var creditList = '{{ route("backend.credit.debit.report.datatable") }}';        
 </script>
 <!-- DataTables Core and Extensions -->
 <script type="text/javascript" src="{{ asset('vendor/datatable/datatables.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap2-toggle.min.js') }}"></script>
-<script src="{{ asset('js/matches-management.js') }}"></script> --}}
+<script src="{{ asset('js/credit-debit-management.js') }}"></script>
 @endpush

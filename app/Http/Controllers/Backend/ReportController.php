@@ -61,6 +61,20 @@ class ReportController extends Controller
                 return $data->user->first_name." ".$data->user->last_name." / ".$data->parent_user->first_name." ".$data->parent_user->last_name;
             }         
         })
+        ->addColumn('debit_coin', function ($data) {
+            if($data->type == "credit"){
+                return "-";
+            }else{
+                return $data->points;
+            }         
+        })
+        ->addColumn('credit_coin', function ($data) {
+            if($data->type == "credit"){
+                return $data->points;
+            }else{
+                return "-";
+            }         
+        })
         ->make(true);
     }
 }
