@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Authorizable;
 use Illuminate\Http\Request;
 use App\Models\Credit;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
@@ -24,7 +26,9 @@ class ReportController extends Controller
         $this->module_path = 'reports';
 
         // module icon
+
         $this->module_icon = 'c-icon cil-people';        
+        $this->module_model = "";
     }
 
     public function credit_debit_report(){
@@ -38,47 +42,25 @@ class ReportController extends Controller
         $module_action = 'List';
         return view(
             "backend.$module_name.index",
-            compact('module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular','module_title')
+            compact('module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular', 'module_title')
         );
     }
 
     public function credit_debit_report_datatable(){
-        $$module_name =  DB::table('credits')
-        ->join('users','users.id', '=','credits.user_id')
-        ->join('users','users.id', '=','credits.parent_id')
-        ->select("*");
+        $module_name = Credit::with("user","parent_user")->get();
         
-        $data = $$module_name;
-        echo "<pre>";
-        print_r($data);exit;
+        $data = $module_name;
         return Datatables::of($data)
-        ->addColumn('status', function ($data) {
-            if($data->status == 0){
-                return '<div class="checkbox row col-lg-6"><input data-class="btn-block" id="kv-toggle-demo" data-id="'.$data->id.'" value="0" type="checkbox" checked data-toggle="toggle" data-on="Active" data-off="Inactive" data-onstyle="success" data-offstyle="warning"></div>';
+        ->addColumn('created_at', function ($data) {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at);
+        })
+        ->addColumn('from_to', function ($data) {
+            if($data->type == "credit"){
+                return $data->parent_user->first_name." ".$data->parent_user->last_name." / ".$data->user->first_name." ".$data->user->last_name;
             }else{
-                return '<div class="checkbox row col-lg-6"><input data-class="btn-block" id="kv-toggle-demo" data-id="'.$data->id.'" value="1" type="checkbox" data-toggle="toggle" data-on="Active" data-off="Inactive" data-onstyle="success" data-offstyle="warning"></div>';
-            }            
+                return $data->user->first_name." ".$data->user->last_name." / ".$data->parent_user->first_name." ".$data->parent_user->last_name;
+            }         
         })
-        ->addColumn('action', function ($data) {
-            return '<a href="'.route("backend.matches.events.list",['id'=>\Crypt::encrypt($data->matchtype_id),'match_id'=>$data->id]).'" class="btn btn-info btn-sm mt-1" data-toggle="tooltip" title="Match events"><i class="fas fa-universal-access"></i></a>';         
-        })
-        ->editColumn('matchType',  function ($data) {
-            return $data->matchType;
-        })
-        ->editColumn('team_1', function ($data) {
-            return $data->team_1;
-        })
-        ->editColumn('is_settled', function ($data) {
-            if($data->is_settled == 0){
-                return "No";
-            }else{
-                return "Yes";
-            }            
-        })
-        ->editColumn('team_2', function ($data) {
-            return $data->team_2;
-        })
-        ->rawColumns(['status','action'])
         ->make(true);
     }
 }

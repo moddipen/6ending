@@ -15,4 +15,12 @@ class Credit extends Model
         'type',
         'net_points'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function parent_user(){
+        return $this->belongsTo(User::class,'parent_id');
+    }
 }
