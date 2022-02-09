@@ -114,7 +114,7 @@
          
         <div class="row mt-4">
             <div class="col">
-            <form method="post" action="{{ route('backend.credits.store') }}" class="form-horizontal" role="form">
+            <form method="post" action="{{ route('backend.betcoins.store') }}" class="form-horizontal" role="form">
                     {!! csrf_field() !!}
                    
                     <div class="card card-accent-primary">

@@ -222,6 +222,11 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     Route::post("$module_name/credit/update", ['as' => "$module_name.update", 'uses' => "$controller_name@credit_update"]);    
     Route::post("$module_name/credit/store", ['as' => "$module_name.store", 'uses' => "$controller_name@store"]);    
 
+    // Bet Coins Module
+    $module_name = 'betcoins';
+    $controller_name = 'BettingLimitController';
+    Route::post("$module_name/BettingLimit/store",['as' => "$module_name.store", 'uses' =>"$controller_name@store"]);
+
     /**
      * Match event settlement
      */
