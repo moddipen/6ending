@@ -21,7 +21,8 @@
                 </div>
             </div>
             <!--/.col-->
-            <div class="col-4">
+            <div class="co
+            l-4">
                 <div class="float-right">
                     <div class="btn-group" role="group" aria-label="Toolbar button groups">
 
@@ -109,6 +110,47 @@
                 </form>
             </div>
         </div>
+        <!-- Start form for set coins limit for bett -->
+         
+        <div class="row mt-4">
+            <div class="col">
+            <form method="post" action="{{ route('backend.credits.store') }}" class="form-horizontal" role="form">
+                    {!! csrf_field() !!}
+                   
+                    <div class="card card-accent-primary">
+                            <div class="card-header">
+                                <i class="fas fa-coins"></i>
+                                Bet Limit
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group ">
+                                            <label for="minlimit"> <strong>Minimum Bet Limit</strong></label> <span class="text-danger"><strong>*</strong></span>
+                                            <input type="text" name="minlimit" value="" class="form-control" id="minlimit" placeholder="Minimum Bet Limit" required=""><br>
+
+                                            <label for="maxlimit"> <strong>Maximum Bet Limit</strong> </label> <span class="text-danger"><strong>*</strong></span>
+                                            <input type="text" name="maxlimit" value="" class="form-control" id="maxlimit" placeholder="maximum Bet Limit" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+
+                    <div class="row m-b-md">
+                        <div class="col-md-12">
+                            <button class="btn-primary btn">
+                                <i class='fas fa-save'></i> @lang('Save')
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        
+        <!-- End form for set coins limit for bett -->
     </div>
     <div class="card-footer">
         <div class="row">
