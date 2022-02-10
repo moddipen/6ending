@@ -33,4 +33,8 @@ class Bet extends Model
         return $this->belongsTo(MatchEventSettlement::class,"match_event_id","match_event_id");
     }
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
 }

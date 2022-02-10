@@ -6,6 +6,7 @@ use App\Authorizable;
 use Illuminate\Http\Request;
 use App\Models\Credit;
 use App\Models\Bet;
+use App\Models\MatchEventSettlement;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,7 @@ use Yajra\DataTables\DataTables;
 class ReportController extends Controller
 {
     use Authorizable;
+    protected $settlements;
     
     public function __construct()
     {
@@ -30,6 +32,7 @@ class ReportController extends Controller
 
         $this->module_icon = 'c-icon cil-people';        
         $this->module_model = "";
+        $this->settlements = new MatchEventSettlement();
     }
 
     public function credit_debit_report(){
@@ -116,6 +119,53 @@ class ReportController extends Controller
         ->addColumn('settlement_time', function ($data) {
             return Carbon::createFromFormat('Y-m-d H:i:s', $data->settlement->created_at);
         })        
+        ->make(true);
+    }
+
+    public function betting_history_report(){
+        $module_title = $this->module_title;
+        $module_name = $this->module_name;
+        $module_path = $this->module_path;
+        $module_icon = $this->module_icon;
+        $module_model = $this->module_model;
+        $module_name_singular = Str::singular($module_name);
+
+        $module_action = 'List';
+        return view(
+            "backend.$module_name.betting_history_index",
+            compact('module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular', 'module_title')
+        );
+    }
+
+    public function betting_history_report_datatable(){
+        $module_name = Bet::with("match_event.match","match_event.matchtypeevent.event_types","match_event.matchtypeevent.match_types","user")->get();
+        
+        $data = $module_name;
+        return Datatables::of($data)
+        ->addColumn('match', function ($data) {
+            return $data->match_event->match->team_1." vs ".$data->match_event->match->team_2."(".$data->match_event->matchtypeevent->match_types->type.")";
+        })
+        ->addColumn('event', function ($data) {
+            return $data->match_event->matchtypeevent->event_types->type;
+        })
+        ->editColumn('created_at', function ($data) {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at);
+        })
+        ->addColumn('username', function ($data) {
+            return $data->user->first_name." ".$data->user->last_name;
+        })
+        ->addColumn('p&l', function ($data) {
+            if($data->status == "win"){
+                return $this->settlements->net_point_calculation_winner($data->match_event->matchtypeevent->bet_coin, $data->match_event->matchtypeevent->win_coin,$data->bet_coins);
+            }else if($data->status == "loss"){
+                return "<p style='color:red;'>".$data->bet_coins."</p>";
+            }else if($data->status == "tie"){
+                return "TIE";
+            }else{
+                return "NA";
+            }            
+        })
+        ->rawColumns(['p&l'])
         ->make(true);
     }
 }

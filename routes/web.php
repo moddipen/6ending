@@ -84,6 +84,9 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     Route::get("betting/reports", "ReportController@betting_report")->name("betting.report");
     Route::get("betting/reports/datatable", ['as' => "betting.report.datatable", 'uses' => "ReportController@betting_report_datatable"]);
 
+    Route::get("bethistory/reports", "ReportController@betting_history_report")->name("betting.history.report");
+    Route::get("betting/history/reports/datatable", ['as' => "betting.history.report.datatable", 'uses' => "ReportController@betting_history_report_datatable"]);
+
     /**
      * Match Routes
      * 
