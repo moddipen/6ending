@@ -47,7 +47,11 @@ class ReportController extends Controller
     }
 
     public function credit_debit_report_datatable(){
-        $module_name = Credit::with("user","parent_user")->get();
+        $module_name = Credit::with("user","parent_user")
+        ->where(function ($query) {
+            $query->where("type","credit")->orWhere("type","debit");
+        })
+        ->where("user_id",auth()->user()->id)->get();
         
         $data = $module_name;
         return Datatables::of($data)
