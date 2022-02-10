@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Authorizable;
 use Illuminate\Http\Request;
 use App\Models\Credit;
+use App\Models\Bet;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -79,6 +80,42 @@ class ReportController extends Controller
                 return "-";
             }         
         })
+        ->make(true);
+    }
+
+    public function betting_report(){
+        $module_title = $this->module_title;
+        $module_name = $this->module_name;
+        $module_path = $this->module_path;
+        $module_icon = $this->module_icon;
+        $module_model = $this->module_model;
+        $module_name_singular = Str::singular($module_name);
+
+        $module_action = 'List';
+        return view(
+            "backend.$module_name.betting_index",
+            compact('module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular', 'module_title')
+        );
+    }
+
+    public function betting_report_datatable(){
+        $module_name = Bet::with("match_event.match","match_event.matchtypeevent.event_types","match_event.matchtypeevent.match_types","settlement")->get();
+        
+        $data = $module_name;
+        
+        return Datatables::of($data)
+        ->addColumn('match', function ($data) {
+            return $data->match_event->match->team_1." vs ".$data->match_event->match->team_2."(".$data->match_event->matchtypeevent->match_types->type.")";
+        })
+        ->addColumn('event', function ($data) {
+            return $data->match_event->matchtypeevent->event_types->type;
+        })
+        ->editColumn('created_at', function ($data) {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at);
+        })
+        ->addColumn('settlement_time', function ($data) {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $data->settlement->created_at);
+        })        
         ->make(true);
     }
 }
