@@ -27,16 +27,15 @@
         <div>
             <div class="row mt-4">
                 <div class="col">                  
-                    <table class="table table-hover table-responsive-sm" id="credit-debit-list">
+                    <table class="table table-hover table-responsive-sm" id="betting-history-list">
                         <thead>
                             <tr>
                                 <th>Bet ID</th>
                                 <th>Username</th>
                                 <th>Match</th>
                                 <th>Event</th>
-                                <th>Selection</th>                                
-                                <th>Bet Placed</th>                                
-                                {{-- <th>Points</th> --}}
+                                <th>Selection</th>
+                                <th>Bet Place</th>
                                 <th>Profit/Loss</th>                                                                
                             </tr>
                         </thead>                            
@@ -62,10 +61,10 @@
 
 @push ('after-scripts')
 <script>
-    var creditList = '{{ route("backend.credit.debit.report.datatable") }}';        
+    var creditList = '{{ route("backend.betting.history.report.datatable") }}';        
 </script>
 <!-- DataTables Core and Extensions -->
 <script type="text/javascript" src="{{ asset('vendor/datatable/datatables.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap2-toggle.min.js') }}"></script>
-<script src="{{ asset('js/credit-debit-management.js') }}"></script>
+<script src="{{ asset('js/betting-history-management.js') }}"></script>
 @endpush
