@@ -88,6 +88,48 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-link',
             ]);
 
+            // Reports 
+            $menu->add('<i class="c-sidebar-nav-icon cil-task"></i> Account Statement', [
+                'route' => 'backend.credit.debit.report',
+                'class' => 'c-sidebar-nav-item',
+            ])
+            ->data([
+                'order'         => 6,
+                'activematches' => 'admin/matches*',
+                'permission'    => ['view_account_statement'],
+            ])
+            ->link->attr([
+                'class' => 'c-sidebar-nav-link',
+            ]);
+
+            $menu->add('<i class="c-sidebar-nav-icon cil-task"></i> Bet History Report', [
+                'route' => 'backend.betting.history.report',
+                'class' => 'c-sidebar-nav-item',
+            ])
+            ->data([
+                'order'         => 6,
+                'activematches' => 'admin/matches*',
+                'permission'    => ['view_bet_history_report'],
+            ])
+            ->link->attr([
+                'class' => 'c-sidebar-nav-link',
+            ]);
+
+
+
+            $menu->add('<i class="c-sidebar-nav-icon cil-task"></i> Current Bet Report', [
+                'route' => 'backend.betting.report',
+                'class' => 'c-sidebar-nav-item',
+            ])
+            ->data([
+                'order'         => 6,
+                'activematches' => 'admin/matches*',
+                'permission'    => ['view_current_bet_report'],
+            ])
+            ->link->attr([
+                'class' => 'c-sidebar-nav-link',
+            ]);
+
             /*// Event Manager
             $menu->add('<i class="c-sidebar-nav-icon cil-task"></i> Matches', [
                 'route' => 'backend.matches.index',
