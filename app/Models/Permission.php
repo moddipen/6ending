@@ -44,7 +44,11 @@ class Permission extends \Spatie\Permission\Models\Permission
             'delete_bets',
 
             'view_user_dashboard',
-            'users_dashboard'
+            'users_dashboard',
+            'view_bet_history_report',
+            'view_current_bet_report',
+            'view_account_statement',
+            'view_profit_loss_report'
         ];
     }
 

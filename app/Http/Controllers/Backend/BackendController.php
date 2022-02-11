@@ -7,6 +7,7 @@ use App\Authorizable;
 use App\Models\Match;
 use App\Models\User;
 use App\Models\Credit;
+use App\Models\Bet;
 
 class BackendController extends Controller
 {
@@ -36,6 +37,7 @@ class BackendController extends Controller
     public function index()
     {
         $total_coins = 0;
+        $remaining_coins = 0;
         $user_coins = User::with("points")->where("id",auth()->user()->id)->first();
         if(!empty($user_coins)){
             if(!empty($user_coins->points)){
@@ -51,14 +53,20 @@ class BackendController extends Controller
     {
         $total_coins = 0;
         $user_coins = User::with("points")->where("id",auth()->user()->id)->first();
+        $remaining_coins = 0;
         if(!empty($user_coins)){
             if(!empty($user_coins->points)){
                 $remaining_coins = $user_coins->points->net_points;
             }
         }
 
-        $bet_coins = Credit::where("user_id",auth()->user()->id)->where("type","bet-debit")->sum("points");
-        $total_coins = Credit::where("user_id",auth()->user()->id)->where("type","credit")->sum("points");
+        $bet_coins = Bet::where("user_id",auth()->user()->id)->where("type","placed")->sum("bet_coins");
+        if($remaining_coins > 0 || $bet_coins > 0){
+            $total_coins = $remaining_coins + $bet_coins;
+        }else{
+            $total_coins = 0;
+        }
+        
         $matches = Match::with("matchtype")->where("status",0)->where('is_settled',0)->get();
         return view('backend.dashboard',["matches"=>$matches,"remaining_coins"=>$remaining_coins,"bet_coins"=>$bet_coins,"total_coins"=>$total_coins]);
     }

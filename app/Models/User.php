@@ -76,6 +76,10 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         return $this->hasMany(Credit::class)->where("type","bet-debit");
     }
 
+    public function placed_bets(){
+        return $this->hasMany(Bet::class)->where("type","placed");
+    }
+
 
     /**
      * Get the list of users related to the current User.
