@@ -66,6 +66,21 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     Route::get('dashboard', 'BackendController@index')->name('dashboard');   
 });
 
+Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.', 'middleware' => ['auth', 'can:view_bet_history_report']], function () {
+    Route::get("bethistory/reports", "ReportController@betting_history_report")->name("betting.history.report");
+    Route::get("betting/history/reports/datatable", ['as' => "betting.history.report.datatable", 'uses' => "ReportController@betting_history_report_datatable"]);   
+});
+
+Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.', 'middleware' => ['auth', 'can:view_current_bet_report']], function () {
+    Route::get("betting/reports", "ReportController@betting_report")->name("betting.report");
+    Route::get("betting/reports/datatable", ['as' => "betting.report.datatable", 'uses' => "ReportController@betting_report_datatable"]);
+});
+
+Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.', 'middleware' => ['auth', 'can:view_account_statement']], function () {
+    Route::get("credit-debit/reports", "ReportController@credit_debit_report")->name("credit.debit.report");    
+    Route::get("credit-debit/reports/datatable", ['as' => "credit.debit.report.datatable", 'uses' => "ReportController@credit_debit_report_datatable"]);
+});
+
 /*
 *
 * Backend Routes
@@ -73,20 +88,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
 * --------------------------------------------------------------------
 */
 Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.', 'middleware' => ['auth', 'can:view_backend']], function () {
-
-
-    /**
-     * Reports
-     */
-    Route::get("credit-debit/reports", "ReportController@credit_debit_report")->name("credit.debit.report");    
-    Route::get("credit-debit/reports/datatable", ['as' => "credit.debit.report.datatable", 'uses' => "ReportController@credit_debit_report_datatable"]);
-
-    Route::get("betting/reports", "ReportController@betting_report")->name("betting.report");
-    Route::get("betting/reports/datatable", ['as' => "betting.report.datatable", 'uses' => "ReportController@betting_report_datatable"]);
-
-    Route::get("bethistory/reports", "ReportController@betting_history_report")->name("betting.history.report");
-    Route::get("betting/history/reports/datatable", ['as' => "betting.history.report.datatable", 'uses' => "ReportController@betting_history_report_datatable"]);
-
+    
     /**
      * Match Routes
      * 
