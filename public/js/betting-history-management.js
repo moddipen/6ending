@@ -1,6 +1,6 @@
 $(document).ready(function() {
     if(typeof creditList !== "undefined"){
-        var dataTable = $('#betting-report-list').DataTable({
+        var dataTable = $('#betting-history-list').DataTable({
             processing: true,
             serverSide: true,
             pageLength : 10,
@@ -25,12 +25,19 @@ $(document).ready(function() {
                 });
             },
             columns: [
+                {data: 'id'},
+                {data: 'username'},
                 {data: 'match'},
                 {data: 'event'},
                 {data: 'result'},
                 {data: 'created_at'},
-                {data: 'settlement_time'}                             
+                {data: 'p&l'},       
             ]           
         });       
     }
 });
+
+
+
+
+
