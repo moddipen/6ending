@@ -130,6 +130,19 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-link',
             ]);
 
+            $menu->add('<i class="c-sidebar-nav-icon cil-task"></i> Profit/Loss Report', [
+                'route' => 'backend.profit.loss.report',
+                'class' => 'c-sidebar-nav-item',
+            ])
+            ->data([
+                'order'         => 6,
+                'activematches' => 'admin/matches*',
+                'permission'    => ['view_profit_loss_report'],
+            ])
+            ->link->attr([
+                'class' => 'c-sidebar-nav-link',
+            ]);
+
             /*// Event Manager
             $menu->add('<i class="c-sidebar-nav-icon cil-task"></i> Matches', [
                 'route' => 'backend.matches.index',

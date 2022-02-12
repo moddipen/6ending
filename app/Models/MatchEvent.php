@@ -30,4 +30,20 @@ class MatchEvent extends Model
     public function bet(){
         return $this->hasMany(Bet::class);
     }
+
+    public function loss_bet(){
+        return $this->hasMany(Bet::class)->where("status","loss");//->selectRaw('SUM(bet_coins) as total_loss');
+    }
+
+    public function won_bet(){
+        return $this->hasMany(Bet::class)->where("status","win");//->selectRaw('SUM(bet_coins) as total_profit');
+    }
+
+    public function bett(){
+        return $this->hasOne(Bet::class);
+    }
+
+    public function settlement(){
+        return $this->hasMany(MatchEventSettlement::class);
+    }
 }

@@ -17,4 +17,8 @@ class Userprofile extends BaseModel
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function parent_limit(){
+        return $this->belongsTo(BettingLimit::class,"created_by","user_id");
+    }
 }

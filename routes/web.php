@@ -81,6 +81,17 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     Route::get("credit-debit/reports/datatable", ['as' => "credit.debit.report.datatable", 'uses' => "ReportController@credit_debit_report_datatable"]);
 });
 
+Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.', 'middleware' => ['auth', 'can:view_profit_loss_report']], function () {
+    Route::get("profit-loss/reports", "ReportController@profit_loss_report")->name("profit.loss.report");    
+    Route::post("profit-loss/reports/datatable", ['as' => "profit.loss.report.datatable", 'uses' => "ReportController@profit_loss_report_datatable"]);
+    Route::get("match/details/{id}", ['as' => "match.details", 'uses' => "MatchController@details"]);
+});
+
+Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.','middleware' => ['can:store_betting_limit']], function () {
+    // Route::post("$module_name/store",['as' => "$module_name.store", 'uses' =>"$controller_name@store"]);
+    Route::post("betting_limit/store", "BettingLimitController@store")->name("betting_limit.store");    
+});
+
 /*
 *
 * Backend Routes
@@ -229,11 +240,6 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'backend.',
     $controller_name = 'CreditController';
     Route::post("$module_name/credit/update", ['as' => "$module_name.update", 'uses' => "$controller_name@credit_update"]);    
     Route::post("$module_name/credit/store", ['as' => "$module_name.store", 'uses' => "$controller_name@store"]);    
-
-    // Bet Coins Module
-    $module_name = 'betcoins';
-    $controller_name = 'BettingLimitController';
-    Route::post("$module_name/BettingLimit/store",['as' => "$module_name.store", 'uses' =>"$controller_name@store"]);
 
     /**
      * Match event settlement

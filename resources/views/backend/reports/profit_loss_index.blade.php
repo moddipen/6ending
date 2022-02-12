@@ -62,13 +62,11 @@
                     <table class="table table-hover table-responsive-sm" id="betting-history-list">
                         <thead>
                             <tr>
-                                <th>Bet ID</th>
-                                <th>Username</th>
                                 <th>Match</th>
-                                <th>Event</th>
-                                <th>Selection</th>
-                                <th>Bet Place</th>
-                                <th>Profit/Loss</th>                                                                
+                                <th>Start Time</th>
+                                <th>Settled Time</th>
+                                <th>Profit / Loss</th>   
+                                <th>Action</th>                                                                                               
                             </tr>
                         </thead>                            
                     </table>
@@ -80,12 +78,39 @@
         
     </div>
 </div>
+<div class="modal fade betting-detail" id="detail-bet" role="dialog" tabindex="-1" aria-labelledby="betting-detail">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>                
+            <div class="modal-body bet-placed-list overflow-scroll"> 
+                <table class="bets table table-responsive-sm dataTable no-footer">
+                    <thead>
+                        <tr role="row">
+                            <th>Bet ID</th>
+                            <th>Selection</th>
+                            <th>Placed</th>
+                            <th>Profit/Loss</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>                              
+            </div>   
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>                               
+        </div>    
+    </div>
+</div>
 @endsection
 
 @push ('after-styles')
-{{-- <style>
-    .input-group-text{ height : calc(1.8125rem + 0px) !important; }
-</style> --}}
 <!-- DataTables Core and Extensions -->
 <link rel="stylesheet" href="{{ asset('vendor/bootstrap-4-datetime-picker/css/tempusdominus-bootstrap-4.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/bootstrap-toggle.min.css') }}">
@@ -94,12 +119,12 @@
 
 @push ('after-scripts')
 <script>
-    var creditList = '{{ route("backend.betting.history.report.datatable") }}';        
+    var profitlossList = '{{ route("backend.profit.loss.report.datatable") }}';        
 </script>
 <!-- DataTables Core and Extensions -->
 <script type="text/javascript" src="{{ asset('vendor/datatable/datatables.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap2-toggle.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/moment/moment.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/bootstrap-4-datetime-picker/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-<script src="{{ asset('js/betting-history-management.js') }}"></script>
+<script src="{{ asset('js/profit-loss-management.js') }}"></script>
 @endpush

@@ -25,6 +25,38 @@
         </div>
         <!--/.row-->
         <div>
+            <div class="row py-4">
+                <div class="col-xs-3">
+                    <label class="form-control-label" for="input-name">{{ __('Start Date') }}</label>
+                </div>
+                <div class="col-xs-2">
+                    <div class="input-group col-sm-10 date datetime_from" id="schedule" data-target-input="nearest">
+                        {{ html()->text('schedule')->placeholder('Date & Time')->class('form-control form-control-sm datetimepicker-input') }}
+                        <div class="input-group-append" data-target="#schedule" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="col-xs-3">
+                    <label class="form-control-label" for="input-name">{{ __('End Date') }}</label>
+                </div>
+                <div class="col-xs-2">
+                    <div class="input-group col-sm-10 date datetime_to" id="schedule-1" data-target-input="nearest">
+                        {{ html()->text('schedule-1')->placeholder('Date & Time')->class('form-control form-control-sm datetimepicker-input') }}
+                        <div class="input-group-append" data-target="#schedule-1" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-2">
+                    <button type="submit" class="btn btn-success search btn-sm" data-toggle="tooltip" title="">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </button>                
+                </div>             
+            </div>
             <div class="row mt-4">
                 <div class="col">                  
                     <table class="table table-hover table-responsive-sm" id="betting-report-list">
@@ -49,10 +81,11 @@
 @endsection
 
 @push ('after-styles')
-<style>
+{{-- <style>
     .input-group-text{ height : calc(1.8125rem + 0px) !important; }
-</style>
+</style> --}}
 <!-- DataTables Core and Extensions -->
+<link rel="stylesheet" href="{{ asset('vendor/bootstrap-4-datetime-picker/css/tempusdominus-bootstrap-4.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/bootstrap-toggle.min.css') }}">
 <link rel="stylesheet" href="{{ asset('vendor/datatable/datatables.min.css') }}">
 @endpush
@@ -64,5 +97,7 @@
 <!-- DataTables Core and Extensions -->
 <script type="text/javascript" src="{{ asset('vendor/datatable/datatables.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap2-toggle.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/moment/moment.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/bootstrap-4-datetime-picker/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <script src="{{ asset('js/betting-report-management.js') }}"></script>
 @endpush

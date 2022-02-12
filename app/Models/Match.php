@@ -27,9 +27,9 @@ class Match extends Model
         return $this->belongsTo(Matchtype::class,'matchtype_id');
     }
 
-    public function bets(){
-        return $this->hasMany(Bet::class,'match_id');
-    }
+    // public function bets(){
+    //     return $this->hasMany(Bet::class,'match_id');
+    // }
 
     public function events(){
         return $this->hasMany(MatchEvent::class,'match_id');

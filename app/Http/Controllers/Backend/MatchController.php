@@ -253,9 +253,10 @@ class MatchController extends Controller
         return view('backend.matches.events',compact('module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular','module_title','get_match_events','match_id'));//["get_match_events"=>$get_match_events,"match_id"=>$match_id]);        
     }
 
-    public function settlement(Request $request){
-        $match_events = Match::whereHas()->first();
-        echo "<pre>";
-        print_r($match_events->toArray());exit;
+    public function details($id){
+        $match = Match::with("events.matchtypeevent","matchtype","events.bet")->whereHas("events.settlement")->where("id",$id)->first();
+        // echo "<pre>";
+        // print_r($match->toArray());exit;
+        return response()->json($match);        
     }
 }

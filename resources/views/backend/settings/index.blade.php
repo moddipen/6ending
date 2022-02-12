@@ -32,7 +32,7 @@
             <!--/.col-->
         </div>
         <!--/.row-->
-
+        @can('isSuperAdmins')
         <div class="row mt-4">
             <div class="col">
                 <form method="post" action="{{ route('backend.settings.store') }}" class="form-horizontal" role="form">
@@ -74,7 +74,9 @@
                 </form>
             </div>
         </div>
+        @endcan
 
+        @can('isSuperAdmins')
         <div class="row mt-4">
             <div class="col">
                 <form method="post" action="{{ route('backend.credits.store') }}" class="form-horizontal" role="form">
@@ -110,11 +112,12 @@
                 </form>
             </div>
         </div>
+        @endcan
         <!-- Start form for set coins limit for bett -->
          
         <div class="row mt-4">
             <div class="col">
-            <form method="post" action="{{ route('backend.betcoins.store') }}" class="form-horizontal" role="form">
+            <form method="post" action="{{ route('backend.betting_limit.store') }}" class="form-horizontal" role="form">
                     {!! csrf_field() !!}
                    
                     <div class="card card-accent-primary">
@@ -126,11 +129,11 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group ">
-                                            <label for="minlimit"> <strong>Minimum Bet Limit</strong></label> <span class="text-danger"><strong>*</strong></span>
-                                            <input type="text" name="minlimit" value="" class="form-control" id="minlimit" placeholder="Minimum Bet Limit" required=""><br>
+                                            <label for="min_limit"> <strong>Minimum Bet Limit</strong></label> <span class="text-danger"><strong>*</strong></span>
+                                            <input type="text" name="min_limit" class="form-control" id="min_limit" value="{{ $bet_limits->min_limit }}" placeholder="Minimum Bet Limit" required=""><br>
 
-                                            <label for="maxlimit"> <strong>Maximum Bet Limit</strong> </label> <span class="text-danger"><strong>*</strong></span>
-                                            <input type="text" name="maxlimit" value="" class="form-control" id="maxlimit" placeholder="maximum Bet Limit" required="">
+                                            <label for="max_limit"> <strong>Maximum Bet Limit</strong> </label> <span class="text-danger"><strong>*</strong></span>
+                                            <input type="text" name="max_limit" class="form-control" id="max_limit" value="{{ $bet_limits->max_limit }}" placeholder="maximum Bet Limit" required="">
                                         </div>
                                     </div>
                                 </div>

@@ -15,8 +15,12 @@ $(document).ready(function() {
                 type: "GET",
                 dataType:'json',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                data: function (d) {   
-                                 
+                data: function (d) {  
+                    var start_date = $("input[name='schedule']").val();
+                    var end_date = $("input[name='schedule-1']").val();
+
+                    d.start_date = start_date;
+                    d.end_date = end_date;
                 },
             },
             fnDrawCallback : function() {
@@ -31,6 +35,43 @@ $(document).ready(function() {
                 {data: 'net_points'},
                 {data: 'from_to'}                
             ]           
-        });       
+        });            
     }
+
+    $(document).on('click', '.search', function(e){
+        dataTable.draw();    
+    }); 
+    
+
+    $('.datetime_from').datetimepicker({
+        format: "YYYY-MM-DD",
+        pickTime: false,
+        icons: {
+            time: 'far fa-clock',
+            date: 'far fa-calendar-alt',
+            up: 'fas fa-arrow-up',
+            down: 'fas fa-arrow-down',
+            previous: 'fas fa-chevron-left',
+            next: 'fas fa-chevron-right',
+            today: 'far fa-calendar-check',
+            clear: 'far fa-trash-alt',
+            close: 'fas fa-times'
+        }
+    });
+
+    $('.datetime_to').datetimepicker({
+        format: "YYYY-MM-DD",
+        pickTime: false,
+        icons: {
+            time: 'far fa-clock',
+            date: 'far fa-calendar-alt',
+            up: 'fas fa-arrow-up',
+            down: 'fas fa-arrow-down',
+            previous: 'fas fa-chevron-left',
+            next: 'fas fa-chevron-right',
+            today: 'far fa-calendar-check',
+            clear: 'far fa-trash-alt',
+            close: 'fas fa-times'
+        }
+    });
 });

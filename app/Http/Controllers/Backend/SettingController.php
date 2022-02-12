@@ -8,6 +8,7 @@ use App\Models\Credit;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\BettingLimit;
 use Log;
 
 class SettingController extends Controller
@@ -49,10 +50,15 @@ class SettingController extends Controller
         $$module_name = $module_model::paginate();
 
         Log::info(label_case($module_title.' '.$module_action).' | User:'.Auth::user()->name.'(ID:'.Auth::user()->id.')');
-
+        $bet_limits = BettingLimit::where("user_id",auth()->user()->id)->first();
+        if(empty($bet_limits)){
+            $bet_limits = new \stdClass;
+            $bet_limits->min_limit = 0;
+            $bet_limits->max_limit = 0;
+        }
         return view(
             "backend.$module_path.index",
-            compact('module_title', 'module_name', "$module_name", 'module_path', 'module_icon', 'module_action', 'module_name_singular')
+            compact('module_title', 'module_name', "$module_name", 'module_path', 'module_icon', 'module_action', 'module_name_singular','bet_limits')
         );
     }
 
@@ -71,4 +77,4 @@ class SettingController extends Controller
 
         return redirect()->back()->with('status', 'Settings has been saved.');
     }   
-        }
+}
