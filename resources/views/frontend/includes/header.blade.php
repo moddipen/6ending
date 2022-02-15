@@ -1,96 +1,116 @@
-<header class="header-global">
-    <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-theme-primary">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <img class="navbar-brand-dark common" src="{{asset('img/backend-logo.jpg')}}" height="35" alt="Logo light">
-                <img class="navbar-brand-light common" src="{{asset('img/backend-logo.jpg')}}" height="35" alt="Logo dark">
-            </a>
-            <div class="navbar-collapse collapse" id="navbar_global">
-                <div class="navbar-collapse-header">
-                    <div class="row">
-                        <div class="col-6 collapse-brand">
-                            <a href="/">
-                                <img src="{{asset('img/backend-logo.jpg')}}" height="35" alt="Logo Impact">
-                            </a>
-                        </div>
-                        <div class="col-6 collapse-close">
-                            <a href="#navbar_global" role="button" class="fas fa-times" data-toggle="collapse"
-                            data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false"
-                            aria-label="Toggle navigation"></a>
-                        </div>
-                    </div>
-                </div>
-                <ul class="navbar-nav navbar-nav-hover justify-content-center">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">
-                            <span class="fas fa-home mr-2"></span> Home
+<div class="header">
+    <div class="container">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header">
+                <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-brand scroll-top">
+                    <div class="logo"></div>
+                </a>
+            </div>
+            <!--/.navbar-header-->
+            <div id="main-nav" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/" class="scroll-top">Home</a></li>
+                    
+                    <li>
+
+                        @can('view_backend')
+                        <a href="{{ route('backend.dashboard') }}" class="btn btn-white"><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</a>
+                        @endcan
+
+                    </li>  
+
+                    @auth
+                    <li>
+                        <a href="{{ route('logout') }}"
+                        class="" onclick="event.preventDefault(); document.getElementById('account-logout-form').submit();">Logout</a>
+                    </li>
+                    <form id="account-logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    @else
+                    <li>
+                        <a href="{{ route('login') }}" class="">
+                            Login
                         </a>
                     </li>
-                    
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" aria-expanded="false" data-toggle="dropdown">
-                            <span class="nav-link-inner-text mr-1">
-                                <span class="fas fa-user mr-1"></span>
-                                Account
-                            </span>
-                            <i class="fas fa-angle-down nav-link-arrow"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-lg">
-                            <div class="col-auto px-0" data-dropdown-content>
-                                <div class="list-group list-group-flush">
-                                    @auth
-                                    <a href="{{ route('frontend.users.profile', auth()->user()->id) }}"
-                                        class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4">
-                                        <span class="icon icon-sm icon-success"><i class="fas fa-user"></i></span>
-                                        <div class="ml-4">
-                                            <span class="text-dark d-block">
-                                                {{ Auth::user()->name }}
-                                            </span>
-                                            <span class="small">View profile details!</span>
-                                        </div>
-                                    </a>
-                                    <a href="{{ route('logout') }}"
-                                    class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4" onclick="event.preventDefault(); document.getElementById('account-logout-form').submit();">
-                                    <span class="icon icon-sm icon-secondary">
-                                        <i class="fas fa-sign-out-alt"></i>
-                                    </span>
-                                    <div class="ml-4">
-                                        <span class="text-dark d-block">
-                                            Logout
-                                        </span>
-                                        <span class="small">Logout from your account!</span>
-                                    </div>
-                                </a>
-                                <form id="account-logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                                @else
-                                <a href="{{ route('login') }}"
-                                class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4">
-                                <span class="icon icon-sm icon-secondary"><i class="fas fa-key"></i></span>
-                                <div class="ml-4">
-                                    <span class="text-dark d-block">
-                                        Login
-                                    </span>
-                                    <span class="small">Login to the application</span>
-                                </div>
-                            </a>
+                    @endauth
 
-                            @endauth
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
+
+                    <!-- <li><a href="#" class="scroll-link" data-id="about">About Us</a></li>
+                    <li><a href="#" class="scroll-link" data-id="portfolio">Portfolio</a></li>
+                    <li><a href="#" class="scroll-link" data-id="blog">Blog</a></li>
+                    <li><a href="#" class="scroll-link" data-id="contact">Contact Us</a></li> -->
+                </ul>
+            </div>
+            <!--/.navbar-collapse-->
+        </nav>
+        <!--/.navbar-->
     </div>
-    <div class="d-none d-lg-block">
-        @can('view_backend')
-        <a href="{{ route('backend.dashboard') }}" class="btn btn-white animate-up-2 mr-3"><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</a>
-        @endcan
-    </div>
-    <div class="d-flex d-lg-none align-items-center">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-    </div>
+    <!--/.container-->
 </div>
-</nav>
-</header>
+<!--/.header-->
+
+<section class="cd-hero">
+    <ul class="cd-hero-slider autoplay">  
+        <!-- 
+            <ul class="cd-hero-slider autoplay"> for slider auto play 
+            <ul class="cd-hero-slider"> for disabled auto play
+            -->
+            <li class="selected first-slide">
+                <div class="cd-full-width">
+                    <div class="tm-slide-content-div slide-caption">
+                        <!-- <span>Introduction to</span> -->
+                        <h2>6enddigits</h2>
+                        <!-- <p>Phasellus interdum tortor sem. Quisque sit amet condimentum sem. Phasellus luctus, felis sit amet pulvinar luctus.</p>
+                        <div class="primary-button">
+                            <a href="#" class="scroll-link" data-id="about">Discover More</a>
+                        </div> -->                           
+                    </div>                   
+                </div> <!-- .cd-full-width -->
+            </li>
+
+            <li class="second-slide">
+                <div class="cd-full-width">
+                    <div class="tm-slide-content-div slide-caption">
+                        <!-- <span>We Are Perfect Staffs</span> -->
+                        <h2>6enddigits</h2>
+                        <!-- <p>Donec dolor ipsum, laoreet nec metus non, tempus elementum massa. Donec non elit rhoncus, vestibulum enim sed, rutrum arcu.</p>
+                        <div class="primary-button">
+                            <a href="#">Read More</a>
+                        </div> -->                        
+                    </div>                     
+                </div> <!-- .cd-full-width -->
+            </li>
+
+            <li class="third-slide">
+                <div class="cd-full-width">
+                    <div class="tm-slide-content-div slide-caption">
+                        <!-- <span>Design is a hobby</span> -->
+                        <h2>6enddigits</h2>
+                        <!-- <p>Integer ut dolor eget magna congue gravida ut at arcu. Vivamus maximus neque quis luctus tempus. Vestibulum consequat.</p>
+                        <div class="primary-button">
+                            <a href="#">View Details</a>
+                        </div> -->                           
+                    </div>                         
+                </div> <!-- .cd-full-width -->
+            </li>
+        </ul> <!-- .cd-hero-slider -->
+
+        <div class="cd-slider-nav">
+            <nav>
+                <span class="cd-marker item-1"></span>
+                
+                <ul>
+                    <li class="selected"><a href="#0"></a></li>
+                    <li><a href="#0"></a></li>
+                    <li><a href="#0"></a></li>                        
+                </ul>
+            </nav> 
+        </div> <!-- .cd-slider-nav -->
+    </section> <!-- .cd-hero -->

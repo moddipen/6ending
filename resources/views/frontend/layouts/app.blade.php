@@ -22,7 +22,11 @@
 
     @stack('before-styles')
 
-    <link rel="stylesheet" href="{{ mix('css/frontend.css') }}">
+    <link rel="stylesheet" href="{{'css/bootstrap.min.css'}}">
+    <link rel="stylesheet" href="{{'css/bootstrap-theme.min.css'}}">
+    <link rel="stylesheet" href="{{'css/fontAwesome.css'}}">
+    <link rel="stylesheet" href="{{'css/hero-slider.css'}}">
+    <link rel="stylesheet" href="{{'css/tooplate-style.css'}}">
 
     @stack('after-styles')
 
@@ -33,8 +37,8 @@
 
     @include('frontend.includes.header')
 
-    <x-preloader />
-
+  <!--   <x-preloader />
+  -->
     <main>
         @yield('content')
     </main>
@@ -45,9 +49,18 @@
 
 <!-- Scripts -->
 @stack('before-scripts')
+<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>  
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+    <script src="js/vendor/bootstrap.min.js"></script>
 
-<script src="{{ mix('js/frontend.js') }}"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
 
-@stack('after-scripts')
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
 
-</html>
+    <!-- <script src="{{ mix('js/frontend.js') }}"></script> -->
+
+    @stack('after-scripts')
+
+    </html>
