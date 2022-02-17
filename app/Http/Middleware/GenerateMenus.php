@@ -52,7 +52,7 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-item',
             ])
             ->data([
-                'order'         => 2,
+                'order'         => 3,
                 'activematches' => 'admin/eventmanagers*',
                 'permission'    => ['view_eventmanagers'],
             ])
@@ -94,8 +94,8 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-item',
             ])
             ->data([
-                'order'         => 6,
-                'activematches' => 'admin/matches*',
+                'order'         => 7,
+                'activematches' => 'admin/credit-debit*',
                 'permission'    => ['view_account_statement'],
             ])
             ->link->attr([
@@ -107,8 +107,8 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-item',
             ])
             ->data([
-                'order'         => 6,
-                'activematches' => 'admin/matches*',
+                'order'         => 8,
+                'activematches' => 'admin/bethistory*',
                 'permission'    => ['view_bet_history_report'],
             ])
             ->link->attr([
@@ -122,8 +122,8 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-item',
             ])
             ->data([
-                'order'         => 6,
-                'activematches' => 'admin/matches*',
+                'order'         => 9,
+                'activematches' => 'admin/betting*',
                 'permission'    => ['view_current_bet_report'],
             ])
             ->link->attr([
@@ -135,8 +135,8 @@ class GenerateMenus
                 'class' => 'c-sidebar-nav-item',
             ])
             ->data([
-                'order'         => 6,
-                'activematches' => 'admin/matches*',
+                'order'         => 10,
+                'activematches' => 'admin/profit-loss*',
                 'permission'    => ['view_profit_loss_report'],
             ])
             ->link->attr([

@@ -48,10 +48,10 @@
                     <div class="col-sm-10">
                         <select class="form-control m-bot15" name="matchtype_id" id="matchtype_id">
                             @if($match_types->count() > 0)
-                                <option value="">Select Record</option>
-                                @foreach ($match_types as $key=>$value)
-                                    <option value="{{ $key }}">{{ $value }}</option>
-                                @endforeach
+                            <option value="">Select Record</option>
+                            @foreach ($match_types as $key=>$value)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                            @endforeach
                             @endif
                         </select>                       
                     </div>                    
@@ -68,7 +68,7 @@
                 <div class="form-group row">
                     {{ html()->label('Short Code Team 1')->class('col-sm-2 form-control-label')->for('shortcode_1') }}
                     <div class="col-sm-10">
-                        <input type="text" name="shortcode_1" id="input-win-coin" class="form-control{{ $errors->has('shortcode_1') ? ' is-invalid' : '' }}" placeholder="{{ __('ShortCode 2') }}"
+                        <input type="text" name="shortcode_1" id="input-win-coin" class="form-control{{ $errors->has('shortcode_1') ? ' is-invalid' : '' }}" placeholder="{{ __('ShortCode 1') }}"
                         value="{{ old('shortcode_1') }}" autofocus>
                     </div>                    
                 </div>

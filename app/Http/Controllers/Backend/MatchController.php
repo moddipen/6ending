@@ -135,11 +135,11 @@ class MatchController extends Controller
             'matchtype_id' => 'required',
             'team_1' => 'required|regex:/^[\pL\s]+$/u|max:255',
             'team_2' => 'required|regex:/^[\pL\s]+$/u|max:255',
-            'shortcode_1' => 'required|regex:/^[\pL\s]+$/u|max:3',
-            'shortcode_2' => 'required|regex:/^[\pL\s]+$/u|max:3',
+            'shortcode_1' => 'required|regex:/^[\pL\s]+$/u|max:4',
+            'shortcode_2' => 'required|regex:/^[\pL\s]+$/u|max:4',
             'schedule' => 'required',
             'status' => 'required'
-        ],
+        ],  
         [
             'matchtype_id.required' => 'The Match Type field is required!'
         ]);   
