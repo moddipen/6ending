@@ -7,7 +7,18 @@
 @endsection
 
 @section('content')
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-8">
+                <h4 class="card-title mb-0">Welcome to 6enddigit User's Dashboard.</h4>                        
+            </div>            
+        </div>
+        <hr>
 
+
+    </div>
+</div>
 <div class="row">
     <div class="col-sm-6 col-lg-3">
         <div class="card bg-gradient-info text-white">

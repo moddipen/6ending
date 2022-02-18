@@ -11,8 +11,21 @@
     <div class="card-body">
         <div class="row">
             <div class="col-sm-8">
-                <h4 class="card-title mb-0">@lang("Welcome to", ['name'=>config('app.name')])</h4>
-                <!-- <div class="small text-muted">{{ date_today() }}</div> -->
+                @role('super admin')
+                    <h4 class="card-title mb-0">Welcome to 6enddigit Super Admin's Dashboard.</h4>
+                @endrole
+                @role('admin')
+                    <h4 class="card-title mb-0">Welcome to 6enddigit Admin's Dashboard.</h4>
+                @endrole
+                @role('subadmin')
+                    <h4 class="card-title mb-0">Welcome to 6enddigit Sub Admin's Dashboard.</h4>
+                @endrole
+                @role('supermaster')
+                    <h4 class="card-title mb-0">Welcome to 6enddigit Super Master's Dashboard.</h4>
+                @endrole
+                @role('master')
+                    <h4 class="card-title mb-0">Welcome to 6enddigit Master's Dashboard.</h4>
+                @endrole              
             </div>
 
             <!-- <div class="col-sm-4 hidden-sm-down">
