@@ -35,7 +35,7 @@ class CreditController extends Controller
             'points' => 'required|numeric|gt:0|lt:10000000000' 
         ]
     );
-        $oldcredit = Credit::where('user_id',auth()->user()->id)->latest()->first();
+        $oldcredit = Credit::where('user_id',auth()->user()->id)->latest('id')->first();
         $credit = new Credit;
         $credit->user_id = auth()->user()->id;
         $credit->parent_id  = $oldcredit->parent_id;
@@ -51,14 +51,14 @@ class CreditController extends Controller
     public function credit_update(Request $request)
     {
         $request->validate([
-                'points' => 'required|numeric|gt:0' 
-            ]
-        );      
+            'points' => 'required|numeric|gt:0' 
+        ]
+    );      
         $request_object = $request->all();
         $parent_transaction_type = "";
-        $latest_record = Credit::where('user_id',$request_object['user_id'])->latest()->first();
+        $latest_record = Credit::where('user_id',$request_object['user_id'])->latest('id')->first();
         if(!empty($latest_record)){
-            $check_parent_credit = Credit::where('user_id',auth()->user()->id)->latest()->first();
+            $check_parent_credit = Credit::where('user_id',auth()->user()->id)->latest('id')->first();
             if($request_object['type'] == "credit"){
                 if(!empty($check_parent_credit) && $check_parent_credit->net_points >= $request_object['points']){
                     $net_points = $latest_record->net_points + $request_object['points'];
@@ -82,7 +82,7 @@ class CreditController extends Controller
                 
             }
         }else{
-            $check_parent_credit = Credit::where('user_id',auth()->user()->id)->latest()->first();
+            $check_parent_credit = Credit::where('user_id',auth()->user()->id)->latest('id')->first();
             $net_points = $request_object['points'];   
             if($request_object['type'] == "credit"){
                 if(!empty($check_parent_credit) && $check_parent_credit->net_points >= $request_object['points']){

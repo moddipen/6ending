@@ -88,41 +88,41 @@
 @if($matches->count() > 0)
 <div class="row">
     @foreach($matches as $match)
-        <div class="col-lg-4 col-sm-6">
-            <div class="card" role="button"  onClick="redirect('{{ route("backend.matches.events",['id'=>\Crypt::encrypt($match->matchtype_id),'match_id'=>$match->id]) }}')">
-                <div class="card-header">
-                    {{ $match->matchtype->type }}               
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-4">
-                            <h3 class="success">{{ $match->shortcode_1  }}</h3>
-                            <span>{{ $match->team_1 }}</span>
-                        </div>
-                        <div class="col-4 text-center">
-                            <h3 class="success">&nbsp;</h3>
-                            <span class="font-weight-bold">{!! time_string_format($match->schedule) !!}</span>
-                        </div>
-                        <div class="col-4 text-right">
-                            <h3 class="success">{{ $match->shortcode_2  }}</h3>
-                            <span>{{ $match->team_2 }}</span>
-                        </div>
-                    </div> 
-                </div>
-                <div class="card-footer text-muted text-right">
-                    <a href="{{ route("backend.matches.events",['id'=>\Crypt::encrypt($match->matchtype_id),'match_id'=>$match->id]) }}" class="text-decoration-none"><i class="fa fa-arrow-right"></i></a>
-                </div>
+    <div class="col-lg-4 col-sm-6">
+        <div class="card" role="button"  onClick="redirect('{{ route("backend.matches.events",['id'=>\Crypt::encrypt($match->matchtype_id),'match_id'=>$match->id]) }}')">
+            <div class="card-header">
+                {{ $match->matchtype->type }}               
             </div>
-        </div>  
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <h3 class="success">{{ $match->shortcode_1  }}</h3>
+                        <span>{{ $match->team_1 }}</span>
+                    </div>
+                    <div class="col-4 text-center">
+                        <h3 class="success">&nbsp;</h3>
+                        <span class="font-weight-bold">{!! time_string_format($match->schedule) !!}</span>
+                    </div>
+                    <div class="col-4 text-right">
+                        <h3 class="success">{{ $match->shortcode_2  }}</h3>
+                        <span>{{ $match->team_2 }}</span>
+                    </div>
+                </div> 
+            </div>
+            <div class="card-footer text-muted text-right">
+                <a href="{{ route("backend.matches.events",['id'=>\Crypt::encrypt($match->matchtype_id),'match_id'=>$match->id]) }}" class="text-decoration-none"><i class="fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>  
     @endforeach
 </div>
 @endif
 <!-- / card -->
 @endsection
 @push ('after-scripts')
-    <script>
-        function redirect(url){
-            window.location.href = url;
-        } 
-    </script>    
+<script>
+    function redirect(url){
+        window.location.href = url;
+    } 
+</script>    
 @endpush

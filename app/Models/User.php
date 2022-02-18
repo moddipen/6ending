@@ -69,7 +69,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     }
     
     public function points(){
-        return $this->hasOne(Credit::class)->latest();
+        return $this->hasOne(Credit::class)->latest('id');
     }
 
     public function bet_points(){

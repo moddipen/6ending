@@ -36,12 +36,12 @@ class BetController extends Controller
 
     public function store(Request $request){
         $request->validate([
-                'bet_coin' => ['required', 'numeric', 'gt:0', new CheckCoins(), new BettingLimit()],
-                'result' => ['required',new CheckLimit($request->type)]
+            'bet_coin' => ['required', 'numeric', 'gt:0', new CheckCoins(), new BettingLimit()],
+            'result' => ['required',new CheckLimit($request->type)]
         ],[
             'result.required' => 'Please enter your prediction!'
         ]
-        ); 
+    ); 
         $request_object = $request->all();
         
         $check_for_enabled_match_event = MatchEvent::where('id',$request_object['match_event_id'])->first();
@@ -55,9 +55,9 @@ class BetController extends Controller
                 'type' => 'placed'
             );
             Bet::create($create_bet_object);
-    
+            
             //Update coins & debit from user
-            $check_user_credit = Credit::where('user_id',auth()->user()->id)->latest()->first();
+            $check_user_credit = Credit::where('user_id',auth()->user()->id)->latest('id')->first();
             $creat_credit_object = array(
                 "user_id" => auth()->user()->id,
                 "parent_id" => $check_user_credit->parent_id,

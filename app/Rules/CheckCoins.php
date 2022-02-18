@@ -27,7 +27,7 @@ class CheckCoins implements Rule
     public function passes($attribute, $value)
     {
         //Check if user has available credits or not
-        $find_total_coints_available = Credit::where('user_id',auth()->user()->id)->latest()->first();
+        $find_total_coints_available = Credit::where('user_id',auth()->user()->id)->latest('id')->first();
         if(!empty($find_total_coints_available) && $find_total_coints_available->net_points >= $value){
             return true;
         }else{
