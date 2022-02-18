@@ -92,7 +92,9 @@ $(document).ready(function() {
                         html += "<td>"+data.events[i].bet[j].result+"</td>";
                         html += "<td>"+new Date(data.events[i].bet[j].created_at).toLocaleString()+"</td>";
                         if(data.events[i].bet[j].status == "win"){  
-                            html += "<td>"+net_point_calculation_winner(data.events[i].matchtypeevent.bet_coin, data.events[i].matchtypeevent.win_coin, data.events[i].bet[j].bet_coins)+"</td>";
+                            var new_coint = net_point_calculation_winner(data.events[i].matchtypeevent.bet_coin, data.events[i].matchtypeevent.win_coin, data.events[i].bet[j].bet_coins);
+                            data.events[i].bet[j].bet_coins = new_coint - data.events[i].bet[j].bet_coins;
+                            html += "<td>"+data.events[i].bet[j].bet_coins+"</td>";
                         }else if(data.events[i].bet[j].status == "loss"){
                             html += "<td class='text-danger'>-"+data.events[i].bet[j].bet_coins+"</td>";
                         }

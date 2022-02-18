@@ -247,7 +247,8 @@ class ReportController extends Controller
             $loss_bet_total = 0;
             foreach($data->events as $event){
                 foreach($event->won_bet as $ev){
-                    $ev['bet_coins'] = $this->settlements->net_point_calculation_winner($event->matchtypeevent->bet_coin, $event->matchtypeevent->win_coin,$ev['bet_coins']);
+                    $new_coin = $this->settlements->net_point_calculation_winner($event->matchtypeevent->bet_coin, $event->matchtypeevent->win_coin, $ev['bet_coins']);
+                    $ev['bet_coins'] = $new_coin - $ev['bet_coins'];
                     $won_bet_total = $won_bet_total + $ev['bet_coins'];
                 } 
                 
