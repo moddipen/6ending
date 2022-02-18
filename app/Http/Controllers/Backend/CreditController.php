@@ -32,7 +32,7 @@ class CreditController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'points' => 'required|numeric|gt:0' 
+            'points' => 'required|numeric|gt:0|lt:10000000000' 
         ]
     );
         $oldcredit = Credit::where('user_id',auth()->user()->id)->latest()->first();

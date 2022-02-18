@@ -156,7 +156,7 @@ class MatchController extends Controller
         );
         $match = Match::create($create_record);
         $match_id = $match->id;
-        $get_events = Matchtypeevent::where("matchtype_id",$request_object['matchtype_id'])->get();
+        $get_events = Matchtypeevent::where("matchtype_id",$request_object['matchtype_id'])->where("status",0)->get();
         
         foreach ($get_events as $event){
             $create_match_event_array = array(

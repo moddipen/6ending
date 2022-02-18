@@ -31,16 +31,16 @@ class BettingLimit implements Rule
         $check_limits = Userprofile::with("parent_limit")->where("user_id",auth()->user()->id)->first();
         if(empty($check_limits->parent_limit)){
             //Check for supermaster
-            $check_limits = Userprofile::with("parent_limit")->whereHas("parent_limit")->where("user_id",$check_limits->created_by)->first();
-            if(empty($check_limits->parent_limit)){
+            $check_limits = Userprofile::with("parent_limit")->where("user_id",$check_limits->created_by)->first();
+            if(empty($check_limits->parent_limit) && isset($check_limits->created_by)){
                 //Check for subadmin
-                $check_limits = Userprofile::with("parent_limit")->whereHas("parent_limit")->where("user_id",$check_limits->created_by)->first();
+                $check_limits = Userprofile::with("parent_limit")->where("user_id",$check_limits->created_by)->first();
                 if(empty($check_limits->parent_limit)){
                     //Check for Admin
-                    $check_limits = Userprofile::with("parent_limit")->whereHas("parent_limit")->where("user_id",$check_limits->created_by)->first();
+                    $check_limits = Userprofile::with("parent_limit")->where("user_id",$check_limits->created_by)->first();
                     if(empty($check_limits->parent_limit)){
                         //Check for Super Admin
-                        $check_limits = Userprofile::with("parent_limit")->whereHas("parent_limit")->where("user_id",$check_limits->created_by)->first();
+                        $check_limits = Userprofile::with("parent_limit")->where("user_id",$check_limits->created_by)->first();
                         if(empty($check_limits->parent_limit)){
                             return true;
                         }else{
