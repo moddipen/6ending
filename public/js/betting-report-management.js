@@ -27,7 +27,7 @@ $(document).ready(function() {
                 $('#match-list #kv-toggle-demo').bootstrapToggle({
                     width : '100%'
                 });
-            },
+            },            
             columns: [
                 {data: 'match'},
                 {data: 'event'},

@@ -28,6 +28,7 @@ $(document).ready(function() {
                     width : '100%'
                 });
             },
+            order: [[ 6, 'desc' ]],
             columns: [
                 {data: 'id'},
                 {data: 'username'},

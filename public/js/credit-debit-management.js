@@ -28,8 +28,9 @@ $(document).ready(function() {
                     width : '100%'
                 });
             },
+            order: [[ 1, 'desc' ]],
             columns: [
-                {data: 'created_at', sortable: false},
+                {data: 'created_at'},
                 {data: 'debit_coin'},
                 {data: 'credit_coin'},
                 {data: 'net_points'},

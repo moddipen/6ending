@@ -28,6 +28,7 @@ $(document).ready(function() {
                     width : '100%'
                 });
             },
+            order: [[ 2, 'desc' ]],
             columns: [
                 {data: 'match'},
                 {data: 'created_at'},

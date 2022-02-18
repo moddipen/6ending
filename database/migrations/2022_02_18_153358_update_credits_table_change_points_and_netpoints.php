@@ -14,8 +14,8 @@ class UpdateCreditsTableChangePointsAndNetpoints extends Migration
     public function up()
     {
         Schema::table('matchtypeevents', function (Blueprint $table) {
-            $table->float('points',15,2)->default(0)->change();
-            $table->float('net_points',15,2)->default(0)->change();
+            // $table->float('points',15,2)->default(0)->change();
+            // $table->float('net_points',15,2)->default(0)->change();
         });
     }
 
