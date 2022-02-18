@@ -35,13 +35,25 @@ class BetController extends Controller
     }
 
     public function store(Request $request){
-        $request->validate([
-            'bet_coin' => ['required', 'numeric', 'gt:0', new CheckCoins(), new BettingLimit()],
-            'result' => ['required',new CheckLimit($request->type)]
-        ],[
-            'result.required' => 'Please enter your prediction!'
-        ]
-    ); 
+        if($request->type == "Lambi Run"){
+            $request->validate([
+                    'bet_coin' => ['required', 'numeric', 'gt:0', new CheckCoins(), new BettingLimit()],
+                    'result' => 'required|gt:0|max:99|numeric'
+                ],[
+                    'result.required' => 'Please enter your prediction!',
+                    'result.max' => 'Bet is allowed upto two digits'
+                ]
+            ); 
+        }else{
+            $request->validate([
+                    'bet_coin' => ['required', 'numeric', 'gt:0', new CheckCoins(), new BettingLimit()],
+                    'result' => ['required',new CheckLimit($request->type)]
+                ],[
+                    'result.required' => 'Please enter your prediction!'
+                ]
+            ); 
+        }
+       
         $request_object = $request->all();
         
         $check_for_enabled_match_event = MatchEvent::where('id',$request_object['match_event_id'])->first();

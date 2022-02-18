@@ -70,6 +70,31 @@ class EventtypeSeeder extends Seeder
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now(),
             ],
+            [
+                'type'        => '1st Ing 20 overs last digit',
+                'created_at'        => Carbon::now(),
+                'updated_at'        => Carbon::now(),
+            ],
+            [
+                'type'        => '1st Ing 30 overs last digit',
+                'created_at'        => Carbon::now(),
+                'updated_at'        => Carbon::now(),
+            ],
+            [
+                'type'        => '1st Ing 35 overs last digit',
+                'created_at'        => Carbon::now(),
+                'updated_at'        => Carbon::now(),
+            ],
+            [
+                'type'        => '1st Ing 40 overs last digit',
+                'created_at'        => Carbon::now(),
+                'updated_at'        => Carbon::now(),
+            ],
+            [
+                'type'        => '2nd ing 20 overs last digit',
+                'created_at'        => Carbon::now(),
+                'updated_at'        => Carbon::now(),
+            ],
         ];
 
         foreach ($eventtypes as $data) {

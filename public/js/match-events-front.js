@@ -14,7 +14,10 @@ $(document).ready(function() {
             if($(this).closest("div").find('.type').length > 0){
                 if($(this).closest("div").find('.type').val() == "One day Khada – 61 runs"){
                     var type = "61";
-                }else{
+                }else if($(this).closest("div").find('.type').val() == "Lambi Run"){
+                    var type = $(this).closest("div").find('.type').val();
+                }
+                else{
                     var type = "31";
                 }   
             }

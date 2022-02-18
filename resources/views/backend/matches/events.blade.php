@@ -59,7 +59,11 @@
                 {{ $event->matchtypeevent->match_types->type }}               
             </div>
             <div class="card-body text-center">
-                <h5 class="">{{ $event->matchtypeevent->event_types->type }}</h5>
+                @if($event->matchtypeevent->event_types->type == "Lambi Run")
+                    <h5 class="">{{ $event->matchtypeevent->event_types->type }} (Last Two Digit)</h5>
+                @else
+                    <h5 class="">{{ $event->matchtypeevent->event_types->type }}</h5>
+                @endif
                 <h6 class="card-text small">* Every {{ $event->matchtypeevent->bet_coin }} coin can get you {{ $event->matchtypeevent->win_coin }} coin on winning </h6>  
                 {{-- @php
                 $check = \App\Models\Bet::where(['match_event_id' => $event->id,'user_id'=>auth()->user()->id])->first();                        
@@ -79,17 +83,20 @@
                 <div class="form-group mx-sm-3 mb-2">
                     <div class="input-group">
                         @if($event->matchtypeevent->event_types->type == "Toss")
-                        <select class="form-control form-control-sm result" name="result">
-                            <option value="">Choose team</option>
-                            <option value="{{ $event->match->team_1 }}">{{ $event->match->team_1 }}</option>
-                            <option value="{{ $event->match->team_2 }}">{{ $event->match->team_2 }}</option>
-                        </select>  
+                            <select class="form-control form-control-sm result" name="result">
+                                <option value="">Choose team</option>
+                                <option value="{{ $event->match->team_1 }}">{{ $event->match->team_1 }}</option>
+                                <option value="{{ $event->match->team_2 }}">{{ $event->match->team_2 }}</option>
+                            </select>  
                         @elseif ($event->matchtypeevent->event_types->type == "One day Khada – 61 runs" || $event->matchtypeevent->event_types->type == "T20 Khada – 31 runs")
-                        <input type="text" class="form-control form-control-sm result_low" placeholder="Low Score" name="result_low"> 
-                        <input type="text" class="form-control form-control-sm result_high" placeholder="High Score" name="result_high"> 
-                        <input type="hidden" class="form-control form-control-sm type" name="type" value="{{ $event->matchtypeevent->event_types->type }}"> 
+                            <input type="text" class="form-control form-control-sm result_low" placeholder="Low Score" name="result_low"> 
+                            <input type="text" class="form-control form-control-sm result_high" placeholder="High Score" name="result_high"> 
+                            <input type="hidden" class="form-control form-control-sm type" name="type" value="{{ $event->matchtypeevent->event_types->type }}"> 
+                        @elseif ($event->matchtypeevent->event_types->type == "Lambi Run")
+                            <input type="hidden" class="form-control form-control-sm type" name="type" value="{{ $event->matchtypeevent->event_types->type }}"> 
+                            <input type="text" class="form-control form-control-sm result" placeholder="Enter value" name="result"> 
                         @else
-                        <input type="text" class="form-control form-control-sm result" placeholder="Enter value" name="result"> 
+                            <input type="text" class="form-control form-control-sm result" placeholder="Enter value" name="result"> 
                         @endif                                
                         <input type="text" class="form-control form-control-sm bet-coins" placeholder="Enter Coins" name="bet_coin">
                         <div class="invalid-feedback"></div>
