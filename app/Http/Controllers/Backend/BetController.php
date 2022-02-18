@@ -75,9 +75,13 @@ class BetController extends Controller
     }
 
     public function list($match_id = null){
-       $get_bets = Bet::with("match_event.matchtypeevent.event_types")->whereHas("match_event", function ($query) use($match_id){
+        $no_record_flag = 0;
+        $get_bets = Bet::with("match_event.matchtypeevent.event_types")->whereHas("match_event", function ($query) use($match_id){
             $query->where("match_id",$match_id);           
         })->where("user_id",auth()->user()->id)->orderBy('created_at', 'DESC')->get();
-        return view("backend.bets.list",compact('get_bets'));
+        if(!$get_bets->isEmpty()){
+            $no_record_flag = 1;
+        }
+        return view("backend.bets.list",compact('get_bets','no_record_flag'));
     }
 }

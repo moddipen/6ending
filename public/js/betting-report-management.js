@@ -32,8 +32,9 @@ $(document).ready(function() {
                 {data: 'match'},
                 {data: 'event'},
                 {data: 'result'},
+                {data: 'bet_coins'},
                 {data: 'created_at'},
-                {data: 'settlement_time'}                             
+                // {data: 'settlement_time'}                             
             ]           
         });       
     }

@@ -65,8 +65,9 @@
                                 <th>Match</th>
                                 <th>Event</th>
                                 <th>Selection</th>
+                                <th>Coins</th>
                                 <th>Bet place time</th>
-                                <th>Bet settle time</th>                                
+                                {{-- <th>Bet settle time</th>                                 --}}
                             </tr>
                         </thead>                            
                     </table>

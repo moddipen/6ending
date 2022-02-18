@@ -121,9 +121,10 @@ class ReportController extends Controller
         if($request_object['start_date'] != "" && $request_object['end_date'] != ""){
             $module_name = Bet::with("match_event.match","match_event.matchtypeevent.event_types","match_event.matchtypeevent.match_types","settlement")
             ->whereBetween("created_at",[Carbon::createFromFormat('Y-m-d',$request_object['start_date']),Carbon::createFromFormat('Y-m-d',$request_object['end_date'])])
+            ->where("type","placed")
             ->get();
         }else{
-            $module_name = Bet::with("match_event.match","match_event.matchtypeevent.event_types","match_event.matchtypeevent.match_types","settlement")->get();
+            $module_name = Bet::with("match_event.match","match_event.matchtypeevent.event_types","match_event.matchtypeevent.match_types","settlement")->where("type","placed")->get();
         }       
         
         $data = $module_name;
@@ -136,15 +137,7 @@ class ReportController extends Controller
         })
         ->editColumn('created_at', function ($data) {
             return Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at);
-        })
-        ->addColumn('settlement_time', function ($data) {
-            if(!empty($data->settlement)){
-                return Carbon::createFromFormat('Y-m-d H:i:s', $data->settlement->created_at);
-            }else{
-                return "-";
-            }
-            
-        })        
+        })            
         ->make(true);
     }
 
