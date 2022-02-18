@@ -1,1 +1,0 @@
-{!!setting('google_analytics')!!}
