@@ -48,7 +48,7 @@
         <div class="card bg-gradient-danger text-white">
             <div class="card-body">
                 <div class="text-value-lg">{{ $bet_coins; }}</div>
-                <div>Bet Coins</div>                
+                <div>Downline Coins</div>                
             </div>
         </div>
     </div>

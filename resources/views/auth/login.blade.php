@@ -92,18 +92,18 @@
                             </div> -->
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary mt-2">
-                                    @lang('Submit')
+                                    @lang('Login')
                                 </button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-6">
+                    <!-- <div class="col-6">
                         <a href="{{ route('password.request') }}" class="text-gray">
                             <small>{{ __('Forgot Your Password?') }}</small>
                         </a>
-                    </div>
+                    </div> -->
                     <!-- @if (Route::has('register'))
                     <div class="col-6 text-right">
                         <a href="{{ route('register') }}" class="text-gray">
