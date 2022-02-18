@@ -14,8 +14,8 @@
         <div class="row">
             <div class="col">
                 <h4 class="card-title mb-0">
-                    <i class="{{$module_icon}}"></i> {{ $module_title }}
-                    <small class="text-muted">{{ __('labels.backend.users.index.action') }} </small>
+                    <i class="{{$module_icon}}"></i>  {{ $check_id_match_settled->team_1 }} vs {{ $check_id_match_settled->team_2 }}
+                    {{-- <small class="text-muted">{{ __('labels.backend.users.index.action') }} </small> --}}
                 </h4>
                 <div class="small text-muted">
                     {{ $module_title }}
@@ -69,9 +69,9 @@
                                     <td>
                                         <div class="checkbox row col-lg-6">
                                             @if($event->status == 0)
-                                                <input data-class="btn-block" data-id="{{ $event->matchtypeevent->id }}" data-width="100%" id="kv-toggle-demo" value="1" type="checkbox" checked data-toggle="toggle" data-on="Enable" data-off="Disable" data-onstyle="success" data-offstyle="warning">
+                                                <input data-class="btn-block" data-id="{{ $event->id }}" data-width="100%" id="kv-toggle-demo" value="1" type="checkbox" checked data-toggle="toggle" data-on="Enable" data-off="Disable" data-onstyle="success" data-offstyle="warning">
                                             @else
-                                                <input data-class="btn-block" data-id="{{ $event->matchtypeevent->id }}" data-width="100%" id="kv-toggle-demo" value="0" type="checkbox" data-toggle="toggle" data-on="Enable" data-off="Disable" data-onstyle="success" data-offstyle="warning">
+                                                <input data-class="btn-block" data-id="{{ $event->id }}" data-width="100%" id="kv-toggle-demo" value="0" type="checkbox" data-toggle="toggle" data-on="Enable" data-off="Disable" data-onstyle="success" data-offstyle="warning">
                                             @endif
                                         </div>
                                     </td>                                           

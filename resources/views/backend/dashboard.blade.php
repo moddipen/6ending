@@ -101,7 +101,7 @@
                         </div>
                         <div class="col-4 text-center">
                             <h3 class="success">&nbsp;</h3>
-                            <span class="text-danger font-weight-bold">{{ time_string_format($match->schedule) }}</span>
+                            <span class="font-weight-bold">{!! time_string_format($match->schedule) !!}</span>
                         </div>
                         <div class="col-4 text-right">
                             <h3 class="success">{{ $match->shortcode_2  }}</h3>

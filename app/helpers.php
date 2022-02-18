@@ -499,11 +499,16 @@ if (!function_exists('time_string_format')) {
     {
         $datetime1 = new DateTime();
         $datetime2 = new DateTime($end_date);
-        $interval = $datetime2->diff($datetime1);
-        if($interval->format('%d') > 0){
-            return $interval->format('%d')."d ".$interval->format('%h')."h ".$interval->format('%i')."m";    
+        if($datetime2 > $datetime1){
+            $interval = $datetime2->diff($datetime1);
+            if($interval->format('%d') > 0){
+                return "<p class='text-danger'>".$interval->format('%d')."d ".$interval->format('%h')."h ".$interval->format('%i')."m</p>";    
+            }else{
+                return "<p class='text-danger'>".$interval->format('%h')."h ".$interval->format('%i')."m</p>";
+            }   
         }else{
-            return $interval->format('%h')."h ".$interval->format('%i')."m";
-        }        
+            return "<p class='text-success'>In Play</p>";
+        }
+             
     }    
 }

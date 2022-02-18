@@ -40,10 +40,11 @@
             </div>
         </li>
     </ul>
-    <div class="c-subheader justify-content-between px-3">
+    <div class="c-subheader d-flex justify-content-between bd-highlight">
         <ol class="breadcrumb border-0 m-0">
             @yield('breadcrumbs')
         </ol>
-
+        <div class="p-2 bd-highlight"><h5 class="mb-0"><b> @yield('match')</b></h5></div>
+        <div class="p-2 bd-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
     </div>
 </header>

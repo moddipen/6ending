@@ -220,7 +220,7 @@ class MatchController extends Controller
 
     public function update_type(Request $request){
         $request_object = $request->all();
-        MatchEvent::where("matchtypeevent_id",$request_object['id'])->update(['status'=>$request_object['status']]);
+        MatchEvent::where("id",$request_object['id'])->update(['status'=>$request_object['status']]);
     }
 
     public function event_backend($id,$match_id){
@@ -250,7 +250,8 @@ class MatchController extends Controller
 
         $id = \Crypt::decrypt($id);
         $get_match_events = MatchEvent::with("matchtypeevent.event_types","matchtypeevent.match_types","match")->where("match_id",$match_id)->get();
-        return view('backend.matches.events',compact('module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular','module_title','get_match_events','match_id'));//["get_match_events"=>$get_match_events,"match_id"=>$match_id]);        
+        $get_match_name = Match::find($match_id);
+        return view('backend.matches.events',compact('module_name', 'module_path', 'module_icon', 'module_action', 'module_name_singular','module_title','get_match_events','match_id','get_match_name'));//["get_match_events"=>$get_match_events,"match_id"=>$match_id]);        
     }
 
     public function details($id){

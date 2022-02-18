@@ -8,6 +8,9 @@
 </x-backend-breadcrumbs>
 @endsection
 
+@section('match')
+    {{ $get_match_name->team_1 }} vs {{ $get_match_name->team_2 }}
+@endsection
 
 @section('content')
 @if($get_match_events->count() == 0)
