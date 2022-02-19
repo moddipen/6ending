@@ -21,4 +21,13 @@ class Userprofile extends BaseModel
     public function parent_limit(){
         return $this->belongsTo(BettingLimit::class,"created_by","user_id");
     }
+
+    public function children(){
+        return $this->hasMany(self::class, 'created_by');
+    }
+
+    public function grandchildren()
+    {
+        return $this->children()->with('grandchildren');
+    }
 }

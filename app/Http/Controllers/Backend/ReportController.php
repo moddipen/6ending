@@ -6,6 +6,7 @@ use App\Authorizable;
 use Illuminate\Http\Request;
 use App\Models\Credit;
 use App\Models\Bet;
+use App\Models\Userprofile;
 use App\Models\MatchEvent;
 use App\Models\MatchEventSettlement;
 use App\Models\Match;
@@ -55,20 +56,29 @@ class ReportController extends Controller
     public function credit_debit_report_datatable(Request $request){
 
         $request_object = $request->all();
-        
+        $tree_users = Userprofile::with("grandchildren")->where("user_id",auth()->user()->id)->first();
+        $childrens = $this->user_all_childs_ids($tree_users->toArray());
         if($request_object['start_date'] != "" && $request_object['end_date'] != ""){
             $module_name = Credit::with("user","parent_user")
             ->where(function ($query) {
                 $query->where("type","credit")->orWhere("type","debit");
             })
-            ->whereBetween("created_at",[Carbon::createFromFormat('Y-m-d',$request_object['start_date']),Carbon::createFromFormat('Y-m-d',$request_object['end_date'])])
-            ->where("user_id",auth()->user()->id)->get();           
+            ->whereBetween("created_at",[Carbon::createFromFormat('Y-m-d',$request_object['start_date']),Carbon::createFromFormat('Y-m-d',$request_object['end_date'])]);
+            // ->where("user_id",auth()->user()->id);
+            if(!empty($childrens)){
+                $module_name->whereIn("user_id",$childrens);
+            }
+            $module_name->get();           
         }else{
             $module_name = Credit::with("user","parent_user")
             ->where(function ($query) {
                 $query->where("type","credit")->orWhere("type","debit");
-            })
-            ->where("user_id",auth()->user()->id)->get();
+            });
+            // ->where("user_id",auth()->user()->id);
+            if(!empty($childrens)){
+                $module_name->whereIn("user_id",$childrens);
+            }
+            $module_name->get();
         }   
        
         $data = $module_name;
@@ -115,16 +125,36 @@ class ReportController extends Controller
         );
     }
 
+    public function user_all_childs_ids($tree_users){
+        $children_array = [];
+        foreach($tree_users['grandchildren'] as $user){
+            $children_array[] = $user['id'];
+            if(!empty($user['grandchildren'])){
+                $children_array=array_merge($children_array, $this->user_all_childs_ids($user));                                
+            }                     
+        }
+        return $children_array;
+    }
+
     public function betting_report_datatable(Request $request){
         $request_object = $request->all();
-        
+        $tree_users = Userprofile::with("grandchildren")->where("user_id",auth()->user()->id)->first();
+        $childrens = $this->user_all_childs_ids($tree_users->toArray());
         if($request_object['start_date'] != "" && $request_object['end_date'] != ""){
             $module_name = Bet::with("match_event.match","match_event.matchtypeevent.event_types","match_event.matchtypeevent.match_types","settlement")
             ->whereBetween("created_at",[Carbon::createFromFormat('Y-m-d',$request_object['start_date']),Carbon::createFromFormat('Y-m-d',$request_object['end_date'])])
-            ->where("type","placed")
-            ->get();
+            ->where("type","placed");
+            if(!empty($childrens)){
+                $module_name->whereIn("user_id",$childrens);
+            }
+            $module_name->get();
         }else{
-            $module_name = Bet::with("match_event.match","match_event.matchtypeevent.event_types","match_event.matchtypeevent.match_types","settlement")->where("type","placed")->get();
+            $module_name = Bet::with("match_event.match","match_event.matchtypeevent.event_types","match_event.matchtypeevent.match_types","settlement")
+            ->where("type","placed");
+            if(!empty($childrens)){
+                $module_name->whereIn("user_id",$childrens);
+            }
+            $module_name->get();
         }       
         
         $data = $module_name;
@@ -158,13 +188,22 @@ class ReportController extends Controller
 
     public function betting_history_report_datatable(Request $request){
         $request_object = $request->all();
-        
+        $tree_users = Userprofile::with("grandchildren")->where("user_id",auth()->user()->id)->first();
+        $childrens = $this->user_all_childs_ids($tree_users->toArray());
+
         if($request_object['start_date'] != "" && $request_object['end_date'] != ""){
             $module_name = Bet::with("match_event.match","match_event.matchtypeevent.event_types","match_event.matchtypeevent.match_types","user")
-            ->whereBetween("created_at",[Carbon::createFromFormat('Y-m-d',$request_object['start_date']),Carbon::createFromFormat('Y-m-d',$request_object['end_date'])])
-            ->get();
+            ->whereBetween("created_at",[Carbon::createFromFormat('Y-m-d',$request_object['start_date']),Carbon::createFromFormat('Y-m-d',$request_object['end_date'])]);
+            if(!empty($childrens)){
+                $module_name->whereIn("user_id",$childrens);
+            }
+            $module_name->get();
         }else{
-            $module_name = Bet::with("match_event.match","match_event.matchtypeevent.event_types","match_event.matchtypeevent.match_types","user")->get();
+            $module_name = Bet::with("match_event.match","match_event.matchtypeevent.event_types","match_event.matchtypeevent.match_types","user");
+            if(!empty($childrens)){
+                $module_name->whereIn("user_id",$childrens);
+            }
+            $module_name->get();
         }
         
         
