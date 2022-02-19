@@ -254,13 +254,33 @@ class ReportController extends Controller
     public function profit_loss_report_datatable(Request $request){
         // $module_name = MatchEvent::with("match.matchtype","matchtypeevent.event_types","loss_bet","won_bet","settlement")->whereHas("settlement")->get();
         $request_object = $request->all();
-        
+        $tree_users = Userprofile::with("grandchildren")->where("user_id",auth()->user()->id)->first();
+        $childrens = $this->user_all_childs_ids($tree_users->toArray());
+
         if($request_object['start_date'] != "" && $request_object['end_date'] != ""){
-            $module_name = Match::with("events.matchtypeevent","matchtype","events.loss_bet","events.won_bet","events.settlement")->whereHas("events.settlement")
-            ->whereBetween("created_at",[Carbon::createFromFormat('Y-m-d',$request_object['start_date']),Carbon::createFromFormat('Y-m-d',$request_object['end_date'])])
-            ->get();
+            $module_name = Match::with("events.matchtypeevent","matchtype","events.loss_bet","events.won_bet","events.settlement")
+            ->whereHas("events.settlement");
+            if(!empty($childrens)){
+                $module_name->whereHas("events.won_bet", function ($query) use ($childrens){
+                    $query->whereIn("user_id",$childrens);
+                });
+                $module_name->whereHas("events.won_bet", function ($query) use ($childrens){
+                    $query->whereIn("user_id",$childrens);
+                });
+            }            
+            $module_name->whereBetween("created_at",[Carbon::createFromFormat('Y-m-d',$request_object['start_date']),Carbon::createFromFormat('Y-m-d',$request_object['end_date'])]);
+            $module_name->get();
         }else{
-            $module_name = Match::with("events.matchtypeevent","matchtype","events.loss_bet","events.won_bet","events.settlement")->whereHas("events.settlement")->get();
+            $module_name = Match::with("events.matchtypeevent","matchtype","events.loss_bet","events.won_bet","events.settlement");
+            if(!empty($childrens)){
+                $module_name->whereHas("events.won_bet", function ($query) use ($childrens){
+                    $query->whereIn("user_id",$childrens);
+                });
+                $module_name->whereHas("events.won_bet", function ($query) use ($childrens){
+                    $query->whereIn("user_id",$childrens);
+                });
+            }
+            $module_name->whereHas("events.settlement")->get();
         }
         
         $data = $module_name;

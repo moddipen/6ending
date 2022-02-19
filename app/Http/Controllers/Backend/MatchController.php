@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Matchtype;
 use App\Models\Match;
 use App\Models\MatchEvent;
+use App\Models\Userprofile;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -255,9 +256,28 @@ class MatchController extends Controller
     }
 
     public function details($id){
-        $match = Match::with("events.matchtypeevent","matchtype","events.bet")->whereHas("events.settlement")->where("id",$id)->first();
-        // echo "<pre>";
-        // print_r($match->toArray());exit;
+        $tree_users = Userprofile::with("grandchildren")->where("user_id",auth()->user()->id)->first();
+        $childrens = $this->user_all_childs_ids($tree_users->toArray());
+        if(!empty($childrens)){
+            $match = Match::with("events.matchtypeevent","matchtype","events.bet")->whereHas("events.settlement")
+            ->whereHas("events.bet", function ($query) use ($childrens){
+                $query->whereIn("user_id",$childrens);
+            })
+            ->where("id",$id)->first();
+        }else{
+            $match = Match::with("events.matchtypeevent","matchtype","events.bet")->whereHas("events.settlement")->where("id",$id)->first();
+        }        
         return response()->json($match);        
+    }
+
+    public function user_all_childs_ids($tree_users){
+        $children_array = [];
+        foreach($tree_users['grandchildren'] as $user){
+            $children_array[] = $user['id'];
+            if(!empty($user['grandchildren'])){
+                $children_array=array_merge($children_array, $this->user_all_childs_ids($user));                                
+            }                     
+        }
+        return $children_array;
     }
 }
