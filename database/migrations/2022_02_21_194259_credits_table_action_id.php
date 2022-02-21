@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateCreditsTableChangePointsAndNetpoints extends Migration
+class CreditsTableActionId extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,8 @@ class UpdateCreditsTableChangePointsAndNetpoints extends Migration
     public function up()
     {
         Schema::table('credits', function (Blueprint $table) {
-            $table->dropColumn('points');
-            $table->dropColumn('net_points');           
-        });
+            $table->integer('action_id')->default(0);                   
+        }); 
     }
 
     /**

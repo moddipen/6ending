@@ -41,7 +41,8 @@ $(document).ready(function() {
                 "_token"     : $('meta[name="csrf-token"]').attr('content'),
                 "type" : $(".credit-point input[name='type']").val(),
                 "user_id" : $(".credit-point input[name='user_id']").val(),
-                "points"   : $(".credit-point input[name='points']").val()
+                "points"   : $(".credit-point input[name='points']").val(),
+                "action_id" : $(".credit-point input[name='action_id']").val(),
             },            
             success:function(data) {
                 $('.credit-point input[name="points"]').next('div .invalid-feedback').css("display","none");

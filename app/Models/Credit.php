@@ -13,7 +13,8 @@ class Credit extends Model
         'parent_id',
         'points',
         'type',
-        'net_points'
+        'net_points',
+        'action_id'
     ];
 
     public function user(){
@@ -22,5 +23,9 @@ class Credit extends Model
 
     public function parent_user(){
         return $this->belongsTo(User::class,'parent_id');
+    }
+    
+    public function action_user(){
+        return $this->belongsTo(User::class,'action_id');
     }
 }

@@ -62,6 +62,7 @@
                     <table class="table table-hover table-responsive-sm" id="credit-debit-list">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Date & Time</th>
                                 <th>Debit Coin</th>
                                 <th>Credit Coin</th>

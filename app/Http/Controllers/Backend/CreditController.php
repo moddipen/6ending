@@ -109,6 +109,7 @@ class CreditController extends Controller
         $create_insert_object = array(
             "user_id" => $request_object['user_id'],
             "parent_id" => auth()->user()->id,
+            "action_id" => auth()->user()->id,
             "points" => $request_object['points'],
             "net_points" => $net_points,
             "type" => $request_object['type'] 
@@ -119,6 +120,7 @@ class CreditController extends Controller
         $crate_parent_coins = array(
             "user_id" => auth()->user()->id,
             "parent_id" => $check_parent_credit->parent_id,
+            "action_id" => $request_object['user_id'],
             "points" => $request_object['points'],
             "net_points" => $net_points_parents,
             "type" => $parent_transaction_type

@@ -28,8 +28,16 @@ $(document).ready(function() {
                     width : '100%'
                 });
             },
-            order: [[ 1, 'desc' ]],
+            "columnDefs": [
+                {
+                    "targets": [ 0 ],
+                    "visible": false,
+                    "searchable": false
+                }
+            ],
+            order: [[ 0, 'DESC' ]],
             columns: [
+                {data: 'id'},
                 {data: 'created_at'},
                 {data: 'debit_coin'},
                 {data: 'credit_coin'},

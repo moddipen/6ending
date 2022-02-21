@@ -59,39 +59,45 @@ class ReportController extends Controller
         $tree_users = Userprofile::with("grandchildren")->where("user_id",auth()->user()->id)->first();
         $childrens = $this->user_all_childs_ids($tree_users->toArray());
         if($request_object['start_date'] != "" && $request_object['end_date'] != ""){
-            $module_name = Credit::with("user","parent_user")
+            $module_name = Credit::with("user","parent_user","action_user")
             ->where(function ($query) {
                 $query->where("type","credit")->orWhere("type","debit");
             })
-            ->whereBetween("created_at",[Carbon::createFromFormat('Y-m-d',$request_object['start_date']),Carbon::createFromFormat('Y-m-d',$request_object['end_date'])]);
-            // ->where("user_id",auth()->user()->id);
-            if(!empty($childrens)){
-                $module_name->whereIn("user_id",$childrens);
-            }
-            $module_name->get();           
+            ->whereBetween("created_at",[Carbon::createFromFormat('Y-m-d',$request_object['start_date']),Carbon::createFromFormat('Y-m-d',$request_object['end_date'])])
+            ->where("user_id",auth()->user()->id)
+            // ->orWhere("parent_id",auth()->user()->id)
+            ->get();           
         }else{
-            $module_name = Credit::with("user","parent_user")
+            $module_name = Credit::with("user","parent_user","action_user")
             ->where(function ($query) {
                 $query->where("type","credit")->orWhere("type","debit");
-            });
-            // ->where("user_id",auth()->user()->id);
-            if(!empty($childrens)){
-                $module_name->whereIn("user_id",$childrens);
-            }
-            $module_name->get();
+            })
+            ->where("user_id",auth()->user()->id)
+            // ->orWhere("parent_id",auth()->user()->id)
+            ->get();
         }   
-       
+        
         $data = $module_name;
         return Datatables::of($data)
         ->addColumn('created_at', function ($data) {
             return Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at);
         })
         ->addColumn('from_to', function ($data) {
-            if($data->type == "credit"){
-                return $data->parent_user->first_name." ".$data->parent_user->last_name." / ".$data->user->first_name." ".$data->user->last_name;
-            }else{
-                return $data->user->first_name." ".$data->user->last_name." / ".$data->parent_user->first_name." ".$data->parent_user->last_name;
-            }         
+            if($data->parent_id != null){
+                if($data->type == "credit"){
+                    if($data->action_id == 0){
+                        return "-";
+                    }else{
+                        return $data->action_user->first_name." ".$data->action_user->last_name." / ".$data->user->first_name." ".$data->user->last_name; 
+                    }                    
+                }else{
+                    if($data->action_id == 0){
+                        return "-";
+                    }else{
+                        return $data->user->first_name." ".$data->user->last_name." / ".$data->action_user->first_name." ".$data->action_user->last_name;    
+                    }                    
+                }   
+            }                  
         })
         ->addColumn('debit_coin', function ($data) {
             if($data->type == "credit"){
