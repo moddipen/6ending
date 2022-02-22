@@ -41,16 +41,7 @@
         <div class="row mt-4 mb-4">
             <div class="col">
                 {{ html()->modelForm($userprofile, 'PATCH', route('backend.users.profileUpdate', $$module_name_singular->id))->class('form-horizontal')->attributes(['enctype'=>"multipart/form-data"])->open() }}
-                <!-- <div class="form-group row">
-                    {{ html()->label(__('labels.backend.users.fields.avatar'))->class('col-md-2 form-control-label')->for('name') }}
-
-                    <div class="col-md-5">
-                        <img src="{{asset($$module_name_singular->avatar)}}" class="user-profile-image img-fluid img-thumbnail" style="max-height:200px; max-width:200px;" />
-                    </div>
-                    <div class="col-md-5">
-                        <input id="file-multiple-input" name="avatar" multiple="" type="file">
-                    </div>
-                </div> --><!--form-group-->
+                
 
                 <div class="row">
                     <div class="col-12 col-md-6">
@@ -89,7 +80,7 @@
                             {{ html()->email($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"])->disabled() }}
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
+                    <!-- <div class="col-12 col-md-6">
                         <div class="form-group">
                             <?php
                             $field_name = 'mobile';
@@ -100,12 +91,12 @@
                             {{ html()->label($field_lable, $field_name) }} {!! fielf_required($required) !!}
                             {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="row">
 
-                    <div class="col-12 col-sm-6">
+                    <!-- <div class="col-12 col-sm-6">
                         <div class="form-group">
                             <?php
                             $field_name = 'gender';
@@ -122,8 +113,8 @@
                             {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
                         </div>
                     </div>
-
-                    <div class="col-12 col-sm-6">
+                -->
+                    <!-- <div class="col-12 col-sm-6">
                         <div class="form-group">
                             <?php
                             $field_name = 'date_of_birth';
@@ -139,11 +130,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="row">
-                    <div class="col-12 col-md-6">
+                    <!-- <div class="col-12 col-md-6">
                         <div class="form-group">
                             <?php
                             $field_name = 'address';
@@ -154,8 +145,8 @@
                             {{ html()->label($field_lable, $field_name) }} {!! fielf_required($required) !!}
                             {{ html()->textarea($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
                         </div>
-                    </div>
-                    <div class="col-12 col-md-6">
+                    </div> -->
+                    <!-- <div class="col-12 col-md-6">
                         <div class="form-group">
                             <?php
                             $field_name = 'bio';
@@ -166,7 +157,7 @@
                             {{ html()->label($field_lable, $field_name) }} {!! fielf_required($required) !!}
                             {{ html()->textarea($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row">
                     <div class="col">

@@ -1,0 +1,15 @@
+1. Bet Not placed : Done
+2. Role mandatory : Done
+3. Dashboard Name : Done
+4. Account Statement Report Sorting : Done
+
+
+5. Account Statement date and FROM| TO Data
+6. New user see report (without any bet or user)
+7. Account Statement date and FROM| TO Data (same name | Same name)
+8. prfile only user form field display
+9. remove Gender, mobile number, address, bio, date of birth
+10. 2 dashboard removed from menu
+11. Account Satatement datatable jquery error display
+12. current bet report (latest first)
+13. History report (latest first)

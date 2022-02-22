@@ -38,12 +38,13 @@ class CreditController extends Controller
         $oldcredit = Credit::where('user_id',auth()->user()->id)->latest('id')->first();
         $credit = new Credit;
         $credit->user_id = auth()->user()->id;
+        $credit->action_id = auth()->user()->id;
         $credit->parent_id  = $oldcredit->parent_id;
         $credit->points = $request->points;
         $credit->net_points = $oldcredit->net_points+$request->points;
         $credit->type = 'credit';
         $credit->save();
-        Flash::success('Points Added Successfully')->important();
+        Flash::success('Points Added Successfully123')->important();
         return redirect()->back(); 
         
     }

@@ -107,22 +107,16 @@
                     </div>
                 </div>
 
+                
+
                 <!-- <div class="form-group row">
-                    {{ html()->label(__('labels.backend.users.fields.confirmed'))->class('col-6 col-sm-2 form-control-label')->for('confirmed') }}
-
-                    <div class="col-6 col-sm-10">
-                        {{ html()->checkbox('confirmed', true, '1') }} @lang('Email Confirmed')
-                    </div>
-                </div> -->
-
-                <div class="form-group row">
                     {{ html()->label(__('labels.backend.users.fields.email_credentials'))->class('col-6 col-sm-2 form-control-label')->for('confirmed') }}
 
                     <div class="col-6 col-sm-10">
                         {{ html()->checkbox('email_credentials', true, '1') }} @lang('Email Credentials')
                     </div>
                 </div>
-
+            -->
                 <div class="form-group row">
                     {{ html()->label('Abilities')->class('col-sm-2 form-control-label') }}
 
@@ -141,7 +135,7 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <div class="checkbox">
-                                                    {{ html()->label(html()->checkbox('roles[]',1,  old('roles') && in_array($role->name, old('roles')) ? true : false, $role->name)->id('role-'.$role->id)->value('admin') . "&nbsp;" . ucwords($role->name). "&nbsp;(".$role->name.")")->for('role-'.$role->id) }}
+                                                    {{ html()->label(html()->checkbox('roles[]',1,  old('roles') && in_array($role->name, old('roles')) ? true : false, $role->name)->required()->id('role-'.$role->id)->value('admin') . "&nbsp;" . ucwords($role->name). "&nbsp;(".$role->name.")")->for('role-'.$role->id) }}
                                                 </div>
                                             </div>
                                         </div>
@@ -155,7 +149,7 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <div class="checkbox">
-                                                    {{ html()->label(html()->checkbox('roles[]',1, old('roles') && in_array($role->name, old('roles')) ? true : false, $role->name)->id('role-'.$role->id)->value('subadmin') . "&nbsp;" . ucwords($role->name). "&nbsp;(".$role->name.")")->for('role-'.$role->id) }}
+                                                    {{ html()->label(html()->checkbox('roles[]',1, old('roles') && in_array($role->name, old('roles')) ? true : false, $role->name)->required()->id('role-'.$role->id)->value('subadmin') . "&nbsp;" . ucwords($role->name). "&nbsp;(".$role->name.")")->for('role-'.$role->id) }}
                                                 </div>
                                             </div>
                                         </div>
@@ -170,7 +164,7 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <div class="checkbox">
-                                                    {{ html()->label(html()->checkbox('roles[]',1, old('roles') && in_array($role->name, old('roles')) ? true : false, $role->name)->id('role-'.$role->id)->value('supermaster') . "&nbsp;" . ucwords($role->name). "&nbsp;(".$role->name.")")->for('role-'.$role->id) }}
+                                                    {{ html()->label(html()->checkbox('roles[]',1, old('roles') && in_array($role->name, old('roles')) ? true : false, $role->name)->required()->id('role-'.$role->id)->value('supermaster') . "&nbsp;" . ucwords($role->name). "&nbsp;(".$role->name.")")->for('role-'.$role->id) }}
                                                 </div>
                                             </div>
                                         </div>
@@ -184,7 +178,7 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <div class="checkbox">
-                                                    {{ html()->label(html()->checkbox('roles[]',1, old('roles') && in_array($role->name, old('roles')) ? true : false, $role->name)->id('role-'.$role->id)->value('master') . "&nbsp;" . ucwords($role->name). "&nbsp;(".$role->name.")")->for('role-'.$role->id) }}
+                                                    {{ html()->label(html()->checkbox('roles[]',1, old('roles') && in_array($role->name, old('roles')) ? true : false, $role->name)->required()->id('role-'.$role->id)->value('master') . "&nbsp;" . ucwords($role->name). "&nbsp;(".$role->name.")")->for('role-'.$role->id) }}
                                                 </div>
                                             </div>
                                         </div>
@@ -200,7 +194,7 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <div class="checkbox">
-                                                    {{ html()->label(html()->checkbox('roles[]',1, old('roles') && in_array($role->name, old('roles')) ? true : false, $role->name)->id('role-'.$role->id)->value('user') . "&nbsp;" . ucwords($role->name). "&nbsp;(".$role->name.")")->for('role-'.$role->id) }}
+                                                    {{ html()->label(html()->checkbox('roles[]',1, old('roles') && in_array($role->name, old('roles')) ? true : false, $role->name)->required()->id('role-'.$role->id)->value('user') . "&nbsp;" . ucwords($role->name). "&nbsp;(".$role->name.")")->for('role-'.$role->id) }}
                                                 </div>
                                             </div>
                                         </div>
@@ -214,22 +208,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="col-12 col-sm-5">
-                                <div class="card card-accent-primary">
-                                    <div class="card-header">
-                                        @lang('Permissions')
-                                    </div>
-                                    <div class="card-body">
-                                        @if ($permissions->count())
-                                        @foreach($permissions as $permission)
-                                        <div class="checkbox">
-                                            {{ html()->label(html()->checkbox('permissions[]', old('permissions') && in_array($permission->name, old('permissions')) ? true : false, $permission->name)->id('permission-'.$permission->id) . ' ' . $permission->name)->for('permission-'.$permission->id) }}
-                                        </div>
-                                        @endforeach
-                                        @endif
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                 </div>

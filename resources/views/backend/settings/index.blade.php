@@ -23,142 +23,142 @@
             <!--/.col-->
             <div class="co
             l-4">
-                <div class="float-right">
-                    <div class="btn-group" role="group" aria-label="Toolbar button groups">
+            <div class="float-right">
+                <div class="btn-group" role="group" aria-label="Toolbar button groups">
 
-                    </div>
                 </div>
             </div>
-            <!--/.col-->
         </div>
-        <!--/.row-->
-        @can('isSuperAdmins')
-        <div class="row mt-4">
-            <div class="col">
-                <form method="post" action="{{ route('backend.settings.store') }}" class="form-horizontal" role="form">
-                    {!! csrf_field() !!}
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+    @can('isSuperAdmins')
+    <div class="row mt-4">
+        <div class="col">
+            <form method="post" action="{{ route('backend.settings.store') }}" class="form-horizontal" role="form">
+                {!! csrf_field() !!}
 
-                    @if(count(config('setting_fields', [])) )
+                @if(count(config('setting_fields', [])) )
 
-                        @foreach(config('setting_fields') as $section => $fields)
-                        <div class="card card-accent-primary">
-                            <div class="card-header">
-                                <i class="{{ Arr::get($fields, 'icon', 'glyphicon glyphicon-flash') }}"></i>
-                                {{ $fields['title'] }}
+                @foreach(config('setting_fields') as $section => $fields)
+                <div class="card card-accent-primary">
+                    <div class="card-header">
+                        <i class="{{ Arr::get($fields, 'icon', 'glyphicon glyphicon-flash') }}"></i>
+                        {{ $fields['title'] }}
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">{{ $fields['desc'] }}</p>
+
+                        <div class="row">
+                            <div class="col">
+                                @foreach($fields['elements'] as $field)
+                                @includeIf('backend.settings.fields.' . $field['type'] )
+                                @endforeach
                             </div>
-                            <div class="card-body">
-                                <p class="text-muted">{{ $fields['desc'] }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                @endforeach
 
-                                <div class="row">
-                                    <div class="col">
-                                        @foreach($fields['elements'] as $field)
-                                            @includeIf('backend.settings.fields.' . $field['type'] )
-                                        @endforeach
-                                    </div>
+                @endif
+
+                <div class="row m-b-md">
+                    <div class="col-md-12">
+                        <button class="btn-primary btn">
+                            <i class='fas fa-save'></i> @lang('Save')
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    @endcan
+
+    @can('isSuperAdmins')
+    <div class="row mt-4">
+        <div class="col">
+            <form method="post" action="{{ route('backend.credits.store') }}" class="form-horizontal" role="form">
+                {!! csrf_field() !!}
+
+                
+                <div class="card card-accent-primary">
+                    <div class="card-header">
+                        <i class="fas fa-envelope"></i>
+                        Credit Coins
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group ">
+                                    <label for="points"> <strong>Coins</strong></label> <span class="text-danger"> <strong>*</strong> </span>
+                                    <input type="text" name="points" value="" class="form-control" id="points" placeholder="Coins" required="">
                                 </div>
                             </div>
                         </div>
-                        
-                        @endforeach
-
-                    @endif
-
-                    <div class="row m-b-md">
-                        <div class="col-md-12">
-                            <button class="btn-primary btn">
-                                <i class='fas fa-save'></i> @lang('Save')
-                            </button>
-                        </div>
                     </div>
+                </div>
+                
 
-                </form>
-            </div>
-        </div>
-        @endcan
-
-        @can('isSuperAdmins')
-        <div class="row mt-4">
-            <div class="col">
-                <form method="post" action="{{ route('backend.credits.store') }}" class="form-horizontal" role="form">
-                    {!! csrf_field() !!}
-
-                   
-                    <div class="card card-accent-primary">
-                            <div class="card-header">
-                                <i class="fas fa-envelope"></i>
-                                Credit Coins
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group ">
-                                            <label for="points"> <strong>Coins</strong></label> <span class="text-danger"> <strong>*</strong> </span>
-                                            <input type="text" name="points" value="" class="form-control" id="points" placeholder="Coins" required="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                       
-
-                    <div class="row m-b-md">
-                        <div class="col-md-12">
-                            <button class="btn-primary btn">
-                                <i class='fas fa-save'></i> @lang('Save')
-                            </button>
-                        </div>
+                <div class="row m-b-md">
+                    <div class="col-md-12">
+                        <button class="btn-primary btn">
+                            <i class='fas fa-save'></i> @lang('Save')
+                        </button>
                     </div>
+                </div>
 
-                </form>
-            </div>
+            </form>
         </div>
-        @endcan
-        <!-- Start form for set coins limit for bett -->
-         
-        <div class="row mt-4">
-            <div class="col">
+    </div>
+    @endcan
+    <!-- Start form for set coins limit for bett -->
+    
+    <div class="row mt-4">
+        <div class="col">
             <form method="post" action="{{ route('backend.betting_limit.store') }}" class="form-horizontal" role="form">
-                    {!! csrf_field() !!}
-                   
-                    <div class="card card-accent-primary">
-                            <div class="card-header">
-                                <i class="fas fa-coins"></i>
-                                Bet Limit
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group ">
-                                            <label for="min_limit"> <strong>Minimum Bet Limit</strong></label> <span class="text-danger"><strong>*</strong></span>
-                                            <input type="text" name="min_limit" class="form-control" id="min_limit" value="{{ $bet_limits->min_limit }}" placeholder="Minimum Bet Limit" required=""><br>
+                {!! csrf_field() !!}
+                
+                <div class="card card-accent-primary">
+                    <div class="card-header">
+                        <i class="fas fa-coins"></i>
+                        Bet Limit
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group ">
+                                    <label for="min_limit"> <strong>Minimum Bet Limit</strong></label> <span class="text-danger"><strong>*</strong></span>
+                                    <input type="text" name="min_limit" class="form-control" id="min_limit" value="{{ $bet_limits->min_limit }}" placeholder="Minimum Bet Limit" required=""><br>
 
-                                            <label for="max_limit"> <strong>Maximum Bet Limit</strong> </label> <span class="text-danger"><strong>*</strong></span>
-                                            <input type="text" name="max_limit" class="form-control" id="max_limit" value="{{ $bet_limits->max_limit }}" placeholder="maximum Bet Limit" required="">
-                                        </div>
-                                    </div>
+                                    <label for="max_limit"> <strong>Maximum Bet Limit</strong> </label> <span class="text-danger"><strong>*</strong></span>
+                                    <input type="text" name="max_limit" class="form-control" id="max_limit" value="{{ $bet_limits->max_limit }}" placeholder="maximum Bet Limit" required="">
                                 </div>
                             </div>
                         </div>
-                       
-
-                    <div class="row m-b-md">
-                        <div class="col-md-12">
-                            <button class="btn-primary btn">
-                                <i class='fas fa-save'></i> @lang('Save')
-                            </button>
-                        </div>
                     </div>
+                </div>
+                
 
-                </form>
-            </div>
-        </div>
-        
-        <!-- End form for set coins limit for bett -->
-    </div>
-    <div class="card-footer">
-        <div class="row">
+                <div class="row m-b-md">
+                    <div class="col-md-12">
+                        <button class="btn-primary btn">
+                            <i class='fas fa-save'></i> @lang('Save')
+                        </button>
+                    </div>
+                </div>
 
+            </form>
         </div>
     </div>
+    
+    <!-- End form for set coins limit for bett -->
+</div>
+<div class="card-footer">
+    <div class="row">
+
+    </div>
+</div>
 </div>
 @endsection

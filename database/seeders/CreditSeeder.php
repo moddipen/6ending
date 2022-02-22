@@ -20,6 +20,7 @@ class CreditSeeder extends Seeder
             "points" => "100000",
             "type" => "credit",
             "net_points" => "100000",
+            "action_id" => $this->getSuperAdmin(),
             'created_at' => now(),
             'updated_at' => now()  
         ]);

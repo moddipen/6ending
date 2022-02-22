@@ -153,6 +153,7 @@ class ReportController extends Controller
             if(!empty($childrens)){
                 $module_name->whereIn("user_id",$childrens);
             }
+            $module_name->orderBy('created_at', 'desc');
             $module_name->get();
         }else{
             $module_name = Bet::with("match_event.match","match_event.matchtypeevent.event_types","match_event.matchtypeevent.match_types","settlement")
@@ -160,6 +161,7 @@ class ReportController extends Controller
             if(!empty($childrens)){
                 $module_name->whereIn("user_id",$childrens);
             }
+            $module_name->orderBy('id', 'desc');
             $module_name->get();
         }       
         
@@ -209,6 +211,7 @@ class ReportController extends Controller
             if(!empty($childrens)){
                 $module_name->whereIn("user_id",$childrens);
             }
+            $module_name->orderBy('id', 'desc');
             $module_name->get();
         }
         
